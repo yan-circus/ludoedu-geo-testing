@@ -72,6 +72,53 @@ const CLASS_TO_ISO = {
   "United States Virgin Islands":    "VI",
 };
 
+// ─── Themes ──────────────────────────────────────────────────────────────────
+
+const THEMES = {
+  sombre: {
+    '--bg':           '#1a1a2e', '--surface':      '#16213e', '--accent':       '#0f3460',
+    '--text':         '#e0e0e0', '--text-dim':     '#888',    '--ocean':        '#2a4a6b',
+    '--country-fill': '#c8d6c8', '--hover-fill':   '#f0c040', '--correct':      '#2ecc71',
+    '--wrong':        '#e74c3c', '--selected-fill':'#3ab5e6', '--radius-btn':   '6px',
+    '--h1-font':      'inherit',
+  },
+  colore: {
+    '--bg':           '#e8f4fd', '--surface':      '#ffffff', '--accent':       '#2980b9',
+    '--text':         '#1a1a2a', '--text-dim':     '#5a6a7a', '--ocean':        '#5bafd6',
+    '--country-fill': '#a8d8a8', '--hover-fill':   '#f39c12', '--correct':      '#27ae60',
+    '--wrong':        '#c0392b', '--selected-fill':'#2980b9', '--radius-btn':   '6px',
+    '--h1-font':      'inherit',
+  },
+  candy: {
+    '--bg':           '#1a0828', '--surface':      '#2d1045', '--accent':       '#8e24aa',
+    '--text':         '#ffe6f5', '--text-dim':     '#cc88bb', '--ocean':        '#c2185b',
+    '--country-fill': '#f8bbd9', '--hover-fill':   '#ff4db3', '--correct':      '#69f044',
+    '--wrong':        '#ff5252', '--selected-fill':'#cc44ff', '--radius-btn':   '20px',
+    '--h1-font':      'inherit',
+  },
+  tresor: {
+    '--bg':           '#1e1006', '--surface':      '#2e1a08', '--accent':       '#7a4a15',
+    '--text':         '#f0ddb0', '--text-dim':     '#a08050', '--ocean':        '#3a5c3a',
+    '--country-fill': '#c8a060', '--hover-fill':   '#e8b030', '--correct':      '#5a9040',
+    '--wrong':        '#b03020', '--selected-fill':'#d4801a', '--radius-btn':   '6px',
+    '--h1-font':      "Georgia, 'Times New Roman', serif",
+  },
+};
+
+// ─── Theme ───────────────────────────────────────────────────────────────────
+
+function applyTheme(name) {
+  const vars = THEMES[name];
+  if (!vars) return;
+  const root = document.documentElement;
+  Object.entries(vars).forEach(([k, v]) => root.style.setProperty(k, v));
+  document.body.dataset.theme = name;
+  localStorage.setItem('geo-theme', name);
+  document.querySelectorAll('.theme-card').forEach(c =>
+    c.classList.toggle('active', c.dataset.theme === name)
+  );
+}
+
 // ─── State ───────────────────────────────────────────────────────────────────
 
 let countries      = [];
@@ -173,6 +220,21 @@ async function init() {
       renderList();
     });
   });
+
+  // Settings modal
+  const overlay      = document.getElementById('settings-overlay');
+  const settingsBtn  = document.getElementById('settings-btn');
+  const settingsClose = document.getElementById('settings-close');
+
+  settingsBtn.addEventListener('click',  () => overlay.classList.remove('hidden'));
+  settingsClose.addEventListener('click', () => overlay.classList.add('hidden'));
+  overlay.addEventListener('click', e => { if (e.target === overlay) overlay.classList.add('hidden'); });
+
+  document.querySelectorAll('.theme-card').forEach(card =>
+    card.addEventListener('click', () => applyTheme(card.dataset.theme))
+  );
+
+  applyTheme(localStorage.getItem('geo-theme') || 'sombre');
 
   resetZoom();
 }
