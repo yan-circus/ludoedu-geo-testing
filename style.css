@@ -287,17 +287,17 @@ select {
 
 /* ── Country paths ── */
 .country {
-  fill: var(--country-fill);
+  fill: var(--c-fill, var(--country-fill));
   stroke: #fff;
   stroke-width: 0.3;
   cursor: pointer;
   transition: fill 0.1s;
 }
 
-.country:hover   { fill: var(--hover-fill); }
-.country.correct { fill: var(--correct)       !important; }
-.country.wrong   { fill: var(--wrong)         !important; }
-.country.selected{ fill: var(--selected-fill) !important; }
+.country:hover   { fill: var(--c-hover,    var(--hover-fill)); }
+.country.correct { fill: var(--correct)                         !important; }
+.country.wrong   { fill: var(--wrong)                           !important; }
+.country.selected{ fill: var(--c-selected, var(--selected-fill)) !important; }
 
 .country.inactive {
   fill: #777;
@@ -430,3 +430,7 @@ body[data-mode="learning"] #stats       { display: none; }
 .theme-card[data-theme="candy"]   .preview-land  { background: #f8bbd9; }
 .theme-card[data-theme="tresor"]  .preview-ocean { background: #3a5c3a; }
 .theme-card[data-theme="tresor"]  .preview-land  { background: #c8a060; }
+.theme-card[data-theme="multi"]   .preview-ocean { background: #1a2a4a; }
+.theme-card[data-theme="multi"]   .preview-land  {
+  background: linear-gradient(to right, #e06060, #e09030, #c8c040, #50b870, #4090d0, #9060c8);
+}

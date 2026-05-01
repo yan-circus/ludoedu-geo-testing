@@ -103,9 +103,39 @@ const THEMES = {
     '--wrong':        '#b03020', '--selected-fill':'#d4801a', '--radius-btn':   '6px',
     '--h1-font':      "Georgia, 'Times New Roman', serif",
   },
+  multi: {
+    '--bg':           '#1a1a2e', '--surface':      '#16213e', '--accent':       '#0f3460',
+    '--text':         '#e0e0e0', '--text-dim':     '#888',    '--ocean':        '#1a2a4a',
+    '--country-fill': '#c8d6c8', '--hover-fill':   '#f0c040', '--correct':      '#2ecc71',
+    '--wrong':        '#e74c3c', '--selected-fill':'#3ab5e6', '--radius-btn':   '6px',
+    '--h1-font':      'inherit',
+  },
 };
 
 // ─── Theme ───────────────────────────────────────────────────────────────────
+
+// Distribute hues using the golden angle — each ISO pair gets a distinct hue
+function countryHue(iso) {
+  const n = (iso.charCodeAt(0) - 65) * 26 + (iso.charCodeAt(1) - 65);
+  return (n * 137.508) % 360;
+}
+
+function applyMulticolorPaths(active) {
+  Object.entries(countryPaths).forEach(([iso, paths]) => {
+    const h = countryHue(iso);
+    paths.forEach(path => {
+      if (active) {
+        path.style.setProperty('--c-fill',     `hsl(${h},55%,50%)`);
+        path.style.setProperty('--c-hover',    `hsl(${h},65%,72%)`);
+        path.style.setProperty('--c-selected', `hsl(${h},55%,80%)`);
+      } else {
+        path.style.removeProperty('--c-fill');
+        path.style.removeProperty('--c-hover');
+        path.style.removeProperty('--c-selected');
+      }
+    });
+  });
+}
 
 function applyTheme(name) {
   const vars = THEMES[name];
@@ -117,6 +147,7 @@ function applyTheme(name) {
   document.querySelectorAll('.theme-card').forEach(c =>
     c.classList.toggle('active', c.dataset.theme === name)
   );
+  applyMulticolorPaths(name === 'multi');
 }
 
 // ─── State ───────────────────────────────────────────────────────────────────
