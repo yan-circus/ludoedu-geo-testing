@@ -236,15 +236,20 @@ select {
 /* ── Small-country marker circles ── */
 circle.country {
   fill: none;
-  stroke: rgba(240, 192, 64, 0.7);
-  stroke-width: 1.2;
+  stroke: none;          /* invisible by default */
+  pointer-events: none;
+}
+circle.country.visible {
+  stroke: var(--selected-fill);
+  stroke-width: 1.5;
+  stroke-dasharray: 4 3;
   pointer-events: stroke;
 }
-circle.country:hover   { stroke: var(--hover-fill);    stroke-width: 2; }
-circle.country.correct { stroke: var(--correct)  !important; fill: none !important; stroke-width: 2; }
-circle.country.wrong   { stroke: var(--wrong)    !important; fill: none !important; stroke-width: 2; }
-circle.country.selected{ stroke: var(--selected-fill) !important; fill: none !important; stroke-width: 2; }
-circle.country.inactive{ stroke: #666 !important; fill: none !important; }
+circle.country.visible:hover { stroke-width: 2.5; }
+
+/* ── Zoom / Pan cursors ── */
+#map-container { cursor: grab; }
+body.dragging * { cursor: grabbing !important; }
 
 /* ── Mode-driven visibility ── */
 body[data-mode="game"] #list-panel  { display: none; }

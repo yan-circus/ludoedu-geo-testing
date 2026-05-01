@@ -4,6 +4,9 @@ const LIVES_MAX              = 3;
 const POINTS_CORRECT         = 100;
 const FEEDBACK_DELAY_CORRECT = 700;
 const FEEDBACK_DELAY_WRONG   = 1400;
+const SMALL_KM2              = 2000;
+const ZOOM_FACTOR            = 0.87;   // zoom in per tick (< 1)
+const ZOOM_MIN_W             = 40;     // max zoom in (SVG units)
 
 const VIEWBOXES = {
   monde:    '0 0 2000 857',
@@ -14,9 +17,6 @@ const VIEWBOXES = {
   Océanie:  '1470 340 540 360',
 };
 
-const SMALL_KM2 = 2000; // seuil pour afficher un cercle marqueur
-
-// Maps SVG class="..." names (multi-polygon countries) to ISO codes.
 const CLASS_TO_ISO = {
   "Angola":                          "AO",
   "Antigua and Barbuda":             "AG",
@@ -58,7 +58,6 @@ const CLASS_TO_ISO = {
   "United Kingdom":                  "GB",
   "United States":                   "US",
   "Vanuatu":                         "VU",
-  // Territories → parent or own ISO (inactive in game, present visually)
   "Canary Islands (Spain)":          "ES",
   "American Samoa":                  "AS",
   "Cayman Islands":                  "KY",
@@ -75,25 +74,34 @@ const CLASS_TO_ISO = {
 
 // ─── State ───────────────────────────────────────────────────────────────────
 
-let countries    = [];
-let countryPaths = {};   // ISO → SVGPathElement[]
-let countryById  = {};   // ISO → country object
+let countries      = [];
+let countryPaths   = {};   // ISO → SVGPathElement[]  (paths only, no circles)
+let countryCircles = {};   // ISO → SVGCircleElement  (separate, invisible by default)
+let countryById    = {};   // ISO → country object
 
-let mode         = 'game';      // 'game' | 'learning'
-let level        = 'monde';     // continent name or 'monde'
+let mode  = 'game';
+let level = 'monde';
+
+// ViewBox state (current)
+let vb = { x: 0, y: 0, w: 2000, h: 857 };
 
 // Game state
-let gameState    = 'idle';
-let score        = 0;
-let lives        = 0;
+let gameState     = 'idle';
+let score         = 0;
+let lives         = 0;
 let currentCountry = null;
-let queue        = [];
-let activePaths  = new Set();
+let queue         = [];
+let activePaths   = new Set();
 
 // Learning state
-let selectedId   = null;        // currently highlighted country in learning mode
-let sortCol      = 'nom';
-let sortDir      = 'asc';
+let selectedId    = null;
+let shownCircleId = null;
+let sortCol       = 'nom';
+let sortDir       = 'asc';
+
+// Drag state
+let isDragging      = false;
+let lastDragScreen  = null;
 
 // ─── DOM refs ─────────────────────────────────────────────────────────────────
 
@@ -123,7 +131,6 @@ async function init() {
   const svg = mapContainer.querySelector('svg');
   svg.removeAttribute('width');
   svg.removeAttribute('height');
-  svg.setAttribute('viewBox', VIEWBOXES[level]);
 
   function registerPath(path, id) {
     if (!countryPaths[id]) countryPaths[id] = [];
@@ -133,13 +140,11 @@ async function init() {
     path.addEventListener('click', onPathClick);
   }
 
-  // Format 1: <path id="XX">
   svg.querySelectorAll('path[id]').forEach(path => {
     const id = path.getAttribute('id');
     if (/^[A-Z]{2}$/.test(id)) registerPath(path, id);
   });
 
-  // Format 2: <path class="Country Name"> (multi-polygon)
   svg.querySelectorAll('path[class]').forEach(path => {
     const cls = path.getAttribute('class');
     const id  = CLASS_TO_ISO[cls];
@@ -147,31 +152,100 @@ async function init() {
   });
 
   drawSmallCountryMarkers(svg);
+  setupMapInteraction(svg);
 
-  // Event listeners
   btnGame.addEventListener('click',  () => setMode('game'));
   btnLearn.addEventListener('click', () => setMode('learning'));
   startBtn.addEventListener('click', startGame);
 
   levelSelect.addEventListener('change', e => {
     level = e.target.value;
-    updateMapView();
+    resetZoom();
     if (mode === 'learning') renderList();
     if (gameState !== 'idle') resetGameIdle();
   });
 
   document.querySelectorAll('.sort-btn').forEach(btn => {
     btn.addEventListener('click', () => {
-      const col = btn.dataset.col;
-      const dir = btn.dataset.dir;
-      sortCol = col;
-      sortDir = dir;
+      sortCol = btn.dataset.col;
+      sortDir = btn.dataset.dir;
       updateSortIndicators();
       renderList();
     });
   });
 
-  updateMapView();
+  resetZoom();
+}
+
+// ─── ViewBox / Zoom / Pan ─────────────────────────────────────────────────────
+
+function parseViewBox(str) {
+  const [x, y, w, h] = str.split(' ').map(Number);
+  return { x, y, w, h };
+}
+
+function applyViewBox() {
+  const svg = mapContainer.querySelector('svg');
+  if (svg) svg.setAttribute('viewBox', `${vb.x} ${vb.y} ${vb.w} ${vb.h}`);
+}
+
+function resetZoom() {
+  vb = parseViewBox(VIEWBOXES[level] ?? VIEWBOXES.monde);
+  applyViewBox();
+}
+
+function svgPoint(clientX, clientY) {
+  const svg = mapContainer.querySelector('svg');
+  const pt  = svg.createSVGPoint();
+  pt.x = clientX;
+  pt.y = clientY;
+  const svgP = pt.matrixTransform(svg.getScreenCTM().inverse());
+  return { x: svgP.x, y: svgP.y };
+}
+
+function setupMapInteraction(svg) {
+  // Zoom with mouse wheel
+  mapContainer.addEventListener('wheel', e => {
+    e.preventDefault();
+    const factor = e.deltaY > 0 ? 1 / ZOOM_FACTOR : ZOOM_FACTOR;
+    const m = svgPoint(e.clientX, e.clientY);
+    const newW = vb.w * factor;
+    const newH = vb.h * factor;
+    if (newW < ZOOM_MIN_W) return; // max zoom in
+    vb.x = m.x - (m.x - vb.x) * factor;
+    vb.y = m.y - (m.y - vb.y) * factor;
+    vb.w = newW;
+    vb.h = newH;
+    applyViewBox();
+  }, { passive: false });
+
+  // Pan with drag
+  mapContainer.addEventListener('mousedown', e => {
+    if (e.button !== 0) return;
+    isDragging = true;
+    lastDragScreen = { x: e.clientX, y: e.clientY };
+    document.body.classList.add('dragging');
+    e.preventDefault();
+  });
+
+  window.addEventListener('mousemove', e => {
+    if (!isDragging) return;
+    const svg = mapContainer.querySelector('svg');
+    const ctm = svg.getScreenCTM();
+    vb.x -= (e.clientX - lastDragScreen.x) / ctm.a;
+    vb.y -= (e.clientY - lastDragScreen.y) / ctm.d;
+    lastDragScreen = { x: e.clientX, y: e.clientY };
+    applyViewBox();
+  });
+
+  window.addEventListener('mouseup', () => {
+    isDragging = false;
+    lastDragScreen = null;
+    document.body.classList.remove('dragging');
+  });
+
+  // Double-click to reset zoom
+  mapContainer.addEventListener('dblclick', resetZoom);
 }
 
 // ─── Mode switching ───────────────────────────────────────────────────────────
@@ -212,6 +286,7 @@ function startGame() {
   lives = LIVES_MAX;
   gameState = 'playing';
   selectedId = null;
+  hideAllCircles();
 
   const pool = getCountriesForLevel();
   queue = shuffle([...pool]);
@@ -290,11 +365,10 @@ function handleLearningClick(clickedId) {
   const country = countryById[clickedId];
   if (!country) return;
 
-  // Deselect previous
+  hideAllCircles();
   if (selectedId) unhighlight(selectedId, 'selected');
 
   if (selectedId === clickedId) {
-    // Toggle off
     selectedId = null;
     questionEl.textContent = 'Cliquez sur un pays de la liste ou de la carte';
     deselectListRow();
@@ -304,10 +378,12 @@ function handleLearningClick(clickedId) {
     questionEl.textContent =
       `${country.nom}  ·  Capitale : ${country.capitale}  ·  Population : ${formatPop(country.population)}`;
     selectListRow(clickedId);
+    // No circle on direct map click
   }
 }
 
 function selectFromList(id) {
+  hideAllCircles();
   if (selectedId) unhighlight(selectedId, 'selected');
 
   if (selectedId === id) {
@@ -317,6 +393,7 @@ function selectFromList(id) {
   } else {
     selectedId = id;
     highlight(id, 'selected');
+    showCircle(id);   // circle only from list click
     const country = countryById[id];
     questionEl.textContent =
       `${country.nom}  ·  Capitale : ${country.capitale}  ·  Population : ${formatPop(country.population)}`;
@@ -327,6 +404,7 @@ function selectFromList(id) {
 // ─── Unified click handler ────────────────────────────────────────────────────
 
 function onPathClick(e) {
+  if (isDragging) return; // ignore clicks that end a drag
   const id = e.currentTarget.dataset.countryId;
   if (mode === 'game') handleGameClick(id);
   else                 handleLearningClick(id);
@@ -340,7 +418,6 @@ function drawSmallCountryMarkers(svg) {
     const paths = countryPaths[country.id];
     if (!paths || paths.length === 0) return;
 
-    // Combined bounding box of all paths for this country
     let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
     paths.forEach(p => {
       try {
@@ -356,30 +433,42 @@ function drawSmallCountryMarkers(svg) {
 
     const cx = (minX + maxX) / 2;
     const cy = (minY + maxY) / 2;
-    const pathSize = Math.max(maxX - minX, maxY - minY);
-    const r = Math.max(10, pathSize * 2.5);
+    const r  = Math.max(10, Math.max(maxX - minX, maxY - minY) * 2.5);
 
     const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
     circle.setAttribute('cx', String(cx));
     circle.setAttribute('cy', String(cy));
     circle.setAttribute('r',  String(r));
-    circle.classList.add('country');
+    circle.classList.add('country', 'small-marker');
     circle.dataset.countryId = country.id;
     circle.addEventListener('click', onPathClick);
 
     svg.appendChild(circle);
-    countryPaths[country.id].push(circle);
+    countryCircles[country.id] = circle;
   });
+}
+
+function showCircle(id) {
+  const c = countryCircles[id];
+  if (c) { c.classList.add('visible'); shownCircleId = id; }
+}
+
+function hideCircle(id) {
+  const c = countryCircles[id];
+  if (c) c.classList.remove('visible');
+  if (shownCircleId === id) shownCircleId = null;
+}
+
+function hideAllCircles() {
+  if (shownCircleId) hideCircle(shownCircleId);
 }
 
 // ─── Country list (learning mode) ────────────────────────────────────────────
 
 function renderList() {
-  const pool = getCountriesForLevel();
-
+  const pool   = getCountriesForLevel();
   const sorted = [...pool].sort((a, b) => {
-    let va = a[sortCol];
-    let vb = b[sortCol];
+    let va = a[sortCol], vb = b[sortCol];
     if (typeof va === 'string') va = va.toLowerCase();
     if (typeof vb === 'string') vb = vb.toLowerCase();
     if (va < vb) return sortDir === 'asc' ? -1 :  1;
@@ -444,11 +533,7 @@ function unhighlight(id, cls) {
 function clearAllHighlights() {
   Object.values(countryPaths).flat()
     .forEach(p => p.classList.remove('correct', 'wrong', 'selected', 'inactive'));
-}
-
-function updateMapView() {
-  const svg = mapContainer.querySelector('svg');
-  if (svg) svg.setAttribute('viewBox', VIEWBOXES[level] ?? VIEWBOXES.monde);
+  hideAllCircles();
 }
 
 function updateUI() {
