@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Géo Quiz</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body data-mode="game">
+  <div id="app">
+
+    <header>
+      <h1>Géo Quiz</h1>
+      <div id="stats">
+        <span id="lives">♥ ♥ ♥</span>
+        <span id="score">0 pts</span>
+      </div>
+    </header>
+
+    <div id="toolbar">
+      <div id="mode-btns">
+        <button id="btn-game"  class="mode-btn active">Mode Jeu</button>
+        <button id="btn-learn" class="mode-btn">Mode Apprentissage</button>
+      </div>
+      <select id="level-select">
+        <option value="monde">Monde entier</option>
+        <option value="Europe">Europe</option>
+        <option value="Afrique">Afrique</option>
+        <option value="Asie">Asie</option>
+        <option value="Amérique">Amérique</option>
+        <option value="Océanie">Océanie</option>
+      </select>
+      <button id="start-btn">Démarrer</button>
+    </div>
+
+    <div id="info-panel">
+      <p id="question">Choisissez un niveau et cliquez sur Démarrer</p>
+      <p id="message"></p>
+    </div>
+
+    <div id="main-content">
+
+      <div id="list-panel">
+        <table id="country-table">
+          <thead>
+            <tr>
+              <th>
+                Nom
+                <span class="sort-btns">
+                  <button class="sort-btn" data-col="nom" data-dir="asc">▲</button>
+                  <button class="sort-btn" data-col="nom" data-dir="desc">▼</button>
+                </span>
+              </th>
+              <th>
+                Population
+                <span class="sort-btns">
+                  <button class="sort-btn" data-col="population" data-dir="asc">▲</button>
+                  <button class="sort-btn" data-col="population" data-dir="desc">▼</button>
+                </span>
+              </th>
+              <th>
+                Superficie
+                <span class="sort-btns">
+                  <button class="sort-btn" data-col="superficie" data-dir="asc">▲</button>
+                  <button class="sort-btn" data-col="superficie" data-dir="desc">▼</button>
+                </span>
+              </th>
+            </tr>
+          </thead>
+          <tbody id="list-body"></tbody>
+        </table>
+      </div>
+
+      <div id="map-container"></div>
+
+    </div>
+  </div>
+  <script src="game.js"></script>
+</body>
+</html>
