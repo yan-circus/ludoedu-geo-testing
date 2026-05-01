@@ -114,9 +114,9 @@ const THEMES = {
 
 // ─── Theme ───────────────────────────────────────────────────────────────────
 
-// Distribute hues using the golden angle — each ISO pair gets a distinct hue
+// Distribute hues using the golden angle + prime scrambling to break alphabetical clustering
 function countryHue(iso) {
-  const n = (iso.charCodeAt(0) - 65) * 26 + (iso.charCodeAt(1) - 65);
+  const n = iso.charCodeAt(0) * 677 + iso.charCodeAt(1);
   return (n * 137.508) % 360;
 }
 
