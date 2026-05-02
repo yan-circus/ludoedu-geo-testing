@@ -31,6 +31,10 @@ Jeu de géographie interactif — identifiez les pays du monde en cliquant sur l
 - Carte au trésor
 - Multicolore
 
+## Démo en ligne
+
+👉 [https://yan-circus.github.io/ludoedu-geo-testing/](https://yan-circus.github.io/ludoedu-geo-testing/)
+
 ## Lancement en local
 
 Aucune dépendance externe. Il suffit d'un serveur HTTP statique :
