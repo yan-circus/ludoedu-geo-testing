@@ -87,14 +87,14 @@ const THEMES = {
   },
   colore: {
     '--bg':           '#e8f4fd', '--surface':      '#ffffff', '--accent':       '#2980b9',
-    '--text':         '#1a1a2a', '--text-dim':     '#5a6a7a', '--ocean':        '#5bafd6',
+    '--text':         '#1a1a2a', '--text-dim':     '#d0e8f8', '--ocean':        '#5bafd6',
     '--country-fill': '#a8d8a8', '--hover-fill':   '#f39c12', '--correct':      '#27ae60',
     '--wrong':        '#c0392b', '--selected-fill':'#2980b9', '--radius-btn':   '6px',
     '--h1-font':      'inherit',
   },
   tresor: {
     '--bg':           '#1e1006', '--surface':      '#2e1a08', '--accent':       '#7a4a15',
-    '--text':         '#f0ddb0', '--text-dim':     '#a08050', '--ocean':        '#3a5c3a',
+    '--text':         '#f0ddb0', '--text-dim':     '#d4b880', '--ocean':        '#3a5c3a',
     '--country-fill': '#c8a060', '--hover-fill':   '#e8b030', '--correct':      '#5a9040',
     '--wrong':        '#b03020', '--selected-fill':'#d4801a', '--radius-btn':   '6px',
     '--h1-font':      "Georgia, 'Times New Roman', serif",
@@ -463,6 +463,7 @@ function startGame() {
 function nextQuestion() {
   if (queue.length === 0) { endGame(true); return; }
   currentCountry = queue.pop();
+  resetZoom();
   setQuestion(currentCountry.nom, null, 'Cliquez sur :');
   setMessage('', '');
   gameState = 'playing';

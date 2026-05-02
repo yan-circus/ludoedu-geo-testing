@@ -214,9 +214,10 @@ body[data-mode="learning"] #timer-btn { display: none; }
 
 /* ── Country list panel ── */
 #list-panel {
-  width: 290px;
+  width: 330px;
   flex-shrink: 0;
   overflow-y: auto;
+  overflow-x: hidden;
   background: var(--surface);
   border-right: 1px solid var(--accent);
 }
@@ -309,6 +310,9 @@ body[data-mode="learning"] #timer-btn { display: none; }
   cursor: default;
 }
 .country.inactive:hover { fill: #777; }
+
+body[data-theme="multi"] .country.correct { fill: #ffffff !important; }
+body[data-theme="multi"] .country.wrong   { fill: #111111 !important; }
 
 /* ── Small-country marker circles ── */
 circle.country {
