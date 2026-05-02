@@ -35,21 +35,6 @@ body[data-theme="colore"] {
   --selected-fill:#2980b9;
 }
 
-/* ── Candy ── */
-body[data-theme="candy"] {
-  --bg:           #1a0828;
-  --surface:      #2d1045;
-  --accent:       #8e24aa;
-  --text:         #ffe6f5;
-  --text-dim:     #cc88bb;
-  --ocean:        #c2185b;
-  --country-fill: #f8bbd9;
-  --hover-fill:   #ff4db3;
-  --correct:      #69f044;
-  --wrong:        #ff5252;
-  --selected-fill:#cc44ff;
-  --radius-btn:   20px;
-}
 
 /* ── Carte au trésor ── */
 body[data-theme="tresor"] {
@@ -323,12 +308,31 @@ circle.country.visible:hover { stroke-width: 2.5; }
 body.dragging * { cursor: grabbing !important; }
 
 /* ── Mode-driven visibility ── */
-body[data-mode="game"]     #list-panel  { display: none; }
-body[data-mode="game"]     #start-btn   { display: inline-block; }
-body[data-mode="game"]     #stats       { display: flex; }
-body[data-mode="learning"] #list-panel  { display: block; }
-body[data-mode="learning"] #start-btn   { display: none; }
-body[data-mode="learning"] #stats       { display: none; }
+body[data-mode="game"]     #list-panel   { display: none; }
+body[data-mode="game"]     #start-btn    { display: inline-block; }
+body[data-mode="game"]     #stats        { display: flex; }
+body[data-mode="learning"] #list-panel   { display: block; }
+body[data-mode="learning"] #start-btn    { display: none; }
+body[data-mode="learning"] #stats        { display: none; }
+body[data-mode="learning"] #timer-gauge  { display: none; }
+
+/* ── Timer gauge ── */
+#timer-gauge {
+  width: 16px;
+  flex-shrink: 0;
+  background: var(--surface);
+  border-right: 1px solid var(--accent);
+  position: relative;
+  overflow: hidden;
+}
+
+#timer-fill {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 100%;
+  background: linear-gradient(to top, #e74c3c 0%, #f39c12 45%, #2ecc71 100%);
+  clip-path: inset(100% 0 0 0);
+}
 
 /* ══════════════════════════════════════════════════════════
    SETTINGS MODAL

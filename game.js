@@ -1,10 +1,12 @@
 // ─── Constants ───────────────────────────────────────────────────────────────
 
 const LIVES_MAX              = 3;
-const POINTS_CORRECT         = 100;
 const FEEDBACK_DELAY_CORRECT = 700;
 const FEEDBACK_DELAY_WRONG   = 1400;
 const SMALL_KM2              = 2000;
+const TIME_LIMIT             = 5;      // seconds per question
+const SCORE_MIN              = 100;
+const SCORE_MAX              = 1000;
 const ZOOM_FACTOR            = 0.87;   // zoom in per tick (< 1)
 const ZOOM_MIN_W             = 40;     // max zoom in (SVG units)
 
@@ -87,13 +89,6 @@ const THEMES = {
     '--text':         '#1a1a2a', '--text-dim':     '#5a6a7a', '--ocean':        '#5bafd6',
     '--country-fill': '#a8d8a8', '--hover-fill':   '#f39c12', '--correct':      '#27ae60',
     '--wrong':        '#c0392b', '--selected-fill':'#2980b9', '--radius-btn':   '6px',
-    '--h1-font':      'inherit',
-  },
-  candy: {
-    '--bg':           '#1a0828', '--surface':      '#2d1045', '--accent':       '#8e24aa',
-    '--text':         '#ffe6f5', '--text-dim':     '#cc88bb', '--ocean':        '#c2185b',
-    '--country-fill': '#f8bbd9', '--hover-fill':   '#ff4db3', '--correct':      '#69f044',
-    '--wrong':        '#ff5252', '--selected-fill':'#cc44ff', '--radius-btn':   '20px',
     '--h1-font':      'inherit',
   },
   tresor: {
@@ -181,6 +176,10 @@ let sortDir       = 'asc';
 let isDragging      = false;
 let lastDragScreen  = null;
 
+// Timer state
+let timerRaf   = null;
+let timerStart = null;
+
 // ─── DOM refs ─────────────────────────────────────────────────────────────────
 
 const mapContainer = document.getElementById('map-container');
@@ -193,6 +192,7 @@ const levelSelect  = document.getElementById('level-select');
 const listBody     = document.getElementById('list-body');
 const btnGame      = document.getElementById('btn-game');
 const btnLearn     = document.getElementById('btn-learn');
+const timerFill    = document.getElementById('timer-fill');
 
 // ─── Init ─────────────────────────────────────────────────────────────────────
 
@@ -341,6 +341,54 @@ function setupMapInteraction(svg) {
   mapContainer.addEventListener('dblclick', resetZoom);
 }
 
+// ─── Timer ───────────────────────────────────────────────────────────────────
+
+function startTimer() {
+  stopTimer();
+  timerStart = performance.now();
+  tickTimer();
+}
+
+function tickTimer() {
+  const elapsed = (performance.now() - timerStart) / 1000;
+  const ratio   = Math.max(0, 1 - elapsed / TIME_LIMIT);
+  timerFill.style.clipPath = `inset(${(1 - ratio) * 100}% 0 0 0)`;
+  if (elapsed >= TIME_LIMIT) { handleTimeout(); return; }
+  timerRaf = requestAnimationFrame(tickTimer);
+}
+
+function stopTimer() {
+  if (timerRaf !== null) { cancelAnimationFrame(timerRaf); timerRaf = null; }
+  timerStart = null;
+}
+
+function resetTimerGauge() {
+  stopTimer();
+  timerFill.style.clipPath = 'inset(100% 0 0 0)';
+}
+
+function scoreForTime() {
+  if (timerStart === null) return SCORE_MIN;
+  const elapsed  = (performance.now() - timerStart) / 1000;
+  const timeLeft = Math.max(0, TIME_LIMIT - elapsed);
+  return Math.round(SCORE_MIN + (SCORE_MAX - SCORE_MIN) * (timeLeft / TIME_LIMIT) ** 2);
+}
+
+function handleTimeout() {
+  if (gameState !== 'playing') return;
+  lives--;
+  highlight(currentCountry.id, 'correct');
+  setMessage(`⏱ Temps écoulé — c'était ${currentCountry.nom}`, 'wrong');
+  gameState = 'feedback';
+  updateUI();
+  setTimeout(() => {
+    unhighlight(currentCountry.id, 'correct');
+    resetTimerGauge();
+    if (lives <= 0) endGame(false);
+    else nextQuestion();
+  }, FEEDBACK_DELAY_WRONG);
+}
+
 // ─── Mode switching ───────────────────────────────────────────────────────────
 
 function setMode(newMode) {
@@ -404,6 +452,7 @@ function nextQuestion() {
   questionEl.textContent = `Cliquez sur : ${currentCountry.nom}`;
   setMessage('', '');
   gameState = 'playing';
+  startTimer();
 }
 
 function handleGameClick(clickedId) {
@@ -411,25 +460,30 @@ function handleGameClick(clickedId) {
   if (!activePaths.has(clickedId)) return;
 
   if (clickedId === currentCountry.id) {
-    score += POINTS_CORRECT;
+    const pts = scoreForTime();
+    stopTimer();
+    score += pts;
     highlight(currentCountry.id, 'correct');
-    setMessage(`✓ Bravo, c'est bien ${currentCountry.nom} !`, 'correct');
+    setMessage(`✓ Bravo, c'est bien ${currentCountry.nom} ! +${pts} pts`, 'correct');
     gameState = 'feedback';
+    updateUI();
     setTimeout(() => {
       unhighlight(currentCountry.id, 'correct');
-      updateUI();
+      resetTimerGauge();
       nextQuestion();
     }, FEEDBACK_DELAY_CORRECT);
   } else {
+    stopTimer();
     lives--;
     highlight(clickedId, 'wrong');
     highlight(currentCountry.id, 'correct');
     setMessage(`✗ Non — c'était ${currentCountry.nom}`, 'wrong');
     gameState = 'feedback';
+    updateUI();
     setTimeout(() => {
       unhighlight(clickedId, 'wrong');
       unhighlight(currentCountry.id, 'correct');
-      updateUI();
+      resetTimerGauge();
       if (lives <= 0) endGame(false);
       else nextQuestion();
     }, FEEDBACK_DELAY_WRONG);
@@ -437,6 +491,7 @@ function handleGameClick(clickedId) {
 }
 
 function endGame(won) {
+  resetTimerGauge();
   gameState = 'idle';
   questionEl.textContent = won
     ? `Félicitations ! Tous les pays trouvés — ${score} pts !`
@@ -446,6 +501,7 @@ function endGame(won) {
 }
 
 function resetGameIdle() {
+  resetTimerGauge();
   gameState = 'idle';
   clearAllHighlights();
   startBtn.textContent = 'Démarrer';
