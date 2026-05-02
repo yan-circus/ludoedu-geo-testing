@@ -201,6 +201,13 @@ body[data-mode="learning"] #timer-btn { display: none; }
 #question .q-label   { font-size: 0.8rem; color: var(--text-dim); font-weight: normal; display: block; }
 #question .q-name    { font-size: 1.45rem; color: var(--hover-fill); display: block; }
 #question .q-details { font-size: 0.82rem; color: var(--text-dim); font-weight: normal; display: block; margin-top: 2px; }
+
+body[data-theme="colore"] #question .q-label,
+body[data-theme="colore"] #question .q-details,
+body[data-theme="tresor"] #question .q-label,
+body[data-theme="tresor"] #question .q-details,
+body[data-theme="multi"]  #question .q-label,
+body[data-theme="multi"]  #question .q-details { color: #cad4df; }
 #message  { font-size: 0.95rem; min-height: 1.1em; }
 #message.correct { color: var(--correct); }
 #message.wrong   { color: var(--wrong); }
