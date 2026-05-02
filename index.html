@@ -25,12 +25,14 @@
       <select id="level-select">
         <option value="monde">Monde entier</option>
         <option value="Europe">Europe</option>
+        <option value="UE">Union Européenne</option>
         <option value="Afrique">Afrique</option>
         <option value="Asie">Asie</option>
         <option value="Amérique">Amérique</option>
         <option value="Océanie">Océanie</option>
       </select>
       <button id="start-btn">Démarrer</button>
+      <button id="timer-btn" class="active" title="Désactiver le chrono">⏱</button>
       <button id="settings-btn" title="Paramètres">
         <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <circle cx="12" cy="12" r="3"/>
@@ -50,6 +52,7 @@
         <table id="country-table">
           <thead>
             <tr>
+              <th class="col-num">#</th>
               <th>
                 Nom
                 <span class="sort-btns">

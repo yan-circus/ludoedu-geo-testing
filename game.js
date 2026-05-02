@@ -13,6 +13,7 @@ const ZOOM_MIN_W             = 40;     // max zoom in (SVG units)
 const VIEWBOXES = {
   monde:    '0 0 2000 857',
   Europe:   '800 60 520 240',
+  UE:       '800 60 520 240',
   Afrique:  '780 195 590 510',
   Asie:     '1100 50 750 440',
   Amérique: '0 30 930 800',
@@ -177,8 +178,9 @@ let isDragging      = false;
 let lastDragScreen  = null;
 
 // Timer state
-let timerRaf   = null;
-let timerStart = null;
+let timerRaf     = null;
+let timerStart   = null;
+let timerEnabled = true;
 
 // ─── DOM refs ─────────────────────────────────────────────────────────────────
 
@@ -193,6 +195,7 @@ const listBody     = document.getElementById('list-body');
 const btnGame      = document.getElementById('btn-game');
 const btnLearn     = document.getElementById('btn-learn');
 const timerFill    = document.getElementById('timer-fill');
+const timerBtn     = document.getElementById('timer-btn');
 
 // ─── Init ─────────────────────────────────────────────────────────────────────
 
@@ -266,6 +269,15 @@ async function init() {
   );
 
   applyTheme(localStorage.getItem('geo-theme') || 'sombre');
+
+  timerBtn.addEventListener('click', () => {
+    timerEnabled = !timerEnabled;
+    timerBtn.classList.toggle('active', timerEnabled);
+    timerBtn.title = timerEnabled ? 'Désactiver le chrono' : 'Activer le chrono';
+    document.body.dataset.timer = timerEnabled ? 'on' : 'off';
+    if (!timerEnabled) resetTimerGauge();
+  });
+  document.body.dataset.timer = 'on';
 
   resetZoom();
 }
@@ -345,6 +357,7 @@ function setupMapInteraction(svg) {
 
 function startTimer() {
   stopTimer();
+  if (!timerEnabled) return;
   timerStart = performance.now();
   tickTimer();
 }
@@ -368,7 +381,7 @@ function resetTimerGauge() {
 }
 
 function scoreForTime() {
-  if (timerStart === null) return SCORE_MIN;
+  if (!timerEnabled || timerStart === null) return SCORE_MIN;
   const elapsed  = (performance.now() - timerStart) / 1000;
   const timeLeft = Math.max(0, TIME_LIMIT - elapsed);
   return Math.round(SCORE_MIN + (SCORE_MAX - SCORE_MIN) * (timeLeft / TIME_LIMIT) ** 2);
@@ -403,11 +416,11 @@ function setMode(newMode) {
   if (mode === 'learning') {
     resetGameIdle();
     renderList();
-    questionEl.textContent = 'Cliquez sur un pays de la liste ou de la carte';
+    setQuestionText('Cliquez sur un pays de la liste ou de la carte');
     setMessage('', '');
   } else {
     listBody.innerHTML = '';
-    questionEl.textContent = 'Choisissez un niveau et cliquez sur Démarrer';
+    setQuestionText('Choisissez un niveau et cliquez sur Démarrer');
     setMessage('', '');
   }
 }
@@ -417,7 +430,8 @@ function setMode(newMode) {
 function getCountriesForLevel() {
   return countries.filter(c => {
     if (!countryPaths[c.id]) return false;
-    if (level === 'monde') return true;
+    if (level === 'monde')   return true;
+    if (level === 'UE')      return c.is_EU;
     return c.continent === level;
   });
 }
@@ -449,7 +463,7 @@ function startGame() {
 function nextQuestion() {
   if (queue.length === 0) { endGame(true); return; }
   currentCountry = queue.pop();
-  questionEl.textContent = `Cliquez sur : ${currentCountry.nom}`;
+  setQuestion(currentCountry.nom, null, 'Cliquez sur :');
   setMessage('', '');
   gameState = 'playing';
   startTimer();
@@ -493,9 +507,9 @@ function handleGameClick(clickedId) {
 function endGame(won) {
   resetTimerGauge();
   gameState = 'idle';
-  questionEl.textContent = won
+  setQuestionText(won
     ? `Félicitations ! Tous les pays trouvés — ${score} pts !`
-    : `Game over ! Score final : ${score} pts`;
+    : `Game over ! Score final : ${score} pts`);
   setMessage('', '');
   clearAllHighlights();
 }
@@ -519,13 +533,12 @@ function handleLearningClick(clickedId) {
 
   if (selectedId === clickedId) {
     selectedId = null;
-    questionEl.textContent = 'Cliquez sur un pays de la liste ou de la carte';
+    setQuestionText('Cliquez sur un pays de la liste ou de la carte');
     deselectListRow();
   } else {
     selectedId = clickedId;
     highlight(clickedId, 'selected');
-    questionEl.textContent =
-      `${country.nom}  ·  Capitale : ${country.capitale}  ·  Population : ${formatPop(country.population)}`;
+    setQuestion(country.nom, `Capitale : ${country.capitale}  ·  Population : ${formatPop(country.population)}`);
     selectListRow(clickedId);
     // No circle on direct map click
   }
@@ -537,15 +550,14 @@ function selectFromList(id) {
 
   if (selectedId === id) {
     selectedId = null;
-    questionEl.textContent = 'Cliquez sur un pays de la liste ou de la carte';
+    setQuestionText('Cliquez sur un pays de la liste ou de la carte');
     deselectListRow();
   } else {
     selectedId = id;
     highlight(id, 'selected');
     showCircle(id);   // circle only from list click
     const country = countryById[id];
-    questionEl.textContent =
-      `${country.nom}  ·  Capitale : ${country.capitale}  ·  Population : ${formatPop(country.population)}`;
+    setQuestion(country.nom, `Capitale : ${country.capitale}  ·  Population : ${formatPop(country.population)}`);
     selectListRow(id);
   }
 }
@@ -626,10 +638,14 @@ function renderList() {
   });
 
   listBody.innerHTML = '';
-  sorted.forEach(c => {
+  sorted.forEach((c, i) => {
     const tr = document.createElement('tr');
     tr.dataset.id = c.id;
     if (c.id === selectedId) tr.classList.add('selected');
+
+    const tdNum = document.createElement('td');
+    tdNum.textContent = i + 1;
+    tdNum.className = 'col-num';
 
     const tdNom = document.createElement('td');
     tdNom.textContent = c.nom;
@@ -642,7 +658,7 @@ function renderList() {
     tdSup.textContent = formatSup(c.superficie);
     tdSup.style.textAlign = 'right';
 
-    tr.append(tdNom, tdPop, tdSup);
+    tr.append(tdNum, tdNom, tdPop, tdSup);
     tr.addEventListener('click', () => selectFromList(c.id));
     listBody.appendChild(tr);
   });
@@ -667,6 +683,35 @@ function updateSortIndicators() {
       btn.dataset.col === sortCol && btn.dataset.dir === sortDir
     );
   });
+}
+
+// ─── Question display helpers ────────────────────────────────────────────────
+
+function setQuestion(name, details, label) {
+  questionEl.innerHTML = '';
+  if (label) {
+    const s = document.createElement('span');
+    s.className = 'q-label';
+    s.textContent = label;
+    questionEl.appendChild(s);
+  }
+  if (name) {
+    const s = document.createElement('span');
+    s.className = 'q-name';
+    s.textContent = name;
+    questionEl.appendChild(s);
+  }
+  if (details) {
+    const s = document.createElement('span');
+    s.className = 'q-details';
+    s.textContent = details;
+    questionEl.appendChild(s);
+  }
+}
+
+function setQuestionText(text) {
+  questionEl.innerHTML = '';
+  questionEl.textContent = text;
 }
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
