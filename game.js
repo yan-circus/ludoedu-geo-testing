@@ -1,6 +1,6 @@
 // ─── Version ─────────────────────────────────────────────────────────────────
 
-const APP_VERSION = { hash: 'c776674', date: '2026-05-03', time: '19:08', msg: 'Plusieurs améliorations mode apprentissage + données continents' };
+const APP_VERSION = { hash: '73ea374', date: '2026-05-03', time: '19:25', msg: 'Responsive : 3 breakpoints + touch events carte' };
 
 // ─── Constants ───────────────────────────────────────────────────────────────
 
