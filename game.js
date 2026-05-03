@@ -1,6 +1,6 @@
 // ─── Version ─────────────────────────────────────────────────────────────────
 
-const APP_VERSION = { hash: '73ea374', date: '2026-05-03', time: '19:25', msg: 'Responsive : 3 breakpoints + touch events carte' };
+const APP_VERSION = { hash: '8821938', date: '2026-05-03', time: '20:29', msg: 'Mode développeur : triple-clic sur version → dev panel' };
 
 // ─── Constants ───────────────────────────────────────────────────────────────
 
