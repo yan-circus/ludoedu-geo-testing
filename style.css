@@ -318,8 +318,8 @@ body[data-theme="multi"]  #question .q-details { color: #cad4df; }
 }
 .country.inactive:hover { fill: #777; }
 
-body[data-theme="multi"] .country.correct { fill: #ffffff !important; }
-body[data-theme="multi"] .country.wrong   { fill: #111111 !important; }
+/* Wrong-reveal : assombrit tous les pays sauf correct (vert) et wrong (rouge) */
+body.wrong-reveal .country:not(.correct):not(.wrong):not(.small-marker) { fill: #4d4d4d !important; }
 
 /* ── Small-country marker circles ── */
 circle.country {
@@ -334,6 +334,11 @@ circle.country.visible {
   pointer-events: stroke;
 }
 circle.country.visible:hover { stroke-width: 2.5; }
+circle.country.correct-outline {
+  stroke: var(--correct);
+  stroke-width: 2.5;
+  pointer-events: stroke;
+}
 
 /* ── Zoom / Pan cursors ── */
 body.dragging * { cursor: grabbing !important; }

@@ -391,10 +391,12 @@ function handleTimeout() {
   if (gameState !== 'playing') return;
   lives--;
   highlight(currentCountry.id, 'correct');
+  document.body.classList.add('wrong-reveal');
   setMessage(`⏱ Temps écoulé — c'était ${currentCountry.nom}`, 'wrong');
   gameState = 'feedback';
   updateUI();
   setTimeout(() => {
+    document.body.classList.remove('wrong-reveal');
     unhighlight(currentCountry.id, 'correct');
     resetTimerGauge();
     if (lives <= 0) endGame(false);
@@ -492,10 +494,12 @@ function handleGameClick(clickedId) {
     lives--;
     highlight(clickedId, 'wrong');
     highlight(currentCountry.id, 'correct');
+    document.body.classList.add('wrong-reveal');
     setMessage(`✗ Non — c'était ${currentCountry.nom}`, 'wrong');
     gameState = 'feedback';
     updateUI();
     setTimeout(() => {
+      document.body.classList.remove('wrong-reveal');
       unhighlight(clickedId, 'wrong');
       unhighlight(currentCountry.id, 'correct');
       resetTimerGauge();
@@ -719,15 +723,18 @@ function setQuestionText(text) {
 
 function highlight(id, cls) {
   (countryPaths[id] || []).forEach(p => p.classList.add(cls));
+  if (cls === 'correct' && countryCircles[id]) countryCircles[id].classList.add('correct-outline');
 }
 
 function unhighlight(id, cls) {
   (countryPaths[id] || []).forEach(p => p.classList.remove(cls));
+  if (cls === 'correct' && countryCircles[id]) countryCircles[id].classList.remove('correct-outline');
 }
 
 function clearAllHighlights() {
   Object.values(countryPaths).flat()
     .forEach(p => p.classList.remove('correct', 'wrong', 'selected', 'inactive'));
+  Object.values(countryCircles).forEach(c => c.classList.remove('correct-outline'));
   hideAllCircles();
 }
 
