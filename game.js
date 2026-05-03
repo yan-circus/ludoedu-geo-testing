@@ -1,6 +1,6 @@
 // ─── Version ─────────────────────────────────────────────────────────────────
 
-const APP_VERSION = { hash: 'b32b73a', date: '2026-05-03', time: '12:31', msg: 'Mode jeu : repose les questions ratées 2 tours plus tard' };
+const APP_VERSION = { hash: 'b7fb3d3', date: '2026-05-03', time: '12:46', msg: 'Ajout panneau d\'aide (bouton ?) avec version commit en bas' };
 
 // ─── Constants ───────────────────────────────────────────────────────────────
 
