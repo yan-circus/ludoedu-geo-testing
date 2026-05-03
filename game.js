@@ -1,6 +1,6 @@
 // ─── Version ─────────────────────────────────────────────────────────────────
 
-const APP_VERSION = { hash: '8821938', date: '2026-05-03', time: '20:29', msg: 'Mode développeur : triple-clic sur version → dev panel' };
+const APP_VERSION = { hash: 'e31d910', date: '2026-05-03', time: '20:35', msg: 'Zoom par défaut adapté au device : 400% mobile, 200% tablette' };
 
 // ─── Constants ───────────────────────────────────────────────────────────────
 
