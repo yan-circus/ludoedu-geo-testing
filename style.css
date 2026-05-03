@@ -169,6 +169,7 @@ select {
   color: var(--text);
 }
 body[data-mode="learning"] #timer-btn { display: none; }
+body.game-running #timer-btn { display: none; }
 
 #settings-btn {
   margin-left: auto;

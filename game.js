@@ -237,7 +237,9 @@ async function init() {
 
   btnGame.addEventListener('click',  () => setMode('game'));
   btnLearn.addEventListener('click', () => setMode('learning'));
-  startBtn.addEventListener('click', startGame);
+  startBtn.addEventListener('click', () => {
+    if (gameState === 'idle') startGame(); else resetGameIdle();
+  });
 
   levelSelect.addEventListener('change', e => {
     level = e.target.value;
@@ -457,8 +459,9 @@ function startGame() {
     });
   });
 
+  document.body.classList.add('game-running');
   updateUI();
-  startBtn.textContent = 'Recommencer';
+  startBtn.textContent = 'Arrêter';
   nextQuestion();
 }
 
@@ -511,16 +514,19 @@ function handleGameClick(clickedId) {
 
 function endGame(won) {
   resetTimerGauge();
+  document.body.classList.remove('game-running');
   gameState = 'idle';
   setQuestionText(won
     ? `Félicitations ! Tous les pays trouvés — ${score} pts !`
     : `Game over ! Score final : ${score} pts`);
   setMessage('', '');
   clearAllHighlights();
+  startBtn.textContent = 'Démarrer';
 }
 
 function resetGameIdle() {
   resetTimerGauge();
+  document.body.classList.remove('game-running');
   gameState = 'idle';
   clearAllHighlights();
   startBtn.textContent = 'Démarrer';
