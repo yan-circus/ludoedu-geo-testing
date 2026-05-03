@@ -177,9 +177,12 @@ let shownCircleId = null;
 let sortCol       = 'nom';
 let sortDir       = 'asc';
 
-// Drag state
+// Drag / touch state
 let isDragging      = false;
 let lastDragScreen  = null;
+let lastTouchDist   = null;
+let touchMoved      = false;
+let lastTapTime     = 0;
 
 // Timer state
 let timerRaf     = null;
@@ -368,6 +371,66 @@ function setupMapInteraction(svg) {
 
   // Double-click to reset zoom
   mapContainer.addEventListener('dblclick', resetZoom);
+
+  // ── Touch: pan (1 doigt) + pinch-zoom (2 doigts) + double-tap reset ──
+  mapContainer.addEventListener('touchstart', e => {
+    touchMoved = false;
+    if (e.touches.length === 1) {
+      lastDragScreen = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+      const now = Date.now();
+      if (now - lastTapTime < 300) resetZoom();
+      lastTapTime = now;
+    } else if (e.touches.length === 2) {
+      lastTouchDist = Math.hypot(
+        e.touches[0].clientX - e.touches[1].clientX,
+        e.touches[0].clientY - e.touches[1].clientY
+      );
+    }
+  }, { passive: true });
+
+  mapContainer.addEventListener('touchmove', e => {
+    e.preventDefault();
+    if (e.touches.length === 1 && lastDragScreen) {
+      const dx = e.touches[0].clientX - lastDragScreen.x;
+      const dy = e.touches[0].clientY - lastDragScreen.y;
+      if (Math.abs(dx) > 3 || Math.abs(dy) > 3) touchMoved = true;
+      const ctm = mapContainer.querySelector('svg').getScreenCTM();
+      vb.x -= dx / ctm.a;
+      vb.y -= dy / ctm.d;
+      lastDragScreen = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+      applyViewBox();
+    } else if (e.touches.length === 2 && lastTouchDist !== null) {
+      touchMoved = true;
+      const newDist = Math.hypot(
+        e.touches[0].clientX - e.touches[1].clientX,
+        e.touches[0].clientY - e.touches[1].clientY
+      );
+      const factor = lastTouchDist / newDist;
+      const cx = (e.touches[0].clientX + e.touches[1].clientX) / 2;
+      const cy = (e.touches[0].clientY + e.touches[1].clientY) / 2;
+      const m  = svgPoint(cx, cy);
+      const newW = vb.w * factor;
+      const newH = vb.h * factor;
+      if (newW >= ZOOM_MIN_W) {
+        vb.x = m.x - (m.x - vb.x) * factor;
+        vb.y = m.y - (m.y - vb.y) * factor;
+        vb.w = newW;
+        vb.h = newH;
+        applyViewBox();
+      }
+      lastTouchDist = newDist;
+    }
+  }, { passive: false });
+
+  mapContainer.addEventListener('touchend', e => {
+    lastTouchDist = null;
+    if (e.touches.length === 0) {
+      lastDragScreen = null;
+    } else if (e.touches.length === 1) {
+      lastDragScreen = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+    }
+    setTimeout(() => { touchMoved = false; }, 50);
+  });
 }
 
 // ─── Timer ───────────────────────────────────────────────────────────────────
@@ -618,7 +681,7 @@ function selectFromList(id) {
 // ─── Unified click handler ────────────────────────────────────────────────────
 
 function onPathClick(e) {
-  if (isDragging) return; // ignore clicks that end a drag
+  if (isDragging || touchMoved) return;
   const id = e.currentTarget.dataset.countryId;
   if (mode === 'game') handleGameClick(id);
   else                 handleLearningClick(id);

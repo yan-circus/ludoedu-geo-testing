@@ -578,3 +578,73 @@ body[data-timer="off"]     #timer-gauge  { display: none; }
   color: var(--text-dim);
   font-family: monospace;
 }
+
+/* ══════════════════════════════════════════════════════════
+   RESPONSIVE
+   ══════════════════════════════════════════════════════════ */
+
+/* Labels courts : masqués par défaut */
+.lbl-short { display: none; }
+.lbl-full  { display: inline; }
+
+/* touch-action sur la carte */
+#map-container { touch-action: none; }
+
+/* ── Tablette (500–900px) ── */
+@media (max-width: 900px) {
+  #list-panel { width: 220px; }
+
+  h1 { font-size: 1.1rem; letter-spacing: 1px; }
+
+  header { padding: 6px 12px; }
+  #toolbar { padding: 5px 10px; gap: 6px; }
+  #info-panel { padding: 6px 12px; min-height: 46px; }
+
+  #question { font-size: 1rem; }
+  #question .q-name { font-size: 1.2rem; }
+  #message  { font-size: 0.88rem; }
+}
+
+/* ── Mobile (<500px) ── */
+@media (max-width: 500px) {
+  /* Labels courts dans les boutons de mode */
+  .lbl-short { display: inline; }
+  .lbl-full  { display: none; }
+
+  h1 { font-size: 0.95rem; letter-spacing: 0; }
+  #lives { font-size: 0.95rem; letter-spacing: 2px; }
+  #score { font-size: 0.88rem; min-width: 50px; }
+
+  header { padding: 5px 10px; }
+  #toolbar { padding: 4px 8px; gap: 5px; }
+  #info-panel { padding: 5px 10px; min-height: 42px; }
+
+  #question { font-size: 0.9rem; }
+  #question .q-name { font-size: clamp(1rem, 5vw, 1.2rem); }
+  #question .q-label, #question .q-details { font-size: 0.72rem; }
+  #message { font-size: 0.82rem; }
+
+  /* Mode jeu : carte plein écran (list-panel déjà masqué par data-mode) */
+  /* Mode apprentissage : liste au-dessus, carte en dessous */
+  body[data-mode="learning"] #main-content {
+    flex-direction: column;
+  }
+  body[data-mode="learning"] #list-panel {
+    width: 100%;
+    height: 200px;
+    flex-shrink: 0;
+    border-right: none;
+    border-bottom: 1px solid var(--accent);
+  }
+
+  /* Timer gauge en bas en mode mobile */
+  body[data-mode="learning"] #timer-gauge { display: none; }
+
+  /* Modales plein écran sur mobile */
+  #settings-panel,
+  #help-panel {
+    width: 95vw;
+    padding: 14px 16px 18px;
+    max-height: 90vh;
+  }
+}
