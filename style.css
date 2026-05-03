@@ -171,8 +171,27 @@ select {
 body[data-mode="learning"] #timer-btn { display: none; }
 body.game-running #timer-btn { display: none; }
 
-#settings-btn {
+#help-btn {
+  padding: 5px 10px;
+  border-radius: var(--radius-btn);
+  border: 1px solid var(--accent);
+  background: var(--bg);
+  color: var(--text);
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 0.95rem;
+  transition: background 0.15s;
+}
+#help-btn:hover { background: var(--accent); }
+
+#right-btns {
   margin-left: auto;
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+#settings-btn {
   padding: 5px 8px;
   border-radius: var(--radius-btn);
   border: 1px solid var(--accent);
@@ -475,4 +494,87 @@ body[data-timer="off"]     #timer-gauge  { display: none; }
 .theme-card[data-theme="multi"]   .preview-ocean { background: #1a2a4a; }
 .theme-card[data-theme="multi"]   .preview-land  {
   background: linear-gradient(to right, #e06060, #e09030, #c8c040, #50b870, #4090d0, #9060c8);
+}
+
+/* ── Help overlay ── */
+#help-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 200;
+}
+#help-overlay.hidden { display: none; }
+
+#help-panel {
+  background: var(--surface);
+  border: 1px solid var(--accent);
+  border-radius: 12px;
+  padding: 20px 24px 24px;
+  width: min(460px, 92vw);
+  max-height: 85vh;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+#help-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 18px;
+}
+#help-header h2 {
+  font-size: 1.1rem;
+  color: var(--hover-fill);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-family: var(--h1-font);
+}
+#help-close {
+  background: transparent;
+  border: none;
+  color: var(--text-dim);
+  font-size: 1.1rem;
+  cursor: pointer;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+#help-close:hover { color: var(--text); background: var(--accent); }
+
+#help-panel section { margin-bottom: 16px; }
+#help-panel section h3 {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--text-dim);
+  margin-bottom: 8px;
+}
+#help-panel ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+#help-panel ul li {
+  font-size: 0.88rem;
+  padding-left: 12px;
+  position: relative;
+}
+#help-panel ul li::before {
+  content: '–';
+  position: absolute;
+  left: 0;
+  color: var(--text-dim);
+}
+
+#help-version {
+  margin-top: auto;
+  padding-top: 16px;
+  border-top: 1px solid var(--accent);
+  font-size: 0.5rem;
+  color: var(--text-dim);
+  font-family: monospace;
 }

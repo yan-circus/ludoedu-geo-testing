@@ -1,3 +1,7 @@
+// ─── Version ─────────────────────────────────────────────────────────────────
+
+const APP_VERSION = { hash: 'b32b73a', date: '2026-05-03', time: '12:31', msg: 'Mode jeu : repose les questions ratées 2 tours plus tard' };
+
 // ─── Constants ───────────────────────────────────────────────────────────────
 
 const LIVES_MAX              = 3;
@@ -256,6 +260,17 @@ async function init() {
       renderList();
     });
   });
+
+  // Help modal
+  const helpOverlay = document.getElementById('help-overlay');
+  const helpBtn     = document.getElementById('help-btn');
+  const helpClose   = document.getElementById('help-close');
+  document.getElementById('help-version').textContent =
+    `${APP_VERSION.hash} · ${APP_VERSION.date} ${APP_VERSION.time}`;
+
+  helpBtn.addEventListener('click',  () => helpOverlay.classList.remove('hidden'));
+  helpClose.addEventListener('click', () => helpOverlay.classList.add('hidden'));
+  helpOverlay.addEventListener('click', e => { if (e.target === helpOverlay) helpOverlay.classList.add('hidden'); });
 
   // Settings modal
   const overlay      = document.getElementById('settings-overlay');
