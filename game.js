@@ -248,7 +248,7 @@ async function init() {
   levelSelect.addEventListener('change', e => {
     level = e.target.value;
     resetZoom();
-    if (mode === 'learning') renderList();
+    if (mode === 'learning') { applyLevelInactive(); renderList(); }
     if (gameState !== 'idle') resetGameIdle();
   });
 
@@ -440,6 +440,7 @@ function setMode(newMode) {
 
   if (mode === 'learning') {
     resetGameIdle();
+    applyLevelInactive();
     renderList();
     setQuestionText('Cliquez sur un pays de la liste ou de la carte');
     setMessage('', '');
@@ -457,7 +458,17 @@ function getCountriesForLevel() {
     if (!countryPaths[c.id]) return false;
     if (level === 'monde')   return true;
     if (level === 'UE')      return c.is_EU;
-    return c.continent === level;
+    return c.continents.includes(level);
+  });
+}
+
+function applyLevelInactive() {
+  const pool = new Set(getCountriesForLevel().map(c => c.id));
+  Object.entries(countryPaths).forEach(([id, paths]) => {
+    paths.forEach(p => {
+      p.classList.remove('inactive');
+      if (!pool.has(id)) p.classList.add('inactive');
+    });
   });
 }
 
@@ -562,7 +573,11 @@ function handleLearningClick(clickedId) {
   if (!country) return;
 
   hideAllCircles();
-  if (selectedId) unhighlight(selectedId, 'selected');
+  if (selectedId) {
+    unhighlight(selectedId, 'selected');
+    unhighlight(selectedId, 'correct');
+  }
+  document.body.classList.remove('wrong-reveal');
 
   if (selectedId === clickedId) {
     selectedId = null;
@@ -573,13 +588,16 @@ function handleLearningClick(clickedId) {
     highlight(clickedId, 'selected');
     setQuestion(country.nom, `Capitale : ${country.capitale}  ·  Population : ${formatPop(country.population)}`);
     selectListRow(clickedId);
-    // No circle on direct map click
   }
 }
 
 function selectFromList(id) {
   hideAllCircles();
-  if (selectedId) unhighlight(selectedId, 'selected');
+  if (selectedId) {
+    unhighlight(selectedId, 'selected');
+    unhighlight(selectedId, 'correct');
+  }
+  document.body.classList.remove('wrong-reveal');
 
   if (selectedId === id) {
     selectedId = null;
@@ -587,8 +605,10 @@ function selectFromList(id) {
     deselectListRow();
   } else {
     selectedId = id;
-    highlight(id, 'selected');
-    showCircle(id);   // circle only from list click
+    highlight(id, 'correct');
+    document.body.classList.add('wrong-reveal');
+    setTimeout(() => document.body.classList.remove('wrong-reveal'), FEEDBACK_DELAY_WRONG);
+    showCircle(id);
     const country = countryById[id];
     setQuestion(country.nom, `Capitale : ${country.capitale}  ·  Population : ${formatPop(country.population)}`);
     selectListRow(id);
@@ -763,6 +783,7 @@ function clearAllHighlights() {
   Object.values(countryPaths).flat()
     .forEach(p => p.classList.remove('correct', 'wrong', 'selected', 'inactive'));
   Object.values(countryCircles).forEach(c => c.classList.remove('correct-outline'));
+  document.body.classList.remove('wrong-reveal');
   hideAllCircles();
 }
 

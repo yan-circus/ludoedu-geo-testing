@@ -1,208 +1,2273 @@
 [
-  { "id": "AE", "nom": "Émirats arabes unis",            "capitale": "Abou Dabi",          "population": 9890000,    "superficie": 83600,    "continent": "Asie",     "is_EU": false },
-  { "id": "AF", "nom": "Afghanistan",                    "capitale": "Kaboul",              "population": 40100000,   "superficie": 652230,   "continent": "Asie",     "is_EU": false },
-  { "id": "AI", "nom": "Anguilla",                       "capitale": "The Valley",          "population": 18090,      "superficie": 91,       "continent": "Amérique", "is_EU": false },
-  { "id": "AL", "nom": "Albanie",                        "capitale": "Tirana",              "population": 2837740,    "superficie": 28748,    "continent": "Europe",   "is_EU": false },
-  { "id": "AM", "nom": "Arménie",                        "capitale": "Erevan",              "population": 2971000,    "superficie": 29743,    "continent": "Asie",     "is_EU": false },
-  { "id": "AO", "nom": "Angola",                         "capitale": "Luanda",              "population": 32870000,   "superficie": 1246700,  "continent": "Afrique",  "is_EU": false },
-  { "id": "AG", "nom": "Antigua-et-Barbuda",             "capitale": "Saint-Jean",          "population": 97929,      "superficie": 442,      "continent": "Amérique", "is_EU": false },
-  { "id": "AR", "nom": "Argentine",                      "capitale": "Buenos Aires",        "population": 45380000,   "superficie": 2780400,  "continent": "Amérique", "is_EU": false },
-  { "id": "AT", "nom": "Autriche",                       "capitale": "Vienne",              "population": 9027000,    "superficie": 83871,    "continent": "Europe",   "is_EU": true  },
-  { "id": "AU", "nom": "Australie",                      "capitale": "Canberra",            "population": 25690000,   "superficie": 7692024,  "continent": "Océanie",  "is_EU": false },
-  { "id": "AW", "nom": "Aruba",                          "capitale": "Oranjestad",          "population": 106766,     "superficie": 193,      "continent": "Amérique", "is_EU": false },
-  { "id": "AZ", "nom": "Azerbaïdjan",                    "capitale": "Bakou",               "population": 10140000,   "superficie": 86600,    "continent": "Asie",     "is_EU": false },
-  { "id": "BA", "nom": "Bosnie-Herzégovine",             "capitale": "Sarajevo",            "population": 3281000,    "superficie": 51197,    "continent": "Europe",   "is_EU": false },
-  { "id": "BB", "nom": "Barbade",                        "capitale": "Bridgetown",          "population": 281200,     "superficie": 431,      "continent": "Amérique", "is_EU": false },
-  { "id": "BD", "nom": "Bangladesh",                     "capitale": "Dacca",               "population": 169400000,  "superficie": 147570,   "continent": "Asie",     "is_EU": false },
-  { "id": "BE", "nom": "Belgique",                       "capitale": "Bruxelles",           "population": 11590000,   "superficie": 30528,    "continent": "Europe",   "is_EU": true  },
-  { "id": "BF", "nom": "Burkina Faso",                   "capitale": "Ouagadougou",         "population": 22100000,   "superficie": 274200,   "continent": "Afrique",  "is_EU": false },
-  { "id": "BG", "nom": "Bulgarie",                       "capitale": "Sofia",               "population": 6520000,    "superficie": 110879,   "continent": "Europe",   "is_EU": true  },
-  { "id": "BH", "nom": "Bahreïn",                        "capitale": "Manama",              "population": 1701000,    "superficie": 765,      "continent": "Asie",     "is_EU": false },
-  { "id": "BI", "nom": "Burundi",                        "capitale": "Gitega",              "population": 12550000,   "superficie": 27830,    "continent": "Afrique",  "is_EU": false },
-  { "id": "BJ", "nom": "Bénin",                          "capitale": "Porto-Novo",          "population": 12650000,   "superficie": 112622,   "continent": "Afrique",  "is_EU": false },
-  { "id": "BL", "nom": "Saint-Barthélemy",               "capitale": "Gustavia",            "population": 10000,      "superficie": 21,       "continent": "Amérique", "is_EU": false },
-  { "id": "BM", "nom": "Bermudes",                       "capitale": "Hamilton",            "population": 64000,      "superficie": 54,       "continent": "Amérique", "is_EU": false },
-  { "id": "BN", "nom": "Brunéi",                         "capitale": "Bandar Seri Begawan", "population": 441532,     "superficie": 5765,     "continent": "Asie",     "is_EU": false },
-  { "id": "BO", "nom": "Bolivie",                        "capitale": "Sucre",               "population": 12080000,   "superficie": 1098581,  "continent": "Amérique", "is_EU": false },
-  { "id": "BR", "nom": "Brésil",                         "capitale": "Brasilia",            "population": 214300000,  "superficie": 8515767,  "continent": "Amérique", "is_EU": false },
-  { "id": "BS", "nom": "Bahamas",                        "capitale": "Nassau",              "population": 396913,     "superficie": 13943,    "continent": "Amérique", "is_EU": false },
-  { "id": "BT", "nom": "Bhoutan",                        "capitale": "Thimphou",            "population": 771600,     "superficie": 38394,    "continent": "Asie",     "is_EU": false },
-  { "id": "BW", "nom": "Botswana",                       "capitale": "Gaborone",            "population": 2630000,    "superficie": 581730,   "continent": "Afrique",  "is_EU": false },
-  { "id": "BY", "nom": "Biélorussie",                    "capitale": "Minsk",               "population": 9442860,    "superficie": 207600,   "continent": "Europe",   "is_EU": false },
-  { "id": "BZ", "nom": "Belize",                         "capitale": "Belmopan",            "population": 404000,     "superficie": 22966,    "continent": "Amérique", "is_EU": false },
-  { "id": "CA", "nom": "Canada",                         "capitale": "Ottawa",              "population": 38250000,   "superficie": 9984670,  "continent": "Amérique", "is_EU": false },
-  { "id": "CD", "nom": "Congo (RDC)",                    "capitale": "Kinshasa",            "population": 99010000,   "superficie": 2344858,  "continent": "Afrique",  "is_EU": false },
-  { "id": "CF", "nom": "République centrafricaine",      "capitale": "Bangui",              "population": 4829000,    "superficie": 622984,   "continent": "Afrique",  "is_EU": false },
-  { "id": "CG", "nom": "Congo",                          "capitale": "Brazzaville",         "population": 5835000,    "superficie": 342000,   "continent": "Afrique",  "is_EU": false },
-  { "id": "CH", "nom": "Suisse",                         "capitale": "Berne",               "population": 8654000,    "superficie": 41285,    "continent": "Europe",   "is_EU": false },
-  { "id": "CI", "nom": "Côte d'Ivoire",                  "capitale": "Yamoussoukro",        "population": 27480000,   "superficie": 322463,   "continent": "Afrique",  "is_EU": false },
-  { "id": "CL", "nom": "Chili",                          "capitale": "Santiago",            "population": 19120000,   "superficie": 756102,   "continent": "Amérique", "is_EU": false },
-  { "id": "CM", "nom": "Cameroun",                       "capitale": "Yaoundé",             "population": 27200000,   "superficie": 475442,   "continent": "Afrique",  "is_EU": false },
-  { "id": "CN", "nom": "Chine",                          "capitale": "Pékin",               "population": 1411780000, "superficie": 9596960,  "continent": "Asie",     "is_EU": false },
-  { "id": "CO", "nom": "Colombie",                       "capitale": "Bogotá",              "population": 51520000,   "superficie": 1141748,  "continent": "Amérique", "is_EU": false },
-  { "id": "CR", "nom": "Costa Rica",                     "capitale": "San José",            "population": 5153000,    "superficie": 51100,    "continent": "Amérique", "is_EU": false },
-  { "id": "CU", "nom": "Cuba",                           "capitale": "La Havane",           "population": 11330000,   "superficie": 109884,   "continent": "Amérique", "is_EU": false },
-  { "id": "CV", "nom": "Cap-Vert",                       "capitale": "Praia",               "population": 561901,     "superficie": 4033,     "continent": "Afrique",  "is_EU": false },
-  { "id": "CW", "nom": "Curaçao",                        "capitale": "Willemstad",          "population": 153671,     "superficie": 444,      "continent": "Amérique", "is_EU": false },
-  { "id": "CY", "nom": "Chypre",                         "capitale": "Nicosie",             "population": 1207000,    "superficie": 9251,     "continent": "Europe",   "is_EU": true  },
-  { "id": "CZ", "nom": "Tchéquie",                       "capitale": "Prague",              "population": 10900000,   "superficie": 78866,    "continent": "Europe",   "is_EU": true  },
-  { "id": "DE", "nom": "Allemagne",                      "capitale": "Berlin",              "population": 83240000,   "superficie": 357114,   "continent": "Europe",   "is_EU": true  },
-  { "id": "DJ", "nom": "Djibouti",                       "capitale": "Djibouti",            "population": 1000000,    "superficie": 23200,    "continent": "Afrique",  "is_EU": false },
-  { "id": "DK", "nom": "Danemark",                       "capitale": "Copenhague",          "population": 5831000,    "superficie": 42924,    "continent": "Europe",   "is_EU": true  },
-  { "id": "DM", "nom": "Dominique",                      "capitale": "Roseau",              "population": 71986,      "superficie": 751,      "continent": "Amérique", "is_EU": false },
-  { "id": "DO", "nom": "République dominicaine",         "capitale": "Saint-Domingue",      "population": 10950000,   "superficie": 48671,    "continent": "Amérique", "is_EU": false },
-  { "id": "DZ", "nom": "Algérie",                        "capitale": "Alger",               "population": 44700000,   "superficie": 2381741,  "continent": "Afrique",  "is_EU": false },
-  { "id": "EC", "nom": "Équateur",                       "capitale": "Quito",               "population": 18000000,   "superficie": 283561,   "continent": "Amérique", "is_EU": false },
-  { "id": "EE", "nom": "Estonie",                        "capitale": "Tallinn",             "population": 1331000,    "superficie": 45228,    "continent": "Europe",   "is_EU": true  },
-  { "id": "EG", "nom": "Égypte",                         "capitale": "Le Caire",            "population": 102300000,  "superficie": 1002450,  "continent": "Afrique",  "is_EU": false },
-  { "id": "EH", "nom": "Sahara occidental",              "capitale": "Laâyoune",            "population": 575986,     "superficie": 266000,   "continent": "Afrique",  "is_EU": false },
-  { "id": "ER", "nom": "Érythrée",                       "capitale": "Asmara",              "population": 3547000,    "superficie": 117600,   "continent": "Afrique",  "is_EU": false },
-  { "id": "ES", "nom": "Espagne",                        "capitale": "Madrid",              "population": 47350000,   "superficie": 505990,   "continent": "Europe",   "is_EU": true  },
-  { "id": "ET", "nom": "Éthiopie",                       "capitale": "Addis-Abeba",         "population": 120300000,  "superficie": 1104300,  "continent": "Afrique",  "is_EU": false },
-  { "id": "FI", "nom": "Finlande",                       "capitale": "Helsinki",            "population": 5541000,    "superficie": 338145,   "continent": "Europe",   "is_EU": true  },
-  { "id": "FJ", "nom": "Fidji",                          "capitale": "Suva",                "population": 896444,     "superficie": 18274,    "continent": "Océanie",  "is_EU": false },
-  { "id": "FM", "nom": "Micronésie",                     "capitale": "Palikir",             "population": 115023,     "superficie": 702,      "continent": "Océanie",  "is_EU": false },
-  { "id": "FR", "nom": "France",                         "capitale": "Paris",               "population": 67390000,   "superficie": 551695,   "continent": "Europe",   "is_EU": true  },
-  { "id": "GA", "nom": "Gabon",                          "capitale": "Libreville",          "population": 2226000,    "superficie": 267668,   "continent": "Afrique",  "is_EU": false },
-  { "id": "GB", "nom": "Royaume-Uni",                    "capitale": "Londres",             "population": 67220000,   "superficie": 242495,   "continent": "Europe",   "is_EU": false },
-  { "id": "GD", "nom": "Grenade",                        "capitale": "Saint-Georges",       "population": 113000,     "superficie": 344,      "continent": "Amérique", "is_EU": false },
-  { "id": "GE", "nom": "Géorgie",                        "capitale": "Tbilissi",            "population": 3989000,    "superficie": 69700,    "continent": "Asie",     "is_EU": false },
-  { "id": "GF", "nom": "Guyane française",               "capitale": "Cayenne",             "population": 298682,     "superficie": 83534,    "continent": "Amérique", "is_EU": false },
-  { "id": "GH", "nom": "Ghana",                          "capitale": "Accra",               "population": 32400000,   "superficie": 238533,   "continent": "Afrique",  "is_EU": false },
-  { "id": "GL", "nom": "Groenland",                      "capitale": "Nuuk",                "population": 56367,      "superficie": 2166086,  "continent": "Amérique", "is_EU": false },
-  { "id": "GM", "nom": "Gambie",                         "capitale": "Banjul",              "population": 2418000,    "superficie": 11295,    "continent": "Afrique",  "is_EU": false },
-  { "id": "GN", "nom": "Guinée",                         "capitale": "Conakry",             "population": 13130000,   "superficie": 245857,   "continent": "Afrique",  "is_EU": false },
-  { "id": "GQ", "nom": "Guinée équatoriale",             "capitale": "Malabo",              "population": 1403000,    "superficie": 28051,    "continent": "Afrique",  "is_EU": false },
-  { "id": "GR", "nom": "Grèce",                          "capitale": "Athènes",             "population": 10720000,   "superficie": 131957,   "continent": "Europe",   "is_EU": true  },
-  { "id": "GT", "nom": "Guatemala",                      "capitale": "Guatemala",           "population": 17110000,   "superficie": 108889,   "continent": "Amérique", "is_EU": false },
-  { "id": "GU", "nom": "Guam",                           "capitale": "Hagåtña",             "population": 168485,     "superficie": 549,      "continent": "Océanie",  "is_EU": false },
-  { "id": "GW", "nom": "Guinée-Bissau",                  "capitale": "Bissau",              "population": 2016000,    "superficie": 36125,    "continent": "Afrique",  "is_EU": false },
-  { "id": "GY", "nom": "Guyana",                         "capitale": "Georgetown",          "population": 786552,     "superficie": 214969,   "continent": "Amérique", "is_EU": false },
-  { "id": "HN", "nom": "Honduras",                       "capitale": "Tegucigalpa",         "population": 10280000,   "superficie": 112492,   "continent": "Amérique", "is_EU": false },
-  { "id": "HR", "nom": "Croatie",                        "capitale": "Zagreb",              "population": 4047000,    "superficie": 56594,    "continent": "Europe",   "is_EU": true  },
-  { "id": "HT", "nom": "Haïti",                          "capitale": "Port-au-Prince",      "population": 11400000,   "superficie": 27750,    "continent": "Amérique", "is_EU": false },
-  { "id": "HU", "nom": "Hongrie",                        "capitale": "Budapest",            "population": 9730000,    "superficie": 93028,    "continent": "Europe",   "is_EU": true  },
-  { "id": "ID", "nom": "Indonésie",                      "capitale": "Jakarta",             "population": 273500000,  "superficie": 1904569,  "continent": "Asie",     "is_EU": false },
-  { "id": "IE", "nom": "Irlande",                        "capitale": "Dublin",              "population": 5124000,    "superficie": 70273,    "continent": "Europe",   "is_EU": true  },
-  { "id": "IL", "nom": "Israël",                         "capitale": "Jérusalem",           "population": 9364000,    "superficie": 20770,    "continent": "Asie",     "is_EU": false },
-  { "id": "IN", "nom": "Inde",                           "capitale": "New Delhi",           "population": 1380000000, "superficie": 3287263,  "continent": "Asie",     "is_EU": false },
-  { "id": "IQ", "nom": "Irak",                           "capitale": "Bagdad",              "population": 40220000,   "superficie": 438317,   "continent": "Asie",     "is_EU": false },
-  { "id": "IR", "nom": "Iran",                           "capitale": "Téhéran",             "population": 85030000,   "superficie": 1648195,  "continent": "Asie",     "is_EU": false },
-  { "id": "IS", "nom": "Islande",                        "capitale": "Reykjavik",           "population": 368792,     "superficie": 103000,   "continent": "Europe",   "is_EU": false },
-  { "id": "IT", "nom": "Italie",                         "capitale": "Rome",                "population": 60360000,   "superficie": 301340,   "continent": "Europe",   "is_EU": true  },
-  { "id": "JM", "nom": "Jamaïque",                       "capitale": "Kingston",            "population": 2961000,    "superficie": 10991,    "continent": "Amérique", "is_EU": false },
-  { "id": "JO", "nom": "Jordanie",                       "capitale": "Amman",               "population": 10200000,   "superficie": 89342,    "continent": "Asie",     "is_EU": false },
-  { "id": "JP", "nom": "Japon",                          "capitale": "Tokyo",               "population": 125700000,  "superficie": 377975,   "continent": "Asie",     "is_EU": false },
-  { "id": "KE", "nom": "Kenya",                          "capitale": "Nairobi",             "population": 53770000,   "superficie": 580367,   "continent": "Afrique",  "is_EU": false },
-  { "id": "KG", "nom": "Kirghizistan",                   "capitale": "Bichkek",             "population": 6524000,    "superficie": 199951,   "continent": "Asie",     "is_EU": false },
-  { "id": "KH", "nom": "Cambodge",                       "capitale": "Phnom Penh",          "population": 16720000,   "superficie": 181035,   "continent": "Asie",     "is_EU": false },
-  { "id": "KM", "nom": "Comores",                        "capitale": "Moroni",              "population": 869601,     "superficie": 1861,     "continent": "Afrique",  "is_EU": false },
-  { "id": "KN", "nom": "Saint-Kitts-et-Nevis",           "capitale": "Basseterre",          "population": 53199,      "superficie": 261,      "continent": "Amérique", "is_EU": false },
-  { "id": "KP", "nom": "Corée du Nord",                  "capitale": "Pyongyang",           "population": 25780000,   "superficie": 120538,   "continent": "Asie",     "is_EU": false },
-  { "id": "KR", "nom": "Corée du Sud",                   "capitale": "Séoul",               "population": 51740000,   "superficie": 100210,   "continent": "Asie",     "is_EU": false },
-  { "id": "KW", "nom": "Koweït",                         "capitale": "Koweït",              "population": 4271000,    "superficie": 17818,    "continent": "Asie",     "is_EU": false },
-  { "id": "KZ", "nom": "Kazakhstan",                     "capitale": "Astana",              "population": 18780000,   "superficie": 2724900,  "continent": "Asie",     "is_EU": false },
-  { "id": "LA", "nom": "Laos",                           "capitale": "Vientiane",           "population": 7379000,    "superficie": 236800,   "continent": "Asie",     "is_EU": false },
-  { "id": "LB", "nom": "Liban",                          "capitale": "Beyrouth",            "population": 6825000,    "superficie": 10452,    "continent": "Asie",     "is_EU": false },
-  { "id": "LC", "nom": "Sainte-Lucie",                   "capitale": "Castries",            "population": 183600,     "superficie": 616,      "continent": "Amérique", "is_EU": false },
-  { "id": "LK", "nom": "Sri Lanka",                      "capitale": "Sri Jayawardenepura", "population": 21920000,   "superficie": 65610,    "continent": "Asie",     "is_EU": false },
-  { "id": "LR", "nom": "Liberia",                        "capitale": "Monrovia",            "population": 5058000,    "superficie": 111369,   "continent": "Afrique",  "is_EU": false },
-  { "id": "LS", "nom": "Lesotho",                        "capitale": "Maseru",              "population": 2142000,    "superficie": 30355,    "continent": "Afrique",  "is_EU": false },
-  { "id": "LT", "nom": "Lituanie",                       "capitale": "Vilnius",             "population": 2795000,    "superficie": 65300,    "continent": "Europe",   "is_EU": true  },
-  { "id": "LU", "nom": "Luxembourg",                     "capitale": "Luxembourg",          "population": 634730,     "superficie": 2586,     "continent": "Europe",   "is_EU": true  },
-  { "id": "LV", "nom": "Lettonie",                       "capitale": "Riga",                "population": 1842000,    "superficie": 64589,    "continent": "Europe",   "is_EU": true  },
-  { "id": "LY", "nom": "Libye",                          "capitale": "Tripoli",             "population": 6871000,    "superficie": 1759540,  "continent": "Afrique",  "is_EU": false },
-  { "id": "MA", "nom": "Maroc",                          "capitale": "Rabat",               "population": 37080000,   "superficie": 446550,   "continent": "Afrique",  "is_EU": false },
-  { "id": "MD", "nom": "Moldavie",                       "capitale": "Chișinău",            "population": 2618000,    "superficie": 33851,    "continent": "Europe",   "is_EU": false },
-  { "id": "ME", "nom": "Monténégro",                     "capitale": "Podgorica",           "population": 621000,     "superficie": 13812,    "continent": "Europe",   "is_EU": false },
-  { "id": "MF", "nom": "Saint-Martin",                   "capitale": "Marigot",             "population": 35746,      "superficie": 54,       "continent": "Amérique", "is_EU": false },
-  { "id": "MG", "nom": "Madagascar",                     "capitale": "Antananarivo",        "population": 27690000,   "superficie": 587041,   "continent": "Afrique",  "is_EU": false },
-  { "id": "MH", "nom": "Îles Marshall",                  "capitale": "Majuro",              "population": 42050,      "superficie": 181,      "continent": "Océanie",  "is_EU": false },
-  { "id": "MK", "nom": "Macédoine du Nord",              "capitale": "Skopje",              "population": 2083000,    "superficie": 25713,    "continent": "Europe",   "is_EU": false },
-  { "id": "ML", "nom": "Mali",                           "capitale": "Bamako",              "population": 21900000,   "superficie": 1240192,  "continent": "Afrique",  "is_EU": false },
-  { "id": "MM", "nom": "Myanmar",                        "capitale": "Naypyidaw",           "population": 54410000,   "superficie": 676578,   "continent": "Asie",     "is_EU": false },
-  { "id": "MN", "nom": "Mongolie",                       "capitale": "Oulan-Bator",         "population": 3278000,    "superficie": 1564116,  "continent": "Asie",     "is_EU": false },
-  { "id": "MQ", "nom": "Martinique",                     "capitale": "Fort-de-France",      "population": 375265,     "superficie": 1128,     "continent": "Amérique", "is_EU": false },
-  { "id": "MR", "nom": "Mauritanie",                     "capitale": "Nouakchott",          "population": 4615000,    "superficie": 1030700,  "continent": "Afrique",  "is_EU": false },
-  { "id": "MS", "nom": "Montserrat",                     "capitale": "Plymouth",            "population": 4922,       "superficie": 102,      "continent": "Amérique", "is_EU": false },
-  { "id": "MT", "nom": "Malte",                          "capitale": "La Valette",          "population": 514564,     "superficie": 316,      "continent": "Europe",   "is_EU": true  },
-  { "id": "MU", "nom": "Maurice",                        "capitale": "Port-Louis",          "population": 1265303,    "superficie": 2040,     "continent": "Afrique",  "is_EU": false },
-  { "id": "MV", "nom": "Maldives",                       "capitale": "Malé",                "population": 540542,     "superficie": 298,      "continent": "Asie",     "is_EU": false },
-  { "id": "MW", "nom": "Malawi",                         "capitale": "Lilongwe",            "population": 19130000,   "superficie": 118484,   "continent": "Afrique",  "is_EU": false },
-  { "id": "MX", "nom": "Mexique",                        "capitale": "Mexico",              "population": 128900000,  "superficie": 1964375,  "continent": "Amérique", "is_EU": false },
-  { "id": "MY", "nom": "Malaisie",                       "capitale": "Kuala Lumpur",        "population": 32370000,   "superficie": 329847,   "continent": "Asie",     "is_EU": false },
-  { "id": "MZ", "nom": "Mozambique",                     "capitale": "Maputo",              "population": 32160000,   "superficie": 801590,   "continent": "Afrique",  "is_EU": false },
-  { "id": "NA", "nom": "Namibie",                        "capitale": "Windhoek",            "population": 2587000,    "superficie": 825615,   "continent": "Afrique",  "is_EU": false },
-  { "id": "NE", "nom": "Niger",                          "capitale": "Niamey",              "population": 25130000,   "superficie": 1267000,  "continent": "Afrique",  "is_EU": false },
-  { "id": "NG", "nom": "Nigeria",                        "capitale": "Abuja",               "population": 213400000,  "superficie": 923768,   "continent": "Afrique",  "is_EU": false },
-  { "id": "NI", "nom": "Nicaragua",                      "capitale": "Managua",             "population": 6625000,    "superficie": 130373,   "continent": "Amérique", "is_EU": false },
-  { "id": "NL", "nom": "Pays-Bas",                       "capitale": "Amsterdam",           "population": 17440000,   "superficie": 41543,    "continent": "Europe",   "is_EU": true  },
-  { "id": "NO", "nom": "Norvège",                        "capitale": "Oslo",                "population": 5408000,    "superficie": 385207,   "continent": "Europe",   "is_EU": false },
-  { "id": "NP", "nom": "Népal",                          "capitale": "Katmandou",           "population": 29190000,   "superficie": 147181,   "continent": "Asie",     "is_EU": false },
-  { "id": "NR", "nom": "Nauru",                          "capitale": "Yaren",               "population": 10824,      "superficie": 21,       "continent": "Océanie",  "is_EU": false },
-  { "id": "NZ", "nom": "Nouvelle-Zélande",               "capitale": "Wellington",          "population": 5085000,    "superficie": 270467,   "continent": "Océanie",  "is_EU": false },
-  { "id": "OM", "nom": "Oman",                           "capitale": "Mascate",             "population": 4520000,    "superficie": 309500,   "continent": "Asie",     "is_EU": false },
-  { "id": "PA", "nom": "Panama",                         "capitale": "Panama",              "population": 4352000,    "superficie": 75417,    "continent": "Amérique", "is_EU": false },
-  { "id": "PE", "nom": "Pérou",                          "capitale": "Lima",                "population": 33360000,   "superficie": 1285216,  "continent": "Amérique", "is_EU": false },
-  { "id": "PG", "nom": "Papouasie-Nouvelle-Guinée",      "capitale": "Port Moresby",        "population": 9120000,    "superficie": 462840,   "continent": "Océanie",  "is_EU": false },
-  { "id": "PH", "nom": "Philippines",                    "capitale": "Manille",             "population": 113900000,  "superficie": 342353,   "continent": "Asie",     "is_EU": false },
-  { "id": "PK", "nom": "Pakistan",                       "capitale": "Islamabad",           "population": 231400000,  "superficie": 881913,   "continent": "Asie",     "is_EU": false },
-  { "id": "PL", "nom": "Pologne",                        "capitale": "Varsovie",            "population": 37780000,   "superficie": 312696,   "continent": "Europe",   "is_EU": true  },
-  { "id": "PS", "nom": "Palestine",                      "capitale": "Ramallah",            "population": 5227193,    "superficie": 6020,     "continent": "Asie",     "is_EU": false },
-  { "id": "PT", "nom": "Portugal",                       "capitale": "Lisbonne",            "population": 10310000,   "superficie": 92212,    "continent": "Europe",   "is_EU": true  },
-  { "id": "PW", "nom": "Palaos",                         "capitale": "Ngerulmud",           "population": 18092,      "superficie": 459,      "continent": "Océanie",  "is_EU": false },
-  { "id": "PY", "nom": "Paraguay",                       "capitale": "Asunción",            "population": 7133000,    "superficie": 406752,   "continent": "Amérique", "is_EU": false },
-  { "id": "QA", "nom": "Qatar",                          "capitale": "Doha",                "population": 2881000,    "superficie": 11586,    "continent": "Asie",     "is_EU": false },
-  { "id": "RE", "nom": "La Réunion",                     "capitale": "Saint-Denis",         "population": 895312,     "superficie": 2512,     "continent": "Afrique",  "is_EU": false },
-  { "id": "RO", "nom": "Roumanie",                       "capitale": "Bucarest",            "population": 19240000,   "superficie": 238397,   "continent": "Europe",   "is_EU": true  },
-  { "id": "RS", "nom": "Serbie",                         "capitale": "Belgrade",            "population": 6908000,    "superficie": 77474,    "continent": "Europe",   "is_EU": false },
-  { "id": "RU", "nom": "Russie",                         "capitale": "Moscou",              "population": 144100000,  "superficie": 17098242, "continent": "Europe",   "is_EU": false },
-  { "id": "RW", "nom": "Rwanda",                         "capitale": "Kigali",              "population": 13460000,   "superficie": 26338,    "continent": "Afrique",  "is_EU": false },
-  { "id": "SA", "nom": "Arabie saoudite",                "capitale": "Riyad",               "population": 35340000,   "superficie": 2149690,  "continent": "Asie",     "is_EU": false },
-  { "id": "SB", "nom": "Îles Salomon",                   "capitale": "Honiara",             "population": 686884,     "superficie": 28896,    "continent": "Océanie",  "is_EU": false },
-  { "id": "SC", "nom": "Seychelles",                     "capitale": "Victoria",            "population": 98347,      "superficie": 459,      "continent": "Afrique",  "is_EU": false },
-  { "id": "SD", "nom": "Soudan",                         "capitale": "Khartoum",            "population": 43850000,   "superficie": 1861484,  "continent": "Afrique",  "is_EU": false },
-  { "id": "SE", "nom": "Suède",                          "capitale": "Stockholm",           "population": 10400000,   "superficie": 450295,   "continent": "Europe",   "is_EU": true  },
-  { "id": "SI", "nom": "Slovénie",                       "capitale": "Ljubljana",           "population": 2100000,    "superficie": 20273,    "continent": "Europe",   "is_EU": true  },
-  { "id": "SK", "nom": "Slovaquie",                      "capitale": "Bratislava",          "population": 5460000,    "superficie": 49035,    "continent": "Europe",   "is_EU": true  },
-  { "id": "SL", "nom": "Sierra Leone",                   "capitale": "Freetown",            "population": 7976000,    "superficie": 71740,    "continent": "Afrique",  "is_EU": false },
-  { "id": "SN", "nom": "Sénégal",                        "capitale": "Dakar",               "population": 17200000,   "superficie": 196722,   "continent": "Afrique",  "is_EU": false },
-  { "id": "SO", "nom": "Somalie",                        "capitale": "Mogadiscio",          "population": 16360000,   "superficie": 637657,   "continent": "Afrique",  "is_EU": false },
-  { "id": "SR", "nom": "Suriname",                       "capitale": "Paramaribo",          "population": 587000,     "superficie": 163820,   "continent": "Amérique", "is_EU": false },
-  { "id": "SS", "nom": "Soudan du Sud",                  "capitale": "Djouba",              "population": 11190000,   "superficie": 619745,   "continent": "Afrique",  "is_EU": false },
-  { "id": "ST", "nom": "Sao Tomé-et-Principe",           "capitale": "São Tomé",            "population": 219159,     "superficie": 964,      "continent": "Afrique",  "is_EU": false },
-  { "id": "SV", "nom": "Salvador",                       "capitale": "San Salvador",        "population": 6486000,    "superficie": 21041,    "continent": "Amérique", "is_EU": false },
-  { "id": "SX", "nom": "Saint-Martin (NL)",              "capitale": "Philipsburg",         "population": 42786,      "superficie": 34,       "continent": "Amérique", "is_EU": false },
-  { "id": "SY", "nom": "Syrie",                          "capitale": "Damas",               "population": 17500000,   "superficie": 185180,   "continent": "Asie",     "is_EU": false },
-  { "id": "SZ", "nom": "Eswatini",                       "capitale": "Mbabane",             "population": 1160000,    "superficie": 17364,    "continent": "Afrique",  "is_EU": false },
-  { "id": "TD", "nom": "Tchad",                          "capitale": "N'Djamena",           "population": 16430000,   "superficie": 1284000,  "continent": "Afrique",  "is_EU": false },
-  { "id": "TG", "nom": "Togo",                           "capitale": "Lomé",                "population": 8280000,    "superficie": 56785,    "continent": "Afrique",  "is_EU": false },
-  { "id": "TH", "nom": "Thaïlande",                      "capitale": "Bangkok",             "population": 71480000,   "superficie": 513120,   "continent": "Asie",     "is_EU": false },
-  { "id": "TJ", "nom": "Tadjikistan",                    "capitale": "Douchanbé",           "population": 9750000,    "superficie": 143100,   "continent": "Asie",     "is_EU": false },
-  { "id": "TL", "nom": "Timor oriental",                 "capitale": "Dili",                "population": 1318000,    "superficie": 14874,    "continent": "Asie",     "is_EU": false },
-  { "id": "TM", "nom": "Turkménistan",                   "capitale": "Achgabat",            "population": 6032000,    "superficie": 488100,   "continent": "Asie",     "is_EU": false },
-  { "id": "TN", "nom": "Tunisie",                        "capitale": "Tunis",               "population": 11820000,   "superficie": 163610,   "continent": "Afrique",  "is_EU": false },
-  { "id": "TO", "nom": "Tonga",                          "capitale": "Nuku'alofa",          "population": 100651,     "superficie": 747,      "continent": "Océanie",  "is_EU": false },
-  { "id": "TR", "nom": "Turquie",                        "capitale": "Ankara",              "population": 84340000,   "superficie": 783356,   "continent": "Asie",     "is_EU": false },
-  { "id": "TT", "nom": "Trinité-et-Tobago",              "capitale": "Port d'Espagne",      "population": 1399491,    "superficie": 5130,     "continent": "Amérique", "is_EU": false },
-  { "id": "TV", "nom": "Tuvalu",                         "capitale": "Funafuti",            "population": 11792,      "superficie": 26,       "continent": "Océanie",  "is_EU": false },
-  { "id": "TW", "nom": "Taïwan",                         "capitale": "Taipei",              "population": 23570000,   "superficie": 35980,    "continent": "Asie",     "is_EU": false },
-  { "id": "TZ", "nom": "Tanzanie",                       "capitale": "Dodoma",              "population": 61500000,   "superficie": 945087,   "continent": "Afrique",  "is_EU": false },
-  { "id": "UA", "nom": "Ukraine",                        "capitale": "Kyiv",                "population": 43530000,   "superficie": 603550,   "continent": "Europe",   "is_EU": false },
-  { "id": "UG", "nom": "Ouganda",                        "capitale": "Kampala",             "population": 47120000,   "superficie": 241038,   "continent": "Afrique",  "is_EU": false },
-  { "id": "US", "nom": "États-Unis",                     "capitale": "Washington",          "population": 331000000,  "superficie": 9833517,  "continent": "Amérique", "is_EU": false },
-  { "id": "UY", "nom": "Uruguay",                        "capitale": "Montevideo",          "population": 3474000,    "superficie": 176215,   "continent": "Amérique", "is_EU": false },
-  { "id": "UZ", "nom": "Ouzbékistan",                    "capitale": "Tachkent",            "population": 35300000,   "superficie": 448978,   "continent": "Asie",     "is_EU": false },
-  { "id": "VC", "nom": "Saint-Vincent-et-les-Grenadines","capitale": "Kingstown",           "population": 110940,     "superficie": 389,      "continent": "Amérique", "is_EU": false },
-  { "id": "VE", "nom": "Venezuela",                      "capitale": "Caracas",             "population": 28440000,   "superficie": 912050,   "continent": "Amérique", "is_EU": false },
-  { "id": "VG", "nom": "Îles Vierges britanniques",      "capitale": "Road Town",           "population": 30237,      "superficie": 151,      "continent": "Amérique", "is_EU": false },
-  { "id": "VN", "nom": "Viêt Nam",                       "capitale": "Hanoï",               "population": 97340000,   "superficie": 331212,   "continent": "Asie",     "is_EU": false },
-  { "id": "VU", "nom": "Vanuatu",                        "capitale": "Port-Vila",           "population": 307145,     "superficie": 12189,    "continent": "Océanie",  "is_EU": false },
-  { "id": "WS", "nom": "Samoa",                          "capitale": "Apia",                "population": 198414,     "superficie": 2842,     "continent": "Océanie",  "is_EU": false },
-  { "id": "XK", "nom": "Kosovo",                         "capitale": "Pristina",            "population": 1795000,    "superficie": 10887,    "continent": "Europe",   "is_EU": false },
-  { "id": "YE", "nom": "Yémen",                          "capitale": "Sanaa",               "population": 33700000,   "superficie": 527968,   "continent": "Asie",     "is_EU": false },
-  { "id": "YT", "nom": "Mayotte",                        "capitale": "Mamoudzou",           "population": 279471,     "superficie": 374,      "continent": "Afrique",  "is_EU": false },
-  { "id": "ZA", "nom": "Afrique du Sud",                 "capitale": "Pretoria",            "population": 60140000,   "superficie": 1221037,  "continent": "Afrique",  "is_EU": false },
-  { "id": "ZM", "nom": "Zambie",                         "capitale": "Lusaka",              "population": 18920000,   "superficie": 752618,   "continent": "Afrique",  "is_EU": false },
-  { "id": "ZW", "nom": "Zimbabwe",                       "capitale": "Harare",              "population": 14860000,   "superficie": 390757,   "continent": "Afrique",  "is_EU": false }
+  {
+    "id": "AE",
+    "nom": "Émirats arabes unis",
+    "capitale": "Abou Dabi",
+    "population": 9890000,
+    "superficie": 83600,
+    "is_EU": false,
+    "continents": [
+      "Asie"
+    ]
+  },
+  {
+    "id": "AF",
+    "nom": "Afghanistan",
+    "capitale": "Kaboul",
+    "population": 40100000,
+    "superficie": 652230,
+    "is_EU": false,
+    "continents": [
+      "Asie"
+    ]
+  },
+  {
+    "id": "AI",
+    "nom": "Anguilla",
+    "capitale": "The Valley",
+    "population": 18090,
+    "superficie": 91,
+    "is_EU": false,
+    "continents": [
+      "Amérique"
+    ]
+  },
+  {
+    "id": "AL",
+    "nom": "Albanie",
+    "capitale": "Tirana",
+    "population": 2837740,
+    "superficie": 28748,
+    "is_EU": false,
+    "continents": [
+      "Europe"
+    ]
+  },
+  {
+    "id": "AM",
+    "nom": "Arménie",
+    "capitale": "Erevan",
+    "population": 2971000,
+    "superficie": 29743,
+    "is_EU": false,
+    "continents": [
+      "Asie"
+    ]
+  },
+  {
+    "id": "AO",
+    "nom": "Angola",
+    "capitale": "Luanda",
+    "population": 32870000,
+    "superficie": 1246700,
+    "is_EU": false,
+    "continents": [
+      "Afrique"
+    ]
+  },
+  {
+    "id": "AG",
+    "nom": "Antigua-et-Barbuda",
+    "capitale": "Saint-Jean",
+    "population": 97929,
+    "superficie": 442,
+    "is_EU": false,
+    "continents": [
+      "Amérique"
+    ]
+  },
+  {
+    "id": "AR",
+    "nom": "Argentine",
+    "capitale": "Buenos Aires",
+    "population": 45380000,
+    "superficie": 2780400,
+    "is_EU": false,
+    "continents": [
+      "Amérique"
+    ]
+  },
+  {
+    "id": "AT",
+    "nom": "Autriche",
+    "capitale": "Vienne",
+    "population": 9027000,
+    "superficie": 83871,
+    "is_EU": true,
+    "continents": [
+      "Europe"
+    ]
+  },
+  {
+    "id": "AU",
+    "nom": "Australie",
+    "capitale": "Canberra",
+    "population": 25690000,
+    "superficie": 7692024,
+    "is_EU": false,
+    "continents": [
+      "Océanie"
+    ]
+  },
+  {
+    "id": "AW",
+    "nom": "Aruba",
+    "capitale": "Oranjestad",
+    "population": 106766,
+    "superficie": 193,
+    "is_EU": false,
+    "continents": [
+      "Amérique"
+    ]
+  },
+  {
+    "id": "AZ",
+    "nom": "Azerbaïdjan",
+    "capitale": "Bakou",
+    "population": 10140000,
+    "superficie": 86600,
+    "is_EU": false,
+    "continents": [
+      "Asie"
+    ]
+  },
+  {
+    "id": "BA",
+    "nom": "Bosnie-Herzégovine",
+    "capitale": "Sarajevo",
+    "population": 3281000,
+    "superficie": 51197,
+    "is_EU": false,
+    "continents": [
+      "Europe"
+    ]
+  },
+  {
+    "id": "BB",
+    "nom": "Barbade",
+    "capitale": "Bridgetown",
+    "population": 281200,
+    "superficie": 431,
+    "is_EU": false,
+    "continents": [
+      "Amérique"
+    ]
+  },
+  {
+    "id": "BD",
+    "nom": "Bangladesh",
+    "capitale": "Dacca",
+    "population": 169400000,
+    "superficie": 147570,
+    "is_EU": false,
+    "continents": [
+      "Asie"
+    ]
+  },
+  {
+    "id": "BE",
+    "nom": "Belgique",
+    "capitale": "Bruxelles",
+    "population": 11590000,
+    "superficie": 30528,
+    "is_EU": true,
+    "continents": [
+      "Europe"
+    ]
+  },
+  {
+    "id": "BF",
+    "nom": "Burkina Faso",
+    "capitale": "Ouagadougou",
+    "population": 22100000,
+    "superficie": 274200,
+    "is_EU": false,
+    "continents": [
+      "Afrique"
+    ]
+  },
+  {
+    "id": "BG",
+    "nom": "Bulgarie",
+    "capitale": "Sofia",
+    "population": 6520000,
+    "superficie": 110879,
+    "is_EU": true,
+    "continents": [
+      "Europe"
+    ]
+  },
+  {
+    "id": "BH",
+    "nom": "Bahreïn",
+    "capitale": "Manama",
+    "population": 1701000,
+    "superficie": 765,
+    "is_EU": false,
+    "continents": [
+      "Asie"
+    ]
+  },
+  {
+    "id": "BI",
+    "nom": "Burundi",
+    "capitale": "Gitega",
+    "population": 12550000,
+    "superficie": 27830,
+    "is_EU": false,
+    "continents": [
+      "Afrique"
+    ]
+  },
+  {
+    "id": "BJ",
+    "nom": "Bénin",
+    "capitale": "Porto-Novo",
+    "population": 12650000,
+    "superficie": 112622,
+    "is_EU": false,
+    "continents": [
+      "Afrique"
+    ]
+  },
+  {
+    "id": "BL",
+    "nom": "Saint-Barthélemy",
+    "capitale": "Gustavia",
+    "population": 10000,
+    "superficie": 21,
+    "is_EU": false,
+    "continents": [
+      "Amérique"
+    ]
+  },
+  {
+    "id": "BM",
+    "nom": "Bermudes",
+    "capitale": "Hamilton",
+    "population": 64000,
+    "superficie": 54,
+    "is_EU": false,
+    "continents": [
+      "Amérique"
+    ]
+  },
+  {
+    "id": "BN",
+    "nom": "Brunéi",
+    "capitale": "Bandar Seri Begawan",
+    "population": 441532,
+    "superficie": 5765,
+    "is_EU": false,
+    "continents": [
+      "Asie"
+    ]
+  },
+  {
+    "id": "BO",
+    "nom": "Bolivie",
+    "capitale": "Sucre",
+    "population": 12080000,
+    "superficie": 1098581,
+    "is_EU": false,
+    "continents": [
+      "Amérique"
+    ]
+  },
+  {
+    "id": "BR",
+    "nom": "Brésil",
+    "capitale": "Brasilia",
+    "population": 214300000,
+    "superficie": 8515767,
+    "is_EU": false,
+    "continents": [
+      "Amérique"
+    ]
+  },
+  {
+    "id": "BS",
+    "nom": "Bahamas",
+    "capitale": "Nassau",
+    "population": 396913,
+    "superficie": 13943,
+    "is_EU": false,
+    "continents": [
+      "Amérique"
+    ]
+  },
+  {
+    "id": "BT",
+    "nom": "Bhoutan",
+    "capitale": "Thimphou",
+    "population": 771600,
+    "superficie": 38394,
+    "is_EU": false,
+    "continents": [
+      "Asie"
+    ]
+  },
+  {
+    "id": "BW",
+    "nom": "Botswana",
+    "capitale": "Gaborone",
+    "population": 2630000,
+    "superficie": 581730,
+    "is_EU": false,
+    "continents": [
+      "Afrique"
+    ]
+  },
+  {
+    "id": "BY",
+    "nom": "Biélorussie",
+    "capitale": "Minsk",
+    "population": 9442860,
+    "superficie": 207600,
+    "is_EU": false,
+    "continents": [
+      "Europe"
+    ]
+  },
+  {
+    "id": "BZ",
+    "nom": "Belize",
+    "capitale": "Belmopan",
+    "population": 404000,
+    "superficie": 22966,
+    "is_EU": false,
+    "continents": [
+      "Amérique"
+    ]
+  },
+  {
+    "id": "CA",
+    "nom": "Canada",
+    "capitale": "Ottawa",
+    "population": 38250000,
+    "superficie": 9984670,
+    "is_EU": false,
+    "continents": [
+      "Amérique"
+    ]
+  },
+  {
+    "id": "CD",
+    "nom": "Congo (RDC)",
+    "capitale": "Kinshasa",
+    "population": 99010000,
+    "superficie": 2344858,
+    "is_EU": false,
+    "continents": [
+      "Afrique"
+    ]
+  },
+  {
+    "id": "CF",
+    "nom": "République centrafricaine",
+    "capitale": "Bangui",
+    "population": 4829000,
+    "superficie": 622984,
+    "is_EU": false,
+    "continents": [
+      "Afrique"
+    ]
+  },
+  {
+    "id": "CG",
+    "nom": "Congo",
+    "capitale": "Brazzaville",
+    "population": 5835000,
+    "superficie": 342000,
+    "is_EU": false,
+    "continents": [
+      "Afrique"
+    ]
+  },
+  {
+    "id": "CH",
+    "nom": "Suisse",
+    "capitale": "Berne",
+    "population": 8654000,
+    "superficie": 41285,
+    "is_EU": false,
+    "continents": [
+      "Europe"
+    ]
+  },
+  {
+    "id": "CI",
+    "nom": "Côte d'Ivoire",
+    "capitale": "Yamoussoukro",
+    "population": 27480000,
+    "superficie": 322463,
+    "is_EU": false,
+    "continents": [
+      "Afrique"
+    ]
+  },
+  {
+    "id": "CL",
+    "nom": "Chili",
+    "capitale": "Santiago",
+    "population": 19120000,
+    "superficie": 756102,
+    "is_EU": false,
+    "continents": [
+      "Amérique"
+    ]
+  },
+  {
+    "id": "CM",
+    "nom": "Cameroun",
+    "capitale": "Yaoundé",
+    "population": 27200000,
+    "superficie": 475442,
+    "is_EU": false,
+    "continents": [
+      "Afrique"
+    ]
+  },
+  {
+    "id": "CN",
+    "nom": "Chine",
+    "capitale": "Pékin",
+    "population": 1411780000,
+    "superficie": 9596960,
+    "is_EU": false,
+    "continents": [
+      "Asie"
+    ]
+  },
+  {
+    "id": "CO",
+    "nom": "Colombie",
+    "capitale": "Bogotá",
+    "population": 51520000,
+    "superficie": 1141748,
+    "is_EU": false,
+    "continents": [
+      "Amérique"
+    ]
+  },
+  {
+    "id": "CR",
+    "nom": "Costa Rica",
+    "capitale": "San José",
+    "population": 5153000,
+    "superficie": 51100,
+    "is_EU": false,
+    "continents": [
+      "Amérique"
+    ]
+  },
+  {
+    "id": "CU",
+    "nom": "Cuba",
+    "capitale": "La Havane",
+    "population": 11330000,
+    "superficie": 109884,
+    "is_EU": false,
+    "continents": [
+      "Amérique"
+    ]
+  },
+  {
+    "id": "CV",
+    "nom": "Cap-Vert",
+    "capitale": "Praia",
+    "population": 561901,
+    "superficie": 4033,
+    "is_EU": false,
+    "continents": [
+      "Afrique"
+    ]
+  },
+  {
+    "id": "CW",
+    "nom": "Curaçao",
+    "capitale": "Willemstad",
+    "population": 153671,
+    "superficie": 444,
+    "is_EU": false,
+    "continents": [
+      "Amérique"
+    ]
+  },
+  {
+    "id": "CY",
+    "nom": "Chypre",
+    "capitale": "Nicosie",
+    "population": 1207000,
+    "superficie": 9251,
+    "is_EU": true,
+    "continents": [
+      "Europe"
+    ]
+  },
+  {
+    "id": "CZ",
+    "nom": "Tchéquie",
+    "capitale": "Prague",
+    "population": 10900000,
+    "superficie": 78866,
+    "is_EU": true,
+    "continents": [
+      "Europe"
+    ]
+  },
+  {
+    "id": "DE",
+    "nom": "Allemagne",
+    "capitale": "Berlin",
+    "population": 83240000,
+    "superficie": 357114,
+    "is_EU": true,
+    "continents": [
+      "Europe"
+    ]
+  },
+  {
+    "id": "DJ",
+    "nom": "Djibouti",
+    "capitale": "Djibouti",
+    "population": 1000000,
+    "superficie": 23200,
+    "is_EU": false,
+    "continents": [
+      "Afrique"
+    ]
+  },
+  {
+    "id": "DK",
+    "nom": "Danemark",
+    "capitale": "Copenhague",
+    "population": 5831000,
+    "superficie": 42924,
+    "is_EU": true,
+    "continents": [
+      "Europe"
+    ]
+  },
+  {
+    "id": "DM",
+    "nom": "Dominique",
+    "capitale": "Roseau",
+    "population": 71986,
+    "superficie": 751,
+    "is_EU": false,
+    "continents": [
+      "Amérique"
+    ]
+  },
+  {
+    "id": "DO",
+    "nom": "République dominicaine",
+    "capitale": "Saint-Domingue",
+    "population": 10950000,
+    "superficie": 48671,
+    "is_EU": false,
+    "continents": [
+      "Amérique"
+    ]
+  },
+  {
+    "id": "DZ",
+    "nom": "Algérie",
+    "capitale": "Alger",
+    "population": 44700000,
+    "superficie": 2381741,
+    "is_EU": false,
+    "continents": [
+      "Afrique"
+    ]
+  },
+  {
+    "id": "EC",
+    "nom": "Équateur",
+    "capitale": "Quito",
+    "population": 18000000,
+    "superficie": 283561,
+    "is_EU": false,
+    "continents": [
+      "Amérique"
+    ]
+  },
+  {
+    "id": "EE",
+    "nom": "Estonie",
+    "capitale": "Tallinn",
+    "population": 1331000,
+    "superficie": 45228,
+    "is_EU": true,
+    "continents": [
+      "Europe"
+    ]
+  },
+  {
+    "id": "EG",
+    "nom": "Égypte",
+    "capitale": "Le Caire",
+    "population": 102300000,
+    "superficie": 1002450,
+    "is_EU": false,
+    "continents": [
+      "Afrique",
+      "Asie"
+    ]
+  },
+  {
+    "id": "EH",
+    "nom": "Sahara occidental",
+    "capitale": "Laâyoune",
+    "population": 575986,
+    "superficie": 266000,
+    "is_EU": false,
+    "continents": [
+      "Afrique"
+    ]
+  },
+  {
+    "id": "ER",
+    "nom": "Érythrée",
+    "capitale": "Asmara",
+    "population": 3547000,
+    "superficie": 117600,
+    "is_EU": false,
+    "continents": [
+      "Afrique"
+    ]
+  },
+  {
+    "id": "ES",
+    "nom": "Espagne",
+    "capitale": "Madrid",
+    "population": 47350000,
+    "superficie": 505990,
+    "is_EU": true,
+    "continents": [
+      "Europe"
+    ]
+  },
+  {
+    "id": "ET",
+    "nom": "Éthiopie",
+    "capitale": "Addis-Abeba",
+    "population": 120300000,
+    "superficie": 1104300,
+    "is_EU": false,
+    "continents": [
+      "Afrique"
+    ]
+  },
+  {
+    "id": "FI",
+    "nom": "Finlande",
+    "capitale": "Helsinki",
+    "population": 5541000,
+    "superficie": 338145,
+    "is_EU": true,
+    "continents": [
+      "Europe"
+    ]
+  },
+  {
+    "id": "FJ",
+    "nom": "Fidji",
+    "capitale": "Suva",
+    "population": 896444,
+    "superficie": 18274,
+    "is_EU": false,
+    "continents": [
+      "Océanie"
+    ]
+  },
+  {
+    "id": "FM",
+    "nom": "Micronésie",
+    "capitale": "Palikir",
+    "population": 115023,
+    "superficie": 702,
+    "is_EU": false,
+    "continents": [
+      "Océanie"
+    ]
+  },
+  {
+    "id": "FR",
+    "nom": "France",
+    "capitale": "Paris",
+    "population": 67390000,
+    "superficie": 551695,
+    "is_EU": true,
+    "continents": [
+      "Europe"
+    ]
+  },
+  {
+    "id": "GA",
+    "nom": "Gabon",
+    "capitale": "Libreville",
+    "population": 2226000,
+    "superficie": 267668,
+    "is_EU": false,
+    "continents": [
+      "Afrique"
+    ]
+  },
+  {
+    "id": "GB",
+    "nom": "Royaume-Uni",
+    "capitale": "Londres",
+    "population": 67220000,
+    "superficie": 242495,
+    "is_EU": false,
+    "continents": [
+      "Europe"
+    ]
+  },
+  {
+    "id": "GD",
+    "nom": "Grenade",
+    "capitale": "Saint-Georges",
+    "population": 113000,
+    "superficie": 344,
+    "is_EU": false,
+    "continents": [
+      "Amérique"
+    ]
+  },
+  {
+    "id": "GE",
+    "nom": "Géorgie",
+    "capitale": "Tbilissi",
+    "population": 3989000,
+    "superficie": 69700,
+    "is_EU": false,
+    "continents": [
+      "Asie"
+    ]
+  },
+  {
+    "id": "GF",
+    "nom": "Guyane française",
+    "capitale": "Cayenne",
+    "population": 298682,
+    "superficie": 83534,
+    "is_EU": false,
+    "continents": [
+      "Amérique"
+    ]
+  },
+  {
+    "id": "GH",
+    "nom": "Ghana",
+    "capitale": "Accra",
+    "population": 32400000,
+    "superficie": 238533,
+    "is_EU": false,
+    "continents": [
+      "Afrique"
+    ]
+  },
+  {
+    "id": "GL",
+    "nom": "Groenland",
+    "capitale": "Nuuk",
+    "population": 56367,
+    "superficie": 2166086,
+    "is_EU": false,
+    "continents": [
+      "Amérique"
+    ]
+  },
+  {
+    "id": "GM",
+    "nom": "Gambie",
+    "capitale": "Banjul",
+    "population": 2418000,
+    "superficie": 11295,
+    "is_EU": false,
+    "continents": [
+      "Afrique"
+    ]
+  },
+  {
+    "id": "GN",
+    "nom": "Guinée",
+    "capitale": "Conakry",
+    "population": 13130000,
+    "superficie": 245857,
+    "is_EU": false,
+    "continents": [
+      "Afrique"
+    ]
+  },
+  {
+    "id": "GQ",
+    "nom": "Guinée équatoriale",
+    "capitale": "Malabo",
+    "population": 1403000,
+    "superficie": 28051,
+    "is_EU": false,
+    "continents": [
+      "Afrique"
+    ]
+  },
+  {
+    "id": "GR",
+    "nom": "Grèce",
+    "capitale": "Athènes",
+    "population": 10720000,
+    "superficie": 131957,
+    "is_EU": true,
+    "continents": [
+      "Europe"
+    ]
+  },
+  {
+    "id": "GT",
+    "nom": "Guatemala",
+    "capitale": "Guatemala",
+    "population": 17110000,
+    "superficie": 108889,
+    "is_EU": false,
+    "continents": [
+      "Amérique"
+    ]
+  },
+  {
+    "id": "GU",
+    "nom": "Guam",
+    "capitale": "Hagåtña",
+    "population": 168485,
+    "superficie": 549,
+    "is_EU": false,
+    "continents": [
+      "Océanie"
+    ]
+  },
+  {
+    "id": "GW",
+    "nom": "Guinée-Bissau",
+    "capitale": "Bissau",
+    "population": 2016000,
+    "superficie": 36125,
+    "is_EU": false,
+    "continents": [
+      "Afrique"
+    ]
+  },
+  {
+    "id": "GY",
+    "nom": "Guyana",
+    "capitale": "Georgetown",
+    "population": 786552,
+    "superficie": 214969,
+    "is_EU": false,
+    "continents": [
+      "Amérique"
+    ]
+  },
+  {
+    "id": "HN",
+    "nom": "Honduras",
+    "capitale": "Tegucigalpa",
+    "population": 10280000,
+    "superficie": 112492,
+    "is_EU": false,
+    "continents": [
+      "Amérique"
+    ]
+  },
+  {
+    "id": "HR",
+    "nom": "Croatie",
+    "capitale": "Zagreb",
+    "population": 4047000,
+    "superficie": 56594,
+    "is_EU": true,
+    "continents": [
+      "Europe"
+    ]
+  },
+  {
+    "id": "HT",
+    "nom": "Haïti",
+    "capitale": "Port-au-Prince",
+    "population": 11400000,
+    "superficie": 27750,
+    "is_EU": false,
+    "continents": [
+      "Amérique"
+    ]
+  },
+  {
+    "id": "HU",
+    "nom": "Hongrie",
+    "capitale": "Budapest",
+    "population": 9730000,
+    "superficie": 93028,
+    "is_EU": true,
+    "continents": [
+      "Europe"
+    ]
+  },
+  {
+    "id": "ID",
+    "nom": "Indonésie",
+    "capitale": "Jakarta",
+    "population": 273500000,
+    "superficie": 1904569,
+    "is_EU": false,
+    "continents": [
+      "Asie",
+      "Océanie"
+    ]
+  },
+  {
+    "id": "IE",
+    "nom": "Irlande",
+    "capitale": "Dublin",
+    "population": 5124000,
+    "superficie": 70273,
+    "is_EU": true,
+    "continents": [
+      "Europe"
+    ]
+  },
+  {
+    "id": "IL",
+    "nom": "Israël",
+    "capitale": "Jérusalem",
+    "population": 9364000,
+    "superficie": 20770,
+    "is_EU": false,
+    "continents": [
+      "Asie"
+    ]
+  },
+  {
+    "id": "IN",
+    "nom": "Inde",
+    "capitale": "New Delhi",
+    "population": 1380000000,
+    "superficie": 3287263,
+    "is_EU": false,
+    "continents": [
+      "Asie"
+    ]
+  },
+  {
+    "id": "IQ",
+    "nom": "Irak",
+    "capitale": "Bagdad",
+    "population": 40220000,
+    "superficie": 438317,
+    "is_EU": false,
+    "continents": [
+      "Asie"
+    ]
+  },
+  {
+    "id": "IR",
+    "nom": "Iran",
+    "capitale": "Téhéran",
+    "population": 85030000,
+    "superficie": 1648195,
+    "is_EU": false,
+    "continents": [
+      "Asie"
+    ]
+  },
+  {
+    "id": "IS",
+    "nom": "Islande",
+    "capitale": "Reykjavik",
+    "population": 368792,
+    "superficie": 103000,
+    "is_EU": false,
+    "continents": [
+      "Europe"
+    ]
+  },
+  {
+    "id": "IT",
+    "nom": "Italie",
+    "capitale": "Rome",
+    "population": 60360000,
+    "superficie": 301340,
+    "is_EU": true,
+    "continents": [
+      "Europe"
+    ]
+  },
+  {
+    "id": "JM",
+    "nom": "Jamaïque",
+    "capitale": "Kingston",
+    "population": 2961000,
+    "superficie": 10991,
+    "is_EU": false,
+    "continents": [
+      "Amérique"
+    ]
+  },
+  {
+    "id": "JO",
+    "nom": "Jordanie",
+    "capitale": "Amman",
+    "population": 10200000,
+    "superficie": 89342,
+    "is_EU": false,
+    "continents": [
+      "Asie"
+    ]
+  },
+  {
+    "id": "JP",
+    "nom": "Japon",
+    "capitale": "Tokyo",
+    "population": 125700000,
+    "superficie": 377975,
+    "is_EU": false,
+    "continents": [
+      "Asie"
+    ]
+  },
+  {
+    "id": "KE",
+    "nom": "Kenya",
+    "capitale": "Nairobi",
+    "population": 53770000,
+    "superficie": 580367,
+    "is_EU": false,
+    "continents": [
+      "Afrique"
+    ]
+  },
+  {
+    "id": "KG",
+    "nom": "Kirghizistan",
+    "capitale": "Bichkek",
+    "population": 6524000,
+    "superficie": 199951,
+    "is_EU": false,
+    "continents": [
+      "Asie"
+    ]
+  },
+  {
+    "id": "KH",
+    "nom": "Cambodge",
+    "capitale": "Phnom Penh",
+    "population": 16720000,
+    "superficie": 181035,
+    "is_EU": false,
+    "continents": [
+      "Asie"
+    ]
+  },
+  {
+    "id": "KM",
+    "nom": "Comores",
+    "capitale": "Moroni",
+    "population": 869601,
+    "superficie": 1861,
+    "is_EU": false,
+    "continents": [
+      "Afrique"
+    ]
+  },
+  {
+    "id": "KN",
+    "nom": "Saint-Kitts-et-Nevis",
+    "capitale": "Basseterre",
+    "population": 53199,
+    "superficie": 261,
+    "is_EU": false,
+    "continents": [
+      "Amérique"
+    ]
+  },
+  {
+    "id": "KP",
+    "nom": "Corée du Nord",
+    "capitale": "Pyongyang",
+    "population": 25780000,
+    "superficie": 120538,
+    "is_EU": false,
+    "continents": [
+      "Asie"
+    ]
+  },
+  {
+    "id": "KR",
+    "nom": "Corée du Sud",
+    "capitale": "Séoul",
+    "population": 51740000,
+    "superficie": 100210,
+    "is_EU": false,
+    "continents": [
+      "Asie"
+    ]
+  },
+  {
+    "id": "KW",
+    "nom": "Koweït",
+    "capitale": "Koweït",
+    "population": 4271000,
+    "superficie": 17818,
+    "is_EU": false,
+    "continents": [
+      "Asie"
+    ]
+  },
+  {
+    "id": "KZ",
+    "nom": "Kazakhstan",
+    "capitale": "Astana",
+    "population": 18780000,
+    "superficie": 2724900,
+    "is_EU": false,
+    "continents": [
+      "Europe",
+      "Asie"
+    ]
+  },
+  {
+    "id": "LA",
+    "nom": "Laos",
+    "capitale": "Vientiane",
+    "population": 7379000,
+    "superficie": 236800,
+    "is_EU": false,
+    "continents": [
+      "Asie"
+    ]
+  },
+  {
+    "id": "LB",
+    "nom": "Liban",
+    "capitale": "Beyrouth",
+    "population": 6825000,
+    "superficie": 10452,
+    "is_EU": false,
+    "continents": [
+      "Asie"
+    ]
+  },
+  {
+    "id": "LC",
+    "nom": "Sainte-Lucie",
+    "capitale": "Castries",
+    "population": 183600,
+    "superficie": 616,
+    "is_EU": false,
+    "continents": [
+      "Amérique"
+    ]
+  },
+  {
+    "id": "LK",
+    "nom": "Sri Lanka",
+    "capitale": "Sri Jayawardenepura",
+    "population": 21920000,
+    "superficie": 65610,
+    "is_EU": false,
+    "continents": [
+      "Asie"
+    ]
+  },
+  {
+    "id": "LR",
+    "nom": "Liberia",
+    "capitale": "Monrovia",
+    "population": 5058000,
+    "superficie": 111369,
+    "is_EU": false,
+    "continents": [
+      "Afrique"
+    ]
+  },
+  {
+    "id": "LS",
+    "nom": "Lesotho",
+    "capitale": "Maseru",
+    "population": 2142000,
+    "superficie": 30355,
+    "is_EU": false,
+    "continents": [
+      "Afrique"
+    ]
+  },
+  {
+    "id": "LT",
+    "nom": "Lituanie",
+    "capitale": "Vilnius",
+    "population": 2795000,
+    "superficie": 65300,
+    "is_EU": true,
+    "continents": [
+      "Europe"
+    ]
+  },
+  {
+    "id": "LU",
+    "nom": "Luxembourg",
+    "capitale": "Luxembourg",
+    "population": 634730,
+    "superficie": 2586,
+    "is_EU": true,
+    "continents": [
+      "Europe"
+    ]
+  },
+  {
+    "id": "LV",
+    "nom": "Lettonie",
+    "capitale": "Riga",
+    "population": 1842000,
+    "superficie": 64589,
+    "is_EU": true,
+    "continents": [
+      "Europe"
+    ]
+  },
+  {
+    "id": "LY",
+    "nom": "Libye",
+    "capitale": "Tripoli",
+    "population": 6871000,
+    "superficie": 1759540,
+    "is_EU": false,
+    "continents": [
+      "Afrique"
+    ]
+  },
+  {
+    "id": "MA",
+    "nom": "Maroc",
+    "capitale": "Rabat",
+    "population": 37080000,
+    "superficie": 446550,
+    "is_EU": false,
+    "continents": [
+      "Afrique"
+    ]
+  },
+  {
+    "id": "MD",
+    "nom": "Moldavie",
+    "capitale": "Chișinău",
+    "population": 2618000,
+    "superficie": 33851,
+    "is_EU": false,
+    "continents": [
+      "Europe"
+    ]
+  },
+  {
+    "id": "ME",
+    "nom": "Monténégro",
+    "capitale": "Podgorica",
+    "population": 621000,
+    "superficie": 13812,
+    "is_EU": false,
+    "continents": [
+      "Europe"
+    ]
+  },
+  {
+    "id": "MF",
+    "nom": "Saint-Martin",
+    "capitale": "Marigot",
+    "population": 35746,
+    "superficie": 54,
+    "is_EU": false,
+    "continents": [
+      "Amérique"
+    ]
+  },
+  {
+    "id": "MG",
+    "nom": "Madagascar",
+    "capitale": "Antananarivo",
+    "population": 27690000,
+    "superficie": 587041,
+    "is_EU": false,
+    "continents": [
+      "Afrique"
+    ]
+  },
+  {
+    "id": "MH",
+    "nom": "Îles Marshall",
+    "capitale": "Majuro",
+    "population": 42050,
+    "superficie": 181,
+    "is_EU": false,
+    "continents": [
+      "Océanie"
+    ]
+  },
+  {
+    "id": "MK",
+    "nom": "Macédoine du Nord",
+    "capitale": "Skopje",
+    "population": 2083000,
+    "superficie": 25713,
+    "is_EU": false,
+    "continents": [
+      "Europe"
+    ]
+  },
+  {
+    "id": "ML",
+    "nom": "Mali",
+    "capitale": "Bamako",
+    "population": 21900000,
+    "superficie": 1240192,
+    "is_EU": false,
+    "continents": [
+      "Afrique"
+    ]
+  },
+  {
+    "id": "MM",
+    "nom": "Myanmar",
+    "capitale": "Naypyidaw",
+    "population": 54410000,
+    "superficie": 676578,
+    "is_EU": false,
+    "continents": [
+      "Asie"
+    ]
+  },
+  {
+    "id": "MN",
+    "nom": "Mongolie",
+    "capitale": "Oulan-Bator",
+    "population": 3278000,
+    "superficie": 1564116,
+    "is_EU": false,
+    "continents": [
+      "Asie"
+    ]
+  },
+  {
+    "id": "MQ",
+    "nom": "Martinique",
+    "capitale": "Fort-de-France",
+    "population": 375265,
+    "superficie": 1128,
+    "is_EU": false,
+    "continents": [
+      "Amérique"
+    ]
+  },
+  {
+    "id": "MR",
+    "nom": "Mauritanie",
+    "capitale": "Nouakchott",
+    "population": 4615000,
+    "superficie": 1030700,
+    "is_EU": false,
+    "continents": [
+      "Afrique"
+    ]
+  },
+  {
+    "id": "MS",
+    "nom": "Montserrat",
+    "capitale": "Plymouth",
+    "population": 4922,
+    "superficie": 102,
+    "is_EU": false,
+    "continents": [
+      "Amérique"
+    ]
+  },
+  {
+    "id": "MT",
+    "nom": "Malte",
+    "capitale": "La Valette",
+    "population": 514564,
+    "superficie": 316,
+    "is_EU": true,
+    "continents": [
+      "Europe"
+    ]
+  },
+  {
+    "id": "MU",
+    "nom": "Maurice",
+    "capitale": "Port-Louis",
+    "population": 1265303,
+    "superficie": 2040,
+    "is_EU": false,
+    "continents": [
+      "Afrique"
+    ]
+  },
+  {
+    "id": "MV",
+    "nom": "Maldives",
+    "capitale": "Malé",
+    "population": 540542,
+    "superficie": 298,
+    "is_EU": false,
+    "continents": [
+      "Asie"
+    ]
+  },
+  {
+    "id": "MW",
+    "nom": "Malawi",
+    "capitale": "Lilongwe",
+    "population": 19130000,
+    "superficie": 118484,
+    "is_EU": false,
+    "continents": [
+      "Afrique"
+    ]
+  },
+  {
+    "id": "MX",
+    "nom": "Mexique",
+    "capitale": "Mexico",
+    "population": 128900000,
+    "superficie": 1964375,
+    "is_EU": false,
+    "continents": [
+      "Amérique"
+    ]
+  },
+  {
+    "id": "MY",
+    "nom": "Malaisie",
+    "capitale": "Kuala Lumpur",
+    "population": 32370000,
+    "superficie": 329847,
+    "is_EU": false,
+    "continents": [
+      "Asie"
+    ]
+  },
+  {
+    "id": "MZ",
+    "nom": "Mozambique",
+    "capitale": "Maputo",
+    "population": 32160000,
+    "superficie": 801590,
+    "is_EU": false,
+    "continents": [
+      "Afrique"
+    ]
+  },
+  {
+    "id": "NA",
+    "nom": "Namibie",
+    "capitale": "Windhoek",
+    "population": 2587000,
+    "superficie": 825615,
+    "is_EU": false,
+    "continents": [
+      "Afrique"
+    ]
+  },
+  {
+    "id": "NE",
+    "nom": "Niger",
+    "capitale": "Niamey",
+    "population": 25130000,
+    "superficie": 1267000,
+    "is_EU": false,
+    "continents": [
+      "Afrique"
+    ]
+  },
+  {
+    "id": "NG",
+    "nom": "Nigeria",
+    "capitale": "Abuja",
+    "population": 213400000,
+    "superficie": 923768,
+    "is_EU": false,
+    "continents": [
+      "Afrique"
+    ]
+  },
+  {
+    "id": "NI",
+    "nom": "Nicaragua",
+    "capitale": "Managua",
+    "population": 6625000,
+    "superficie": 130373,
+    "is_EU": false,
+    "continents": [
+      "Amérique"
+    ]
+  },
+  {
+    "id": "NL",
+    "nom": "Pays-Bas",
+    "capitale": "Amsterdam",
+    "population": 17440000,
+    "superficie": 41543,
+    "is_EU": true,
+    "continents": [
+      "Europe"
+    ]
+  },
+  {
+    "id": "NO",
+    "nom": "Norvège",
+    "capitale": "Oslo",
+    "population": 5408000,
+    "superficie": 385207,
+    "is_EU": false,
+    "continents": [
+      "Europe"
+    ]
+  },
+  {
+    "id": "NP",
+    "nom": "Népal",
+    "capitale": "Katmandou",
+    "population": 29190000,
+    "superficie": 147181,
+    "is_EU": false,
+    "continents": [
+      "Asie"
+    ]
+  },
+  {
+    "id": "NR",
+    "nom": "Nauru",
+    "capitale": "Yaren",
+    "population": 10824,
+    "superficie": 21,
+    "is_EU": false,
+    "continents": [
+      "Océanie"
+    ]
+  },
+  {
+    "id": "NZ",
+    "nom": "Nouvelle-Zélande",
+    "capitale": "Wellington",
+    "population": 5085000,
+    "superficie": 270467,
+    "is_EU": false,
+    "continents": [
+      "Océanie"
+    ]
+  },
+  {
+    "id": "OM",
+    "nom": "Oman",
+    "capitale": "Mascate",
+    "population": 4520000,
+    "superficie": 309500,
+    "is_EU": false,
+    "continents": [
+      "Asie"
+    ]
+  },
+  {
+    "id": "PA",
+    "nom": "Panama",
+    "capitale": "Panama",
+    "population": 4352000,
+    "superficie": 75417,
+    "is_EU": false,
+    "continents": [
+      "Amérique"
+    ]
+  },
+  {
+    "id": "PE",
+    "nom": "Pérou",
+    "capitale": "Lima",
+    "population": 33360000,
+    "superficie": 1285216,
+    "is_EU": false,
+    "continents": [
+      "Amérique"
+    ]
+  },
+  {
+    "id": "PG",
+    "nom": "Papouasie-Nouvelle-Guinée",
+    "capitale": "Port Moresby",
+    "population": 9120000,
+    "superficie": 462840,
+    "is_EU": false,
+    "continents": [
+      "Océanie"
+    ]
+  },
+  {
+    "id": "PH",
+    "nom": "Philippines",
+    "capitale": "Manille",
+    "population": 113900000,
+    "superficie": 342353,
+    "is_EU": false,
+    "continents": [
+      "Asie"
+    ]
+  },
+  {
+    "id": "PK",
+    "nom": "Pakistan",
+    "capitale": "Islamabad",
+    "population": 231400000,
+    "superficie": 881913,
+    "is_EU": false,
+    "continents": [
+      "Asie"
+    ]
+  },
+  {
+    "id": "PL",
+    "nom": "Pologne",
+    "capitale": "Varsovie",
+    "population": 37780000,
+    "superficie": 312696,
+    "is_EU": true,
+    "continents": [
+      "Europe"
+    ]
+  },
+  {
+    "id": "PS",
+    "nom": "Palestine",
+    "capitale": "Ramallah",
+    "population": 5227193,
+    "superficie": 6020,
+    "is_EU": false,
+    "continents": [
+      "Asie"
+    ]
+  },
+  {
+    "id": "PT",
+    "nom": "Portugal",
+    "capitale": "Lisbonne",
+    "population": 10310000,
+    "superficie": 92212,
+    "is_EU": true,
+    "continents": [
+      "Europe"
+    ]
+  },
+  {
+    "id": "PW",
+    "nom": "Palaos",
+    "capitale": "Ngerulmud",
+    "population": 18092,
+    "superficie": 459,
+    "is_EU": false,
+    "continents": [
+      "Océanie"
+    ]
+  },
+  {
+    "id": "PY",
+    "nom": "Paraguay",
+    "capitale": "Asunción",
+    "population": 7133000,
+    "superficie": 406752,
+    "is_EU": false,
+    "continents": [
+      "Amérique"
+    ]
+  },
+  {
+    "id": "QA",
+    "nom": "Qatar",
+    "capitale": "Doha",
+    "population": 2881000,
+    "superficie": 11586,
+    "is_EU": false,
+    "continents": [
+      "Asie"
+    ]
+  },
+  {
+    "id": "RE",
+    "nom": "La Réunion",
+    "capitale": "Saint-Denis",
+    "population": 895312,
+    "superficie": 2512,
+    "is_EU": false,
+    "continents": [
+      "Afrique"
+    ]
+  },
+  {
+    "id": "RO",
+    "nom": "Roumanie",
+    "capitale": "Bucarest",
+    "population": 19240000,
+    "superficie": 238397,
+    "is_EU": true,
+    "continents": [
+      "Europe"
+    ]
+  },
+  {
+    "id": "RS",
+    "nom": "Serbie",
+    "capitale": "Belgrade",
+    "population": 6908000,
+    "superficie": 77474,
+    "is_EU": false,
+    "continents": [
+      "Europe"
+    ]
+  },
+  {
+    "id": "RU",
+    "nom": "Russie",
+    "capitale": "Moscou",
+    "population": 144100000,
+    "superficie": 17098242,
+    "is_EU": false,
+    "continents": [
+      "Europe",
+      "Asie"
+    ]
+  },
+  {
+    "id": "RW",
+    "nom": "Rwanda",
+    "capitale": "Kigali",
+    "population": 13460000,
+    "superficie": 26338,
+    "is_EU": false,
+    "continents": [
+      "Afrique"
+    ]
+  },
+  {
+    "id": "SA",
+    "nom": "Arabie saoudite",
+    "capitale": "Riyad",
+    "population": 35340000,
+    "superficie": 2149690,
+    "is_EU": false,
+    "continents": [
+      "Asie"
+    ]
+  },
+  {
+    "id": "SB",
+    "nom": "Îles Salomon",
+    "capitale": "Honiara",
+    "population": 686884,
+    "superficie": 28896,
+    "is_EU": false,
+    "continents": [
+      "Océanie"
+    ]
+  },
+  {
+    "id": "SC",
+    "nom": "Seychelles",
+    "capitale": "Victoria",
+    "population": 98347,
+    "superficie": 459,
+    "is_EU": false,
+    "continents": [
+      "Afrique"
+    ]
+  },
+  {
+    "id": "SD",
+    "nom": "Soudan",
+    "capitale": "Khartoum",
+    "population": 43850000,
+    "superficie": 1861484,
+    "is_EU": false,
+    "continents": [
+      "Afrique"
+    ]
+  },
+  {
+    "id": "SE",
+    "nom": "Suède",
+    "capitale": "Stockholm",
+    "population": 10400000,
+    "superficie": 450295,
+    "is_EU": true,
+    "continents": [
+      "Europe"
+    ]
+  },
+  {
+    "id": "SI",
+    "nom": "Slovénie",
+    "capitale": "Ljubljana",
+    "population": 2100000,
+    "superficie": 20273,
+    "is_EU": true,
+    "continents": [
+      "Europe"
+    ]
+  },
+  {
+    "id": "SK",
+    "nom": "Slovaquie",
+    "capitale": "Bratislava",
+    "population": 5460000,
+    "superficie": 49035,
+    "is_EU": true,
+    "continents": [
+      "Europe"
+    ]
+  },
+  {
+    "id": "SL",
+    "nom": "Sierra Leone",
+    "capitale": "Freetown",
+    "population": 7976000,
+    "superficie": 71740,
+    "is_EU": false,
+    "continents": [
+      "Afrique"
+    ]
+  },
+  {
+    "id": "SN",
+    "nom": "Sénégal",
+    "capitale": "Dakar",
+    "population": 17200000,
+    "superficie": 196722,
+    "is_EU": false,
+    "continents": [
+      "Afrique"
+    ]
+  },
+  {
+    "id": "SO",
+    "nom": "Somalie",
+    "capitale": "Mogadiscio",
+    "population": 16360000,
+    "superficie": 637657,
+    "is_EU": false,
+    "continents": [
+      "Afrique"
+    ]
+  },
+  {
+    "id": "SR",
+    "nom": "Suriname",
+    "capitale": "Paramaribo",
+    "population": 587000,
+    "superficie": 163820,
+    "is_EU": false,
+    "continents": [
+      "Amérique"
+    ]
+  },
+  {
+    "id": "SS",
+    "nom": "Soudan du Sud",
+    "capitale": "Djouba",
+    "population": 11190000,
+    "superficie": 619745,
+    "is_EU": false,
+    "continents": [
+      "Afrique"
+    ]
+  },
+  {
+    "id": "ST",
+    "nom": "Sao Tomé-et-Principe",
+    "capitale": "São Tomé",
+    "population": 219159,
+    "superficie": 964,
+    "is_EU": false,
+    "continents": [
+      "Afrique"
+    ]
+  },
+  {
+    "id": "SV",
+    "nom": "Salvador",
+    "capitale": "San Salvador",
+    "population": 6486000,
+    "superficie": 21041,
+    "is_EU": false,
+    "continents": [
+      "Amérique"
+    ]
+  },
+  {
+    "id": "SX",
+    "nom": "Saint-Martin (NL)",
+    "capitale": "Philipsburg",
+    "population": 42786,
+    "superficie": 34,
+    "is_EU": false,
+    "continents": [
+      "Amérique"
+    ]
+  },
+  {
+    "id": "SY",
+    "nom": "Syrie",
+    "capitale": "Damas",
+    "population": 17500000,
+    "superficie": 185180,
+    "is_EU": false,
+    "continents": [
+      "Asie"
+    ]
+  },
+  {
+    "id": "SZ",
+    "nom": "Eswatini",
+    "capitale": "Mbabane",
+    "population": 1160000,
+    "superficie": 17364,
+    "is_EU": false,
+    "continents": [
+      "Afrique"
+    ]
+  },
+  {
+    "id": "TD",
+    "nom": "Tchad",
+    "capitale": "N'Djamena",
+    "population": 16430000,
+    "superficie": 1284000,
+    "is_EU": false,
+    "continents": [
+      "Afrique"
+    ]
+  },
+  {
+    "id": "TG",
+    "nom": "Togo",
+    "capitale": "Lomé",
+    "population": 8280000,
+    "superficie": 56785,
+    "is_EU": false,
+    "continents": [
+      "Afrique"
+    ]
+  },
+  {
+    "id": "TH",
+    "nom": "Thaïlande",
+    "capitale": "Bangkok",
+    "population": 71480000,
+    "superficie": 513120,
+    "is_EU": false,
+    "continents": [
+      "Asie"
+    ]
+  },
+  {
+    "id": "TJ",
+    "nom": "Tadjikistan",
+    "capitale": "Douchanbé",
+    "population": 9750000,
+    "superficie": 143100,
+    "is_EU": false,
+    "continents": [
+      "Asie"
+    ]
+  },
+  {
+    "id": "TL",
+    "nom": "Timor oriental",
+    "capitale": "Dili",
+    "population": 1318000,
+    "superficie": 14874,
+    "is_EU": false,
+    "continents": [
+      "Asie"
+    ]
+  },
+  {
+    "id": "TM",
+    "nom": "Turkménistan",
+    "capitale": "Achgabat",
+    "population": 6032000,
+    "superficie": 488100,
+    "is_EU": false,
+    "continents": [
+      "Asie"
+    ]
+  },
+  {
+    "id": "TN",
+    "nom": "Tunisie",
+    "capitale": "Tunis",
+    "population": 11820000,
+    "superficie": 163610,
+    "is_EU": false,
+    "continents": [
+      "Afrique"
+    ]
+  },
+  {
+    "id": "TO",
+    "nom": "Tonga",
+    "capitale": "Nuku'alofa",
+    "population": 100651,
+    "superficie": 747,
+    "is_EU": false,
+    "continents": [
+      "Océanie"
+    ]
+  },
+  {
+    "id": "TR",
+    "nom": "Turquie",
+    "capitale": "Ankara",
+    "population": 84340000,
+    "superficie": 783356,
+    "is_EU": false,
+    "continents": [
+      "Europe",
+      "Asie"
+    ]
+  },
+  {
+    "id": "TT",
+    "nom": "Trinité-et-Tobago",
+    "capitale": "Port d'Espagne",
+    "population": 1399491,
+    "superficie": 5130,
+    "is_EU": false,
+    "continents": [
+      "Amérique"
+    ]
+  },
+  {
+    "id": "TV",
+    "nom": "Tuvalu",
+    "capitale": "Funafuti",
+    "population": 11792,
+    "superficie": 26,
+    "is_EU": false,
+    "continents": [
+      "Océanie"
+    ]
+  },
+  {
+    "id": "TW",
+    "nom": "Taïwan",
+    "capitale": "Taipei",
+    "population": 23570000,
+    "superficie": 35980,
+    "is_EU": false,
+    "continents": [
+      "Asie"
+    ]
+  },
+  {
+    "id": "TZ",
+    "nom": "Tanzanie",
+    "capitale": "Dodoma",
+    "population": 61500000,
+    "superficie": 945087,
+    "is_EU": false,
+    "continents": [
+      "Afrique"
+    ]
+  },
+  {
+    "id": "UA",
+    "nom": "Ukraine",
+    "capitale": "Kyiv",
+    "population": 43530000,
+    "superficie": 603550,
+    "is_EU": false,
+    "continents": [
+      "Europe"
+    ]
+  },
+  {
+    "id": "UG",
+    "nom": "Ouganda",
+    "capitale": "Kampala",
+    "population": 47120000,
+    "superficie": 241038,
+    "is_EU": false,
+    "continents": [
+      "Afrique"
+    ]
+  },
+  {
+    "id": "US",
+    "nom": "États-Unis",
+    "capitale": "Washington",
+    "population": 331000000,
+    "superficie": 9833517,
+    "is_EU": false,
+    "continents": [
+      "Amérique"
+    ]
+  },
+  {
+    "id": "UY",
+    "nom": "Uruguay",
+    "capitale": "Montevideo",
+    "population": 3474000,
+    "superficie": 176215,
+    "is_EU": false,
+    "continents": [
+      "Amérique"
+    ]
+  },
+  {
+    "id": "UZ",
+    "nom": "Ouzbékistan",
+    "capitale": "Tachkent",
+    "population": 35300000,
+    "superficie": 448978,
+    "is_EU": false,
+    "continents": [
+      "Asie"
+    ]
+  },
+  {
+    "id": "VC",
+    "nom": "Saint-Vincent-et-les-Grenadines",
+    "capitale": "Kingstown",
+    "population": 110940,
+    "superficie": 389,
+    "is_EU": false,
+    "continents": [
+      "Amérique"
+    ]
+  },
+  {
+    "id": "VE",
+    "nom": "Venezuela",
+    "capitale": "Caracas",
+    "population": 28440000,
+    "superficie": 912050,
+    "is_EU": false,
+    "continents": [
+      "Amérique"
+    ]
+  },
+  {
+    "id": "VG",
+    "nom": "Îles Vierges britanniques",
+    "capitale": "Road Town",
+    "population": 30237,
+    "superficie": 151,
+    "is_EU": false,
+    "continents": [
+      "Amérique"
+    ]
+  },
+  {
+    "id": "VN",
+    "nom": "Viêt Nam",
+    "capitale": "Hanoï",
+    "population": 97340000,
+    "superficie": 331212,
+    "is_EU": false,
+    "continents": [
+      "Asie"
+    ]
+  },
+  {
+    "id": "VU",
+    "nom": "Vanuatu",
+    "capitale": "Port-Vila",
+    "population": 307145,
+    "superficie": 12189,
+    "is_EU": false,
+    "continents": [
+      "Océanie"
+    ]
+  },
+  {
+    "id": "WS",
+    "nom": "Samoa",
+    "capitale": "Apia",
+    "population": 198414,
+    "superficie": 2842,
+    "is_EU": false,
+    "continents": [
+      "Océanie"
+    ]
+  },
+  {
+    "id": "XK",
+    "nom": "Kosovo",
+    "capitale": "Pristina",
+    "population": 1795000,
+    "superficie": 10887,
+    "is_EU": false,
+    "continents": [
+      "Europe"
+    ]
+  },
+  {
+    "id": "YE",
+    "nom": "Yémen",
+    "capitale": "Sanaa",
+    "population": 33700000,
+    "superficie": 527968,
+    "is_EU": false,
+    "continents": [
+      "Asie"
+    ]
+  },
+  {
+    "id": "YT",
+    "nom": "Mayotte",
+    "capitale": "Mamoudzou",
+    "population": 279471,
+    "superficie": 374,
+    "is_EU": false,
+    "continents": [
+      "Afrique"
+    ]
+  },
+  {
+    "id": "ZA",
+    "nom": "Afrique du Sud",
+    "capitale": "Pretoria",
+    "population": 60140000,
+    "superficie": 1221037,
+    "is_EU": false,
+    "continents": [
+      "Afrique"
+    ]
+  },
+  {
+    "id": "ZM",
+    "nom": "Zambie",
+    "capitale": "Lusaka",
+    "population": 18920000,
+    "superficie": 752618,
+    "is_EU": false,
+    "continents": [
+      "Afrique"
+    ]
+  },
+  {
+    "id": "ZW",
+    "nom": "Zimbabwe",
+    "capitale": "Harare",
+    "population": 14860000,
+    "superficie": 390757,
+    "is_EU": false,
+    "continents": [
+      "Afrique"
+    ]
+  }
 ]

@@ -339,7 +339,7 @@ body[data-theme="multi"]  #question .q-details { color: #cad4df; }
 .country.inactive:hover { fill: #777; }
 
 /* Wrong-reveal : assombrit tous les pays sauf correct (vert) et wrong (rouge) */
-body.wrong-reveal .country:not(.correct):not(.wrong):not(.small-marker) { fill: #4d4d4d !important; }
+body.wrong-reveal .country:not(.correct):not(.wrong):not(.small-marker):not(.inactive) { fill: #4d4d4d !important; }
 
 /* ── Small-country marker circles ── */
 circle.country {
