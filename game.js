@@ -275,6 +275,19 @@ async function init() {
   helpClose.addEventListener('click', () => helpOverlay.classList.add('hidden'));
   helpOverlay.addEventListener('click', e => { if (e.target === helpOverlay) helpOverlay.classList.add('hidden'); });
 
+  // Triple-clic sur la version → mode développeur
+  let devClickCount = 0, devClickTimer = null;
+  document.getElementById('help-version').addEventListener('click', () => {
+    devClickCount++;
+    clearTimeout(devClickTimer);
+    devClickTimer = setTimeout(() => { devClickCount = 0; }, 600);
+    if (devClickCount >= 3) {
+      devClickCount = 0;
+      document.body.classList.toggle('dev-mode');
+      updateDevPanel();
+    }
+  });
+
   // Settings modal
   const overlay      = document.getElementById('settings-overlay');
   const settingsBtn  = document.getElementById('settings-btn');
@@ -312,6 +325,14 @@ function parseViewBox(str) {
 function applyViewBox() {
   const svg = mapContainer.querySelector('svg');
   if (svg) svg.setAttribute('viewBox', `${vb.x} ${vb.y} ${vb.w} ${vb.h}`);
+  updateDevPanel();
+}
+
+function updateDevPanel() {
+  if (!document.body.classList.contains('dev-mode')) return;
+  const baseW  = parseViewBox(VIEWBOXES[level] ?? VIEWBOXES.monde).w;
+  const zoomPct = Math.round((baseW / vb.w) * 100);
+  document.getElementById('dev-zoom').textContent = zoomPct + ' %';
 }
 
 function resetZoom() {
