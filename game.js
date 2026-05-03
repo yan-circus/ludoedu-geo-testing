@@ -1,6 +1,6 @@
 // ─── Version ─────────────────────────────────────────────────────────────────
 
-const APP_VERSION = { hash: 'b7fb3d3', date: '2026-05-03', time: '12:46', msg: 'Ajout panneau d\'aide (bouton ?) avec version commit en bas' };
+const APP_VERSION = { hash: 'c776674', date: '2026-05-03', time: '19:08', msg: 'Plusieurs améliorations mode apprentissage + données continents' };
 
 // ─── Constants ───────────────────────────────────────────────────────────────
 
