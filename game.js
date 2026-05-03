@@ -335,8 +335,23 @@ function updateDevPanel() {
   document.getElementById('dev-zoom').textContent = zoomPct + ' %';
 }
 
+function defaultZoomFactor() {
+  if (window.innerWidth <= 500) return 0.25;  // 400%
+  if (window.innerWidth <= 900) return 0.5;   // 200%
+  return 1;
+}
+
 function resetZoom() {
-  vb = parseViewBox(VIEWBOXES[level] ?? VIEWBOXES.monde);
+  const base   = parseViewBox(VIEWBOXES[level] ?? VIEWBOXES.monde);
+  const factor = defaultZoomFactor();
+  const cx = base.x + base.w / 2;
+  const cy = base.y + base.h / 2;
+  vb = {
+    x: cx - (base.w * factor) / 2,
+    y: cy - (base.h * factor) / 2,
+    w: base.w * factor,
+    h: base.h * factor,
+  };
   applyViewBox();
 }
 
