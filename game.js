@@ -389,9 +389,15 @@ function scoreForTime() {
   return Math.round(SCORE_MIN + (SCORE_MAX - SCORE_MIN) * (timeLeft / TIME_LIMIT) ** 2);
 }
 
+function requeueCurrent() {
+  const pos = Math.max(0, queue.length - 2);
+  queue.splice(pos, 0, currentCountry);
+}
+
 function handleTimeout() {
   if (gameState !== 'playing') return;
   lives--;
+  requeueCurrent();
   highlight(currentCountry.id, 'correct');
   document.body.classList.add('wrong-reveal');
   setMessage(`⏱ Temps écoulé — c'était ${currentCountry.nom}`, 'wrong');
@@ -495,6 +501,7 @@ function handleGameClick(clickedId) {
   } else {
     stopTimer();
     lives--;
+    requeueCurrent();
     highlight(clickedId, 'wrong');
     highlight(currentCountry.id, 'correct');
     document.body.classList.add('wrong-reveal');
