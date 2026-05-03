@@ -1,6 +1,6 @@
 // ─── Version ─────────────────────────────────────────────────────────────────
 
-const APP_VERSION = { hash: 'e31d910', date: '2026-05-03', time: '20:35', msg: 'Zoom par défaut adapté au device : 400% mobile, 200% tablette' };
+const APP_VERSION = { hash: '4f16b32', date: '2026-05-03', time: '20:47', msg: 'Dev panel : ajout taille écran' };
 
 // ─── Constants ───────────────────────────────────────────────────────────────
 
