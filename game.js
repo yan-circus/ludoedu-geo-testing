@@ -333,6 +333,7 @@ function updateDevPanel() {
   const baseW  = parseViewBox(VIEWBOXES[level] ?? VIEWBOXES.monde).w;
   const zoomPct = Math.round((baseW / vb.w) * 100);
   document.getElementById('dev-zoom').textContent = zoomPct + ' %';
+  document.getElementById('dev-screen').textContent = `${window.innerWidth} × ${window.innerHeight}`;
 }
 
 function defaultZoomFactor() {
