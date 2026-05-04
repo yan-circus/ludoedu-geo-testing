@@ -1,0 +1,18 @@
+{
+  "name": "Ludoedu Géo",
+  "short_name": "GéoQuiz",
+  "description": "Quiz géographique interactif mondial",
+  "start_url": ".",
+  "display": "standalone",
+  "orientation": "landscape",
+  "background_color": "#1a1a2e",
+  "theme_color": "#1a1a2e",
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}

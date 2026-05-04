@@ -303,6 +303,23 @@ async function init() {
 
   applyTheme(localStorage.getItem('geo-theme') || 'sombre');
 
+  // Fullscreen
+  document.getElementById('fs-btn').addEventListener('click', () => {
+    if (!document.fullscreenElement) {
+      document.documentElement.requestFullscreen().catch(() => {});
+    } else {
+      document.exitFullscreen();
+    }
+  });
+  document.addEventListener('fullscreenchange', () => {
+    document.body.classList.toggle('is-fullscreen', !!document.fullscreenElement);
+  });
+
+  // Service worker (PWA)
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('./sw.js').catch(() => {});
+  }
+
   timerBtn.addEventListener('click', () => {
     timerEnabled = !timerEnabled;
     timerBtn.classList.toggle('active', timerEnabled);

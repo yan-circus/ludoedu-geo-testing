@@ -171,6 +171,21 @@ select {
 body[data-mode="learning"] #timer-btn { display: none; }
 body.game-running #timer-btn { display: none; }
 
+#fs-btn {
+  padding: 5px 8px;
+  border-radius: var(--radius-btn);
+  border: 1px solid var(--accent);
+  background: var(--bg);
+  color: var(--text);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  transition: background 0.15s;
+}
+#fs-btn:hover { background: var(--accent); }
+body:not(.is-fullscreen) #fs-btn .icon-compress { display: none; }
+body.is-fullscreen      #fs-btn .icon-expand   { display: none; }
+
 #help-btn {
   padding: 5px 10px;
   border-radius: var(--radius-btn);
