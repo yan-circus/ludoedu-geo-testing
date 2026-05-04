@@ -1,6 +1,6 @@
 // ─── Version ─────────────────────────────────────────────────────────────────
 
-const APP_VERSION = { hash: 'c6051b4', date: '2026-05-04', time: '17:32', msg: 'Augmentation délai mauvaise réponse : 1400 → 2500 ms' };
+const APP_VERSION = { hash: '26d4874', date: '2026-05-04', time: '18:15', msg: 'PWA : mise en cache offline des assets' };
 
 // ─── Constants ───────────────────────────────────────────────────────────────
 
