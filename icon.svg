@@ -1,9 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 192">
-  <rect width="192" height="192" rx="36" fill="#1a1a2e"/>
-  <circle cx="96" cy="96" r="68" fill="#2a4a6b" stroke="#3ab5e6" stroke-width="3"/>
-  <!-- continents stylisés -->
-  <ellipse cx="78" cy="75" rx="22" ry="26" fill="#c8d6c8"/>
-  <ellipse cx="116" cy="88" rx="19" ry="23" fill="#c8d6c8"/>
-  <ellipse cx="88" cy="118" rx="13" ry="16" fill="#c8d6c8"/>
-  <ellipse cx="60" cy="105" rx="9"  ry="13" fill="#c8d6c8"/>
-</svg>
