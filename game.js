@@ -1,6 +1,6 @@
 // ─── Version ─────────────────────────────────────────────────────────────────
 
-const APP_VERSION = { hash: '63de023', date: '2026-05-04', time: '15:21', msg: 'Renommage icône icon512.png → icon.png' };
+const APP_VERSION = { hash: 'c6051b4', date: '2026-05-04', time: '17:32', msg: 'Augmentation délai mauvaise réponse : 1400 → 2500 ms' };
 
 // ─── Constants ───────────────────────────────────────────────────────────────
 
