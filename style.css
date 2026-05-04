@@ -373,6 +373,14 @@ body[data-theme="multi"]  #question .q-details { color: #cad4df; }
 }
 
 .country:hover   { fill: var(--c-hover,    var(--hover-fill)); }
+
+/* Pas de hover sur touch (évite la couleur qui reste après un drag) */
+@media (hover: none) {
+  .country:hover { fill: var(--c-fill, var(--country-fill)); }
+}
+/* Neutralise la couleur pendant un drag (souris ou touch) */
+body.dragging       .country:hover,
+body.touch-dragging .country:hover { fill: var(--c-fill, var(--country-fill)) !important; }
 .country.correct { fill: var(--correct)                         !important; }
 .country.wrong   { fill: var(--wrong)                           !important; }
 .country.selected{ fill: var(--c-selected, var(--selected-fill)) !important; }

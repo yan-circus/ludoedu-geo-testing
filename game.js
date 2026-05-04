@@ -183,6 +183,7 @@ let lastDragScreen  = null;
 let lastTouchDist   = null;
 let touchMoved      = false;
 let lastTapTime     = 0;
+let mouseMoved      = false;
 
 // Timer state
 let timerRaf     = null;
@@ -253,6 +254,7 @@ async function init() {
     resetZoom();
     if (mode === 'learning') { applyLevelInactive(); renderList(); }
     if (gameState !== 'idle') resetGameIdle();
+    if (mode === 'game' && gameState === 'idle') applyLevelInactive();
   });
 
   document.querySelectorAll('.sort-btn').forEach(btn => {
@@ -354,9 +356,9 @@ function updateDevPanel() {
 }
 
 function defaultZoomFactor() {
-  if (window.innerWidth <= 500) return 0.25;  // 400%
-  if (window.innerWidth <= 900) return 0.5;   // 200%
-  return 1;
+  if (window.innerWidth <= 500)  return 0.25;  // 400% mobile
+  if (window.innerWidth <= 1400) return 0.5;   // 200% tablette
+  return 1;                                     // 100% desktop >1400px
 }
 
 function resetZoom() {
@@ -402,6 +404,7 @@ function setupMapInteraction(svg) {
   mapContainer.addEventListener('mousedown', e => {
     if (e.button !== 0) return;
     isDragging = true;
+    mouseMoved = false;
     lastDragScreen = { x: e.clientX, y: e.clientY };
     document.body.classList.add('dragging');
     e.preventDefault();
@@ -409,6 +412,7 @@ function setupMapInteraction(svg) {
 
   window.addEventListener('mousemove', e => {
     if (!isDragging) return;
+    mouseMoved = true;
     const svg = mapContainer.querySelector('svg');
     const ctm = svg.getScreenCTM();
     vb.x -= (e.clientX - lastDragScreen.x) / ctm.a;
@@ -421,6 +425,7 @@ function setupMapInteraction(svg) {
     isDragging = false;
     lastDragScreen = null;
     document.body.classList.remove('dragging');
+    setTimeout(() => { mouseMoved = false; }, 10);
   });
 
   // Double-click to reset zoom
@@ -447,7 +452,10 @@ function setupMapInteraction(svg) {
     if (e.touches.length === 1 && lastDragScreen) {
       const dx = e.touches[0].clientX - lastDragScreen.x;
       const dy = e.touches[0].clientY - lastDragScreen.y;
-      if (Math.abs(dx) > 3 || Math.abs(dy) > 3) touchMoved = true;
+      if (Math.abs(dx) > 3 || Math.abs(dy) > 3) {
+        touchMoved = true;
+        document.body.classList.add('touch-dragging');
+      }
       const ctm = mapContainer.querySelector('svg').getScreenCTM();
       vb.x -= dx / ctm.a;
       vb.y -= dy / ctm.d;
@@ -483,7 +491,10 @@ function setupMapInteraction(svg) {
     } else if (e.touches.length === 1) {
       lastDragScreen = { x: e.touches[0].clientX, y: e.touches[0].clientY };
     }
-    setTimeout(() => { touchMoved = false; }, 50);
+    setTimeout(() => {
+      touchMoved = false;
+      document.body.classList.remove('touch-dragging');
+    }, 50);
   });
 }
 
@@ -563,6 +574,7 @@ function setMode(newMode) {
     setMessage('', '');
   } else {
     listBody.innerHTML = '';
+    applyLevelInactive();
     setQuestionText('Choisissez un niveau et cliquez sur Démarrer');
     setMessage('', '');
   }
@@ -671,6 +683,7 @@ function endGame(won) {
     : `Game over ! Score final : ${score} pts`);
   setMessage('', '');
   clearAllHighlights();
+  applyLevelInactive();
   startBtn.textContent = 'Démarrer';
 }
 
@@ -679,6 +692,7 @@ function resetGameIdle() {
   document.body.classList.remove('game-running');
   gameState = 'idle';
   clearAllHighlights();
+  applyLevelInactive();
   startBtn.textContent = 'Démarrer';
   updateUI();
 }
@@ -735,7 +749,7 @@ function selectFromList(id) {
 // ─── Unified click handler ────────────────────────────────────────────────────
 
 function onPathClick(e) {
-  if (isDragging || touchMoved) return;
+  if (isDragging || touchMoved || mouseMoved) return;
   const id = e.currentTarget.dataset.countryId;
   if (mode === 'game') handleGameClick(id);
   else                 handleLearningClick(id);
