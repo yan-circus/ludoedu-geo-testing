@@ -1,6 +1,6 @@
 // ─── Version ─────────────────────────────────────────────────────────────────
 
-const APP_VERSION = { hash: '4f16b32', date: '2026-05-03', time: '20:47', msg: 'Dev panel : ajout taille écran' };
+const APP_VERSION = { hash: '2f73f6a', date: '2026-05-04', time: '07:45', msg: 'PWA + bouton plein écran' };
 
 // ─── Constants ───────────────────────────────────────────────────────────────
 
