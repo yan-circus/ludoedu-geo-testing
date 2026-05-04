@@ -6,7 +6,7 @@ const APP_VERSION = { hash: '63de023', date: '2026-05-04', time: '15:21', msg: '
 
 const LIVES_MAX              = 3;
 const FEEDBACK_DELAY_CORRECT = 700;
-const FEEDBACK_DELAY_WRONG   = 1400;
+const FEEDBACK_DELAY_WRONG   = 2500;
 const SMALL_KM2              = 2000;
 const TIME_LIMIT             = 5;      // seconds per question
 const SCORE_MIN              = 100;
