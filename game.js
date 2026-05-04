@@ -1,6 +1,6 @@
 // ─── Version ─────────────────────────────────────────────────────────────────
 
-const APP_VERSION = { hash: 'aca7d02', date: '2026-05-04', time: '14:37', msg: 'Corrections drag/hover + zoom tablette grande' };
+const APP_VERSION = { hash: '63de023', date: '2026-05-04', time: '15:21', msg: 'Renommage icône icon512.png → icon.png' };
 
 // ─── Constants ───────────────────────────────────────────────────────────────
 
