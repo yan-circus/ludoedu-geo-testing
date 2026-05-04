@@ -33,7 +33,7 @@ Jeu de géographie interactif — identifiez les pays du monde en cliquant sur l
 
 ## Démo en ligne
 
-👉 [https://yan-circus.github.io/ludoedu-geo-testing/](https://yan-circus.github.io/ludoedu-geo-testing/)
+👉 [https://yan-circus.github.io/cliconmap/](https://yan-circus.github.io/cliconmap/)
 
 ## Lancement en local
 

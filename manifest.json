@@ -1,7 +1,7 @@
 {
-  "name": "Ludoedu Géo",
-  "short_name": "GéoQuiz",
-  "description": "Quiz géographique interactif mondial",
+  "name": "Clic On Map",
+  "short_name": "ClicOnMap",
+  "description": "Jeu de géographie interactif — cliquez sur les pays du monde",
   "start_url": ".",
   "display": "standalone",
   "orientation": "landscape",
