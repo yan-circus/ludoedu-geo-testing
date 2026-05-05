@@ -65,6 +65,13 @@
             <line x1="10" y1="14" x2="3" y2="21"/><line x1="21" y1="3" x2="14" y2="10"/>
           </svg>
         </button>
+        <button id="scores-btn" title="Scores">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="20" x2="18" y2="10"/>
+            <line x1="12" y1="20" x2="12" y2="4"/>
+            <line x1="6"  y1="20" x2="6"  y2="14"/>
+          </svg>
+        </button>
         <button id="help-btn" title="Aide">?</button>
         <button id="settings-btn" title="Paramètres">
           <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -209,6 +216,40 @@
 
         </div>
       </section>
+    </div>
+  </div>
+
+  <!-- Scores modal -->
+  <div id="scores-overlay" class="hidden">
+    <div id="scores-panel">
+      <div id="scores-header">
+        <h2>Scores</h2>
+        <button id="scores-close">✕</button>
+      </div>
+      <div id="scores-tabs">
+        <button class="scores-tab active" data-tab="mine">Mes scores</button>
+        <button class="scores-tab" data-tab="global">Classement</button>
+      </div>
+      <div id="scores-mine" class="scores-content">
+        <p class="scores-msg">Connectez-vous pour voir vos scores.</p>
+      </div>
+      <div id="scores-global" class="scores-content hidden">
+        <div id="scores-level-row">
+          <label for="scores-level-select">Niveau :</label>
+          <select id="scores-level-select">
+            <option value="1">Monde entier</option>
+            <option value="2">Europe</option>
+            <option value="3">Union Européenne</option>
+            <option value="4">Afrique</option>
+            <option value="5">Asie</option>
+            <option value="6">Amérique</option>
+            <option value="7">Océanie</option>
+          </select>
+        </div>
+        <div id="scores-global-content">
+          <p class="scores-msg">Chargement…</p>
+        </div>
+      </div>
     </div>
   </div>
 

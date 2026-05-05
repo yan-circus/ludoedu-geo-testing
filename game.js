@@ -14,6 +14,12 @@ const SCORE_MAX              = 1000;
 const ZOOM_FACTOR            = 0.87;   // zoom in per tick (< 1)
 const ZOOM_MIN_W             = 40;     // max zoom in (SVG units)
 
+const LEVEL_NAMES = {
+  1: 'Monde entier', 2: 'Europe', 3: 'Union Européenne',
+  4: 'Afrique', 5: 'Asie', 6: 'Amérique', 7: 'Océanie',
+};
+const GAME_TYPE_NAMES = { 1: 'Classique', 2: 'Sans chrono' };
+
 const VIEWBOXES = {
   monde:    '0 0 2000 857',
   Europe:   '800 60 520 240',
@@ -291,6 +297,26 @@ async function init() {
       updateDevPanel();
     }
   });
+
+  // Scores modal
+  document.getElementById('scores-btn').addEventListener('click', openScoresModal);
+  document.getElementById('scores-close').addEventListener('click', () =>
+    document.getElementById('scores-overlay').classList.add('hidden')
+  );
+  document.getElementById('scores-overlay').addEventListener('click', e => {
+    if (e.target === document.getElementById('scores-overlay'))
+      document.getElementById('scores-overlay').classList.add('hidden');
+  });
+  document.querySelectorAll('.scores-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      document.querySelectorAll('.scores-tab').forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      document.getElementById('scores-mine').classList.toggle('hidden',   tab.dataset.tab !== 'mine');
+      document.getElementById('scores-global').classList.toggle('hidden', tab.dataset.tab !== 'global');
+      if (tab.dataset.tab === 'global') loadLeaderboard();
+    });
+  });
+  document.getElementById('scores-level-select').addEventListener('change', loadLeaderboard);
 
   // Settings modal
   const overlay      = document.getElementById('settings-overlay');
@@ -1050,6 +1076,118 @@ function formatPop(n) {
 function formatSup(n) {
   if (n >= 1_000_000) return (n / 1_000_000).toFixed(1).replace('.', ',') + ' M km²';
   return n.toLocaleString('fr-FR') + ' km²';
+}
+
+// ─── Scores modal ────────────────────────────────────────────────────────────
+
+async function openScoresModal() {
+  document.getElementById('scores-overlay').classList.remove('hidden');
+
+  const user = window.firebaseService?.getUser();
+  const mineEl = document.getElementById('scores-mine');
+  if (user) {
+    mineEl.innerHTML = '<p class="scores-msg">Chargement…</p>';
+    try {
+      renderMyScores(await window.firebaseService.getMyScores());
+    } catch(_) {
+      mineEl.innerHTML = '<p class="scores-msg">Erreur de chargement.</p>';
+    }
+  } else {
+    mineEl.innerHTML = '<p class="scores-msg">Connectez-vous pour voir vos scores.</p>';
+  }
+
+  await loadLeaderboard();
+}
+
+async function loadLeaderboard() {
+  const levelId = parseInt(document.getElementById('scores-level-select').value);
+  const el = document.getElementById('scores-global-content');
+  el.innerHTML = '<p class="scores-msg">Chargement…</p>';
+  try {
+    renderLeaderboard(await window.firebaseService.getLevelLeaderboard(levelId));
+  } catch(_) {
+    el.innerHTML = '<p class="scores-msg">Erreur de chargement.</p>';
+  }
+}
+
+function starsStr(n) {
+  const s = Math.max(0, Math.min(3, n || 0));
+  return '★'.repeat(s) + '☆'.repeat(3 - s);
+}
+
+function renderMyScores(docs) {
+  const el = document.getElementById('scores-mine');
+  if (!docs.length) {
+    el.innerHTML = '<p class="scores-msg">Aucune partie enregistrée.</p>';
+    return;
+  }
+  docs.sort((a, b) => a.level_id - b.level_id || a.game_type_id - b.game_type_id);
+
+  const table = document.createElement('table');
+  table.className = 'scores-table';
+  table.innerHTML = '<thead><tr><th>Niveau</th><th>Mode</th><th>Score</th><th>★</th><th>Date</th></tr></thead>';
+  const tbody = document.createElement('tbody');
+
+  docs.forEach(d => {
+    const tr = document.createElement('tr');
+    [
+      LEVEL_NAMES[d.level_id]       || '–',
+      GAME_TYPE_NAMES[d.game_type_id] || '–',
+      (d.score || 0).toLocaleString('fr-FR'),
+      starsStr(d.stars),
+      new Date(d.date).toLocaleDateString('fr-FR'),
+    ].forEach(text => {
+      const td = document.createElement('td');
+      td.textContent = text;
+      tr.appendChild(td);
+    });
+    tbody.appendChild(tr);
+  });
+
+  table.appendChild(tbody);
+  el.innerHTML = '';
+  el.appendChild(table);
+}
+
+function renderLeaderboard(docs) {
+  const el = document.getElementById('scores-global-content');
+  if (!docs.length) {
+    el.innerHTML = '<p class="scores-msg">Aucun score pour ce niveau.</p>';
+    return;
+  }
+  const myUid = window.firebaseService?.getUser()?.uid;
+
+  const table = document.createElement('table');
+  table.className = 'scores-table';
+  table.innerHTML = '<thead><tr><th>#</th><th>Joueur</th><th>Score</th><th>★</th><th>Mode</th><th>Date</th></tr></thead>';
+  const tbody = document.createElement('tbody');
+
+  docs.forEach((d, i) => {
+    const tr = document.createElement('tr');
+    if (d.user_id === myUid) tr.classList.add('scores-me');
+
+    [String(i + 1), d.display_name || '—'].forEach(text => {
+      const td = document.createElement('td');
+      td.textContent = text;
+      tr.appendChild(td);
+    });
+    [
+      (d.score || 0).toLocaleString('fr-FR'),
+      starsStr(d.stars),
+      GAME_TYPE_NAMES[d.game_type_id] || '–',
+      new Date(d.date).toLocaleDateString('fr-FR'),
+    ].forEach(text => {
+      const td = document.createElement('td');
+      td.textContent = text;
+      tr.appendChild(td);
+    });
+
+    tbody.appendChild(tr);
+  });
+
+  table.appendChild(tbody);
+  el.innerHTML = '';
+  el.appendChild(table);
 }
 
 function authErrorMsg(err) {

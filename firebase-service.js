@@ -160,6 +160,7 @@ window.firebaseService = {
     if (!existing.exists || score > existing.data().score) {
       await progressRef.set({
         user_id:      userId,
+        display_name: _currentUser.displayName || _currentUser.email.split('@')[0],
         level_id:     levelId,
         difficulty:   DIFFICULTY,
         game_type_id: gameTypeId,
@@ -170,5 +171,22 @@ window.firebaseService = {
         date:         now,
       });
     }
+  },
+
+  getMyScores: async () => {
+    if (!_currentUser) return [];
+    const snap = await db.collection('user_progress')
+      .where('user_id', '==', _currentUser.uid)
+      .get();
+    return snap.docs.map(d => d.data());
+  },
+
+  getLevelLeaderboard: async (levelId) => {
+    const snap = await db.collection('user_progress')
+      .where('level_id', '==', levelId)
+      .get();
+    const docs = snap.docs.map(d => d.data());
+    docs.sort((a, b) => b.score - a.score);
+    return docs.slice(0, 10);
   },
 };
