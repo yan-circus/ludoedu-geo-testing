@@ -1,6 +1,6 @@
 // ─── Version ─────────────────────────────────────────────────────────────────
 
-const APP_VERSION = { hash: '9a56078', date: '2026-05-05', time: '19:47', msg: 'Score header : centré grand format, visible seulement en jeu actif' };
+const APP_VERSION = { hash: '70262d6', date: '2026-05-05', time: '20:10', msg: 'Thème persistant : sauvegarde skin_id dans Firestore par utilisateur' };
 
 // ─── Constants ───────────────────────────────────────────────────────────────
 
