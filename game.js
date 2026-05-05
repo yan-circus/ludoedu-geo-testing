@@ -1,6 +1,6 @@
 // ─── Version ─────────────────────────────────────────────────────────────────
 
-const APP_VERSION = { hash: '799784c', date: '2026-05-05', time: '21:00', msg: 'Apprentissage : recentrage carte au clic liste' };
+const APP_VERSION = { hash: '472298e', date: '2026-05-05', time: '20:56', msg: 'Apprentissage : recentrage carte + compteur pays + améliorations UX' };
 
 // ─── Constants ───────────────────────────────────────────────────────────────
 
