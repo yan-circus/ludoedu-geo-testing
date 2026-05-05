@@ -1,6 +1,6 @@
 // ─── Version ─────────────────────────────────────────────────────────────────
 
-const APP_VERSION = { hash: '26d4874', date: '2026-05-04', time: '18:15', msg: 'PWA : mise en cache offline des assets' };
+const APP_VERSION = { hash: '02fa356', date: '2026-05-05', time: '10:45', msg: 'Fix bug clic rejeté si micro-mouvement souris : test distance au lieu de flag mouseMoved' };
 
 // ─── Constants ───────────────────────────────────────────────────────────────
 
