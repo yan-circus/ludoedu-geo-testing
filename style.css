@@ -444,36 +444,81 @@ body[data-timer="off"]     #timer-gauge  { display: none; }
   clip-path: inset(100% 0 0 0);
 }
 
-/* ── User area (header) ── */
-#user-area {
+/* ── Header right group ── */
+#header-right {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 16px;
+}
+
+/* ── User area ── */
+#user-area {
+  position: relative;
   flex-shrink: 0;
 }
 
+#auth-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 4px 8px;
+  border: none;
+  border-radius: var(--radius-btn);
+  background: transparent;
+  color: var(--text-dim);
+  cursor: pointer;
+  transition: color 0.15s;
+}
+#auth-btn:hover { color: var(--text); }
+#auth-btn.logged-in { color: var(--correct); }
+
 #user-display {
-  font-size: 0.82rem;
-  color: var(--correct);
-  max-width: 90px;
+  font-size: 0.68rem;
+  max-width: 80px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
-#auth-btn {
-  padding: 4px 10px;
+/* ── User dropdown ── */
+#user-dropdown {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 6px);
+  background: var(--surface);
+  border: 1px solid var(--accent);
+  border-radius: 8px;
+  padding: 12px 14px;
+  min-width: 170px;
+  z-index: 300;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+}
+#user-dropdown.hidden { display: none; }
+
+#dropdown-name {
+  font-size: 0.82rem;
+  color: var(--text-dim);
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--accent);
+  word-break: break-all;
+}
+
+#logout-btn {
+  padding: 7px 10px;
   border-radius: var(--radius-btn);
   border: 1px solid var(--accent);
-  background: var(--bg);
+  background: transparent;
   color: var(--text);
-  font-size: 0.82rem;
+  font-size: 0.85rem;
   cursor: pointer;
+  text-align: left;
   transition: background 0.15s;
-  white-space: nowrap;
 }
-#auth-btn:hover { background: var(--accent); }
-#auth-btn.logged-in { border-color: var(--wrong); color: var(--wrong); }
+#logout-btn:hover { background: var(--accent); }
 
 /* ══════════════════════════════════════════════════════════
    AUTH MODAL

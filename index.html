@@ -17,13 +17,24 @@
 
     <header>
       <h1>Clic On Map</h1>
-      <div id="user-area">
-        <span id="user-display"></span>
-        <button id="auth-btn">Connexion</button>
-      </div>
-      <div id="stats">
-        <span id="lives">♥ ♥ ♥</span>
-        <span id="score">0 pts</span>
+      <div id="header-right">
+        <div id="stats">
+          <span id="lives">♥ ♥ ♥</span>
+          <span id="score">0 pts</span>
+        </div>
+        <div id="user-area">
+          <button id="auth-btn">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+              <circle cx="12" cy="7" r="4"/>
+            </svg>
+            <span id="user-display">Me connecter</span>
+          </button>
+          <div id="user-dropdown" class="hidden">
+            <p id="dropdown-name"></p>
+            <button id="logout-btn">Se déconnecter</button>
+          </div>
+        </div>
       </div>
     </header>
 

@@ -320,14 +320,26 @@ async function init() {
   });
 
   // Auth modal
-  const authOverlay = document.getElementById('auth-overlay');
-  const authBtn     = document.getElementById('auth-btn');
+  const authOverlay  = document.getElementById('auth-overlay');
+  const authBtn      = document.getElementById('auth-btn');
+  const userDropdown = document.getElementById('user-dropdown');
 
   authBtn.addEventListener('click', () => {
     if (window.firebaseService?.getUser()) {
-      window.firebaseService.signOut().catch(console.error);
+      userDropdown.classList.toggle('hidden');
     } else {
       authOverlay.classList.remove('hidden');
+    }
+  });
+
+  document.getElementById('logout-btn').addEventListener('click', () => {
+    window.firebaseService.signOut().catch(console.error);
+    userDropdown.classList.add('hidden');
+  });
+
+  document.addEventListener('click', e => {
+    if (!document.getElementById('user-area').contains(e.target)) {
+      userDropdown.classList.add('hidden');
     }
   });
 
@@ -387,13 +399,14 @@ async function init() {
   window.onFirebaseAuthChanged = user => {
     const display = document.getElementById('user-display');
     if (user) {
-      display.textContent = user.displayName || user.email.split('@')[0];
-      authBtn.textContent = 'Déconnexion';
+      const name = user.displayName || user.email.split('@')[0];
+      display.textContent = name;
+      document.getElementById('dropdown-name').textContent = user.email;
       authBtn.classList.add('logged-in');
     } else {
-      display.textContent = '';
-      authBtn.textContent = 'Connexion';
+      display.textContent = 'Me connecter';
       authBtn.classList.remove('logged-in');
+      userDropdown.classList.add('hidden');
     }
   };
 
