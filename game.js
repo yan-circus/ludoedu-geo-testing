@@ -1,6 +1,6 @@
 // ─── Version ─────────────────────────────────────────────────────────────────
 
-const APP_VERSION = { hash: '02fa356', date: '2026-05-05', time: '10:45', msg: 'Fix bug clic rejeté si micro-mouvement souris : test distance au lieu de flag mouseMoved' };
+const APP_VERSION = { hash: '9f4e814', date: '2026-05-05', time: '15:32', msg: 'Connexion Firebase : auth utilisateurs + sauvegarde des scores' };
 
 // ─── Constants ───────────────────────────────────────────────────────────────
 
