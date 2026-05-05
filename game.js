@@ -184,7 +184,6 @@ let mouseDownPos    = null;
 let lastTouchDist   = null;
 let touchMoved      = false;
 let lastTapTime     = 0;
-let mouseMoved      = false;
 
 // Timer state
 let timerRaf     = null;
@@ -405,7 +404,6 @@ function setupMapInteraction(svg) {
   mapContainer.addEventListener('mousedown', e => {
     if (e.button !== 0) return;
     isDragging = true;
-    mouseMoved = false;
     mouseDownPos   = { x: e.clientX, y: e.clientY };
     lastDragScreen = { x: e.clientX, y: e.clientY };
     document.body.classList.add('dragging');
@@ -414,9 +412,6 @@ function setupMapInteraction(svg) {
 
   window.addEventListener('mousemove', e => {
     if (!isDragging) return;
-    const dx = e.clientX - mouseDownPos.x;
-    const dy = e.clientY - mouseDownPos.y;
-    if (Math.abs(dx) > 5 || Math.abs(dy) > 5) mouseMoved = true;
     const svg = mapContainer.querySelector('svg');
     const ctm = svg.getScreenCTM();
     vb.x -= (e.clientX - lastDragScreen.x) / ctm.a;
@@ -430,13 +425,13 @@ function setupMapInteraction(svg) {
       const dx = Math.round(e.clientX - mouseDownPos.x);
       const dy = Math.round(e.clientY - mouseDownPos.y);
       const dist = Math.round(Math.hypot(dx, dy));
+      const dragged = Math.abs(dx) > 5 || Math.abs(dy) > 5;
       document.getElementById('dev-drag').textContent =
-        `dx=${dx} dy=${dy} dist=${dist}px ${mouseMoved ? '→ DRAG' : '→ CLIC'}`;
+        `dx=${dx} dy=${dy} dist=${dist}px ${dragged ? '→ DRAG' : '→ CLIC'}`;
     }
     isDragging = false;
     lastDragScreen = null;
     document.body.classList.remove('dragging');
-    setTimeout(() => { mouseMoved = false; }, 10);
   });
 
   // Double-click to reset zoom
@@ -760,7 +755,12 @@ function selectFromList(id) {
 // ─── Unified click handler ────────────────────────────────────────────────────
 
 function onPathClick(e) {
-  if (isDragging || touchMoved || mouseMoved) return;
+  if (isDragging || touchMoved) return;
+  if (mouseDownPos) {
+    const dx = e.clientX - mouseDownPos.x;
+    const dy = e.clientY - mouseDownPos.y;
+    if (Math.abs(dx) > 5 || Math.abs(dy) > 5) return;
+  }
   const id = e.currentTarget.dataset.countryId;
   if (mode === 'game') handleGameClick(id);
   else                 handleLearningClick(id);
