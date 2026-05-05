@@ -1,6 +1,6 @@
 // ─── Version ─────────────────────────────────────────────────────────────────
 
-const APP_VERSION = { hash: '8bbf0ae', date: '2026-05-05', time: '16:21', msg: 'Modal scores : mes scores + classement global par niveau' };
+const APP_VERSION = { hash: '9a56078', date: '2026-05-05', time: '19:47', msg: 'Score header : centré grand format, visible seulement en jeu actif' };
 
 // ─── Constants ───────────────────────────────────────────────────────────────
 
