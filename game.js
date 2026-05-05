@@ -20,6 +20,9 @@ const LEVEL_NAMES = {
 };
 const GAME_TYPE_NAMES = { 1: 'Classique', 2: 'Sans chrono' };
 
+const SKIN_IDS   = { sombre: 1, colore: 2, tresor: 3, multi: 4 };
+const SKIN_NAMES = { 1: 'sombre', 2: 'colore', 3: 'tresor', 4: 'multi' };
+
 const VIEWBOXES = {
   monde:    '0 0 2000 857',
   Europe:   '800 60 520 240',
@@ -328,10 +331,15 @@ async function init() {
   overlay.addEventListener('click', e => { if (e.target === overlay) overlay.classList.add('hidden'); });
 
   document.querySelectorAll('.theme-card').forEach(card =>
-    card.addEventListener('click', () => applyTheme(card.dataset.theme))
+    card.addEventListener('click', () => {
+      applyTheme(card.dataset.theme);
+      const skinId = SKIN_IDS[card.dataset.theme];
+      if (skinId) window.firebaseService?.updateUserSkin(skinId).catch(console.error);
+    })
   );
 
   applyTheme(localStorage.getItem('geo-theme') || 'sombre');
+  // La pref Firestore écrasera le localStorage une fois le user connecté (voir onFirebaseAuthChanged)
 
   // Fullscreen
   document.getElementById('fs-btn').addEventListener('click', () => {
@@ -429,6 +437,10 @@ async function init() {
       display.textContent = name;
       document.getElementById('dropdown-name').textContent = user.email;
       authBtn.classList.add('logged-in');
+      window.firebaseService.getUserSkin().then(skinId => {
+        const themeName = SKIN_NAMES[skinId];
+        if (themeName) applyTheme(themeName);
+      }).catch(() => {});
     } else {
       display.textContent = 'Me connecter';
       authBtn.classList.remove('logged-in');

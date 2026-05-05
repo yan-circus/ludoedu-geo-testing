@@ -127,8 +127,16 @@ window.firebaseService = {
       });
     });
 
+    // skins
+    [
+      { id: 1, name: 'Sombre',          notes: 'Thème sombre par défaut' },
+      { id: 2, name: 'Coloré',          notes: 'Thème clair et coloré' },
+      { id: 3, name: 'Carte au trésor', notes: 'Thème vintage' },
+      { id: 4, name: 'Multicolore',     notes: 'Pays multicolores' },
+    ].forEach(s => batch.set(db.collection('skins').doc(String(s.id)), s));
+
     await batch.commit();
-    console.log('Seed OK — games, game_types, level_families, levels créés dans Firestore.');
+    console.log('Seed OK — games, game_types, level_families, levels, skins créés dans Firestore.');
   },
 
   saveGame: async ({ levelKey, timerEnabled, score, timeMs, won, poolSize }) => {
@@ -179,6 +187,17 @@ window.firebaseService = {
       .where('user_id', '==', _currentUser.uid)
       .get();
     return snap.docs.map(d => d.data());
+  },
+
+  getUserSkin: async () => {
+    if (!_currentUser) return null;
+    const doc = await db.collection('users').doc(_currentUser.uid).get();
+    return doc.exists ? (doc.data().skin_id || null) : null;
+  },
+
+  updateUserSkin: (skinId) => {
+    if (!_currentUser) return Promise.resolve();
+    return db.collection('users').doc(_currentUser.uid).update({ skin_id: skinId });
   },
 
   getLevelLeaderboard: async (levelId) => {
