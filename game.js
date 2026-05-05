@@ -6,7 +6,7 @@ const APP_VERSION = { hash: '26d4874', date: '2026-05-04', time: '18:15', msg: '
 
 const LIVES_MAX              = 3;
 const FEEDBACK_DELAY_CORRECT = 700;
-const FEEDBACK_DELAY_WRONG   = 2500;
+const FEEDBACK_DELAY_WRONG   = 700;
 const SMALL_KM2              = 2000;
 const TIME_LIMIT             = 5;      // seconds per question
 const SCORE_MIN              = 100;
@@ -180,6 +180,7 @@ let sortDir       = 'asc';
 // Drag / touch state
 let isDragging      = false;
 let lastDragScreen  = null;
+let mouseDownPos    = null;
 let lastTouchDist   = null;
 let touchMoved      = false;
 let lastTapTime     = 0;
@@ -405,6 +406,7 @@ function setupMapInteraction(svg) {
     if (e.button !== 0) return;
     isDragging = true;
     mouseMoved = false;
+    mouseDownPos   = { x: e.clientX, y: e.clientY };
     lastDragScreen = { x: e.clientX, y: e.clientY };
     document.body.classList.add('dragging');
     e.preventDefault();
@@ -412,7 +414,9 @@ function setupMapInteraction(svg) {
 
   window.addEventListener('mousemove', e => {
     if (!isDragging) return;
-    mouseMoved = true;
+    const dx = e.clientX - mouseDownPos.x;
+    const dy = e.clientY - mouseDownPos.y;
+    if (Math.abs(dx) > 5 || Math.abs(dy) > 5) mouseMoved = true;
     const svg = mapContainer.querySelector('svg');
     const ctm = svg.getScreenCTM();
     vb.x -= (e.clientX - lastDragScreen.x) / ctm.a;
@@ -421,7 +425,14 @@ function setupMapInteraction(svg) {
     applyViewBox();
   });
 
-  window.addEventListener('mouseup', () => {
+  window.addEventListener('mouseup', e => {
+    if (mouseDownPos && document.body.classList.contains('dev-mode')) {
+      const dx = Math.round(e.clientX - mouseDownPos.x);
+      const dy = Math.round(e.clientY - mouseDownPos.y);
+      const dist = Math.round(Math.hypot(dx, dy));
+      document.getElementById('dev-drag').textContent =
+        `dx=${dx} dy=${dy} dist=${dist}px ${mouseMoved ? '→ DRAG' : '→ CLIC'}`;
+    }
     isDragging = false;
     lastDragScreen = null;
     document.body.classList.remove('dragging');
