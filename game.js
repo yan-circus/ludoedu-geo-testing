@@ -1,6 +1,6 @@
 // ─── Version ─────────────────────────────────────────────────────────────────
 
-const APP_VERSION = { hash: '70262d6', date: '2026-05-05', time: '20:10', msg: 'Thème persistant : sauvegarde skin_id dans Firestore par utilisateur' };
+const APP_VERSION = { hash: '5c9356b', date: '2026-05-05', time: '20:14', msg: 'Aide : ajout section compte joueur' };
 
 // ─── Constants ───────────────────────────────────────────────────────────────
 
