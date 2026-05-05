@@ -1058,7 +1058,7 @@ function clearAllHighlights() {
 }
 
 function updateUI() {
-  scoreEl.textContent = `${score} pts`;
+  scoreEl.textContent = score;
   livesEl.textContent = '♥'.repeat(lives) + '♡'.repeat(Math.max(0, LIVES_MAX - lives));
 }
 

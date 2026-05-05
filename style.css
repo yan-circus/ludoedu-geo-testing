@@ -80,6 +80,7 @@ header {
   background: var(--surface);
   border-bottom: 1px solid var(--accent);
   flex-shrink: 0;
+  position: relative;
 }
 
 h1 {
@@ -98,7 +99,20 @@ h1 {
 }
 
 #lives { color: var(--wrong); letter-spacing: 4px; font-size: 1.15rem; }
-#score { font-weight: bold; min-width: 65px; text-align: right; }
+#score { font-weight: bold; }
+
+body[data-mode="game"] #score { display: none; }
+
+body.game-running #score {
+  display: block;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 3rem;
+  color: var(--hover-fill);
+  font-weight: bold;
+  pointer-events: none;
+}
 
 /* ── Toolbar ── */
 #toolbar {
