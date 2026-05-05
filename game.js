@@ -1,12 +1,12 @@
 // ─── Version ─────────────────────────────────────────────────────────────────
 
-const APP_VERSION = { hash: '5c9356b', date: '2026-05-05', time: '20:14', msg: 'Aide : ajout section compte joueur' };
+const APP_VERSION = { hash: '799784c', date: '2026-05-05', time: '21:00', msg: 'Apprentissage : recentrage carte au clic liste' };
 
 // ─── Constants ───────────────────────────────────────────────────────────────
 
 const LIVES_MAX              = 3;
 const FEEDBACK_DELAY_CORRECT = 700;
-const FEEDBACK_DELAY_WRONG   = 700;
+const FEEDBACK_DELAY_WRONG   = 2500;
 const SMALL_KM2              = 2000;
 const TIME_LIMIT             = 5;      // seconds per question
 const SCORE_MIN              = 100;
@@ -181,6 +181,7 @@ let queue         = [];
 let activePaths   = new Set();
 let gameStartTime = null;
 let gamePoolSize  = 0;
+let correctCount  = 0;
 
 // Learning state
 let selectedId    = null;
@@ -228,6 +229,11 @@ async function init() {
   countryById = Object.fromEntries(countries.map(c => [c.id, c]));
 
   mapContainer.innerHTML = svgText;
+
+  const counterEl = document.createElement('div');
+  counterEl.id = 'country-counter';
+  counterEl.className = 'hidden';
+  mapContainer.appendChild(counterEl);
   const svg = mapContainer.querySelector('svg');
   svg.removeAttribute('width');
   svg.removeAttribute('height');
@@ -489,7 +495,7 @@ function updateDevPanel() {
 function defaultZoomFactor() {
   if (window.innerWidth <= 500)  return 0.25;  // 400% mobile
   if (window.innerWidth <= 1400) return 0.5;   // 200% tablette
-  return 1;                                     // 100% desktop >1400px
+  return level === 'monde' ? 0.5 : 1;          // desktop : 200% monde, 100% autres
 }
 
 function resetZoom() {
@@ -741,13 +747,16 @@ function applyLevelInactive() {
 function startGame() {
   score = 0;
   lives = LIVES_MAX;
+  correctCount = 0;
   gameState = 'playing';
+  document.body.classList.remove('game-over');
   selectedId = null;
   hideAllCircles();
 
   const pool = getCountriesForLevel();
   gameStartTime = Date.now();
   gamePoolSize  = pool.length;
+  updateCounter();
   queue = shuffle([...pool]);
   activePaths = new Set(pool.map(c => c.id));
 
@@ -783,10 +792,12 @@ function handleGameClick(clickedId) {
     const pts = scoreForTime();
     stopTimer();
     score += pts;
+    correctCount++;
     highlight(currentCountry.id, 'correct');
     setMessage(`✓ Bravo, c'est bien ${currentCountry.nom} ! +${pts} pts`, 'correct');
     gameState = 'feedback';
     updateUI();
+    updateCounter();
     setTimeout(() => {
       unhighlight(currentCountry.id, 'correct');
       resetTimerGauge();
@@ -819,10 +830,9 @@ function endGame(won) {
 
   resetTimerGauge();
   document.body.classList.remove('game-running');
+  document.body.classList.add('game-over');
   gameState = 'idle';
-  setQuestionText(won
-    ? `Félicitations ! Tous les pays trouvés — ${score} pts !`
-    : `Game over ! Score final : ${score} pts`);
+  setQuestionText(won ? 'Félicitations !' : 'Game over');
   setMessage('', '');
   clearAllHighlights();
   applyLevelInactive();
@@ -836,10 +846,12 @@ function endGame(won) {
 function resetGameIdle() {
   resetTimerGauge();
   document.body.classList.remove('game-running');
+  document.body.classList.remove('game-over');
   gameState = 'idle';
   clearAllHighlights();
   applyLevelInactive();
   startBtn.textContent = 'Démarrer';
+  document.getElementById('country-counter').classList.add('hidden');
   updateUI();
 }
 
@@ -868,6 +880,42 @@ function handleLearningClick(clickedId) {
   }
 }
 
+function centerOnCountry(id) {
+  const paths = countryPaths[id];
+  let cx, cy;
+
+  if (paths && paths.length > 0) {
+    let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
+    paths.forEach(p => {
+      try {
+        const bb = p.getBBox();
+        if (bb.width === 0 && bb.height === 0) return;
+        minX = Math.min(minX, bb.x);
+        minY = Math.min(minY, bb.y);
+        maxX = Math.max(maxX, bb.x + bb.width);
+        maxY = Math.max(maxY, bb.y + bb.height);
+      } catch (_) {}
+    });
+    if (isFinite(minX)) {
+      cx = (minX + maxX) / 2;
+      cy = (minY + maxY) / 2;
+    }
+  }
+
+  if (cx === undefined) {
+    const circle = countryCircles[id];
+    if (circle) {
+      cx = parseFloat(circle.getAttribute('cx'));
+      cy = parseFloat(circle.getAttribute('cy'));
+    }
+  }
+
+  if (cx === undefined) return;
+  vb.x = cx - vb.w / 2;
+  vb.y = cy - vb.h / 2;
+  applyViewBox();
+}
+
 function selectFromList(id) {
   hideAllCircles();
   if (selectedId) {
@@ -886,6 +934,7 @@ function selectFromList(id) {
     document.body.classList.add('wrong-reveal');
     setTimeout(() => document.body.classList.remove('wrong-reveal'), FEEDBACK_DELAY_WRONG);
     showCircle(id);
+    centerOnCountry(id);
     const country = countryById[id];
     setQuestion(country.nom, `Capitale : ${country.capitale}  ·  Population : ${formatPop(country.population)}`);
     selectListRow(id);
@@ -1200,6 +1249,12 @@ function renderLeaderboard(docs) {
   table.appendChild(tbody);
   el.innerHTML = '';
   el.appendChild(table);
+}
+
+function updateCounter() {
+  const el = document.getElementById('country-counter');
+  el.textContent = `${correctCount} / ${gamePoolSize}`;
+  el.classList.remove('hidden');
 }
 
 function authErrorMsg(err) {
