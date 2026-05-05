@@ -359,6 +359,61 @@ async function init() {
     document.body.classList.toggle('is-fullscreen', !!document.fullscreenElement);
   });
 
+  // Avatar state
+  let regAvatarId     = 1;
+  let profileAvatarId = 1;
+
+  buildAvatarGrid(
+    document.getElementById('reg-avatar-picker'),
+    regAvatarId,
+    id => { regAvatarId = id; }
+  );
+
+  // Profile modal
+  const profileOverlay = document.getElementById('profile-overlay');
+
+  document.getElementById('profile-btn').addEventListener('click', () => {
+    userDropdown.classList.add('hidden');
+    buildAvatarGrid(
+      document.getElementById('profile-avatar-picker'),
+      profileAvatarId,
+      id => { profileAvatarId = id; }
+    );
+    profileOverlay.classList.remove('hidden');
+  });
+  document.getElementById('profile-close').addEventListener('click', () =>
+    profileOverlay.classList.add('hidden')
+  );
+  profileOverlay.addEventListener('click', e => {
+    if (e.target === profileOverlay) profileOverlay.classList.add('hidden');
+  });
+  document.getElementById('profile-save').addEventListener('click', async () => {
+    const btn = document.getElementById('profile-save');
+    btn.disabled = true;
+    try {
+      await window.firebaseService.updateUserAvatar(profileAvatarId);
+      showUserAvatar(profileAvatarId);
+      profileOverlay.classList.add('hidden');
+    } catch (err) {
+      console.error('Avatar save error:', err);
+    } finally {
+      btn.disabled = false;
+    }
+  });
+
+  function showUserAvatar(avatarId) {
+    const avatarImg = document.getElementById('auth-avatar');
+    const authIcon  = document.getElementById('auth-icon');
+    if (avatarId) {
+      avatarImg.src = avatarPath(avatarId);
+      avatarImg.classList.remove('hidden');
+      authIcon.classList.add('hidden');
+    } else {
+      avatarImg.classList.add('hidden');
+      authIcon.classList.remove('hidden');
+    }
+  }
+
   // Auth modal
   const authOverlay  = document.getElementById('auth-overlay');
   const authBtn      = document.getElementById('auth-btn');
@@ -402,55 +457,110 @@ async function init() {
     });
   });
 
-  document.getElementById('login-btn').addEventListener('click', async () => {
+  document.getElementById('forgot-btn').addEventListener('click', async () => {
+    const email   = document.getElementById('login-email').value.trim();
+    const errorEl = document.getElementById('login-error');
+    errorEl.textContent = '';
+    if (!email) {
+      errorEl.textContent = 'Entrez votre email d\'abord.';
+      document.getElementById('login-email').focus();
+      return;
+    }
+    const btn = document.getElementById('forgot-btn');
+    btn.disabled = true;
+    try {
+      await window.firebaseService.resetPassword(email);
+      errorEl.style.color = 'var(--correct)';
+      errorEl.textContent = 'Email envoyé ! Vérifiez votre boîte mail.';
+    } catch (err) {
+      errorEl.style.color = '';
+      errorEl.textContent = authErrorMsg(err);
+    } finally {
+      btn.disabled = false;
+    }
+  });
+
+  document.getElementById('auth-login').addEventListener('submit', async (e) => {
+    e.preventDefault();
     const email    = document.getElementById('login-email').value.trim();
     const password = document.getElementById('login-password').value;
     const errorEl  = document.getElementById('login-error');
     errorEl.textContent = '';
-    document.getElementById('login-btn').disabled = true;
+    errorEl.style.color = '';
+    const btn = document.getElementById('login-btn');
+    btn.disabled = true;
     try {
       await window.firebaseService.signIn(email, password);
       authOverlay.classList.add('hidden');
     } catch (err) {
       errorEl.textContent = authErrorMsg(err);
     } finally {
-      document.getElementById('login-btn').disabled = false;
+      btn.disabled = false;
     }
   });
 
-  document.getElementById('register-btn').addEventListener('click', async () => {
+  document.getElementById('auth-register').addEventListener('submit', async (e) => {
+    e.preventDefault();
     const firstName = document.getElementById('reg-firstname').value.trim();
     const lastName  = document.getElementById('reg-lastname').value.trim();
     const email     = document.getElementById('reg-email').value.trim();
     const password  = document.getElementById('reg-password').value;
     const errorEl   = document.getElementById('register-error');
     errorEl.textContent = '';
-    document.getElementById('register-btn').disabled = true;
+    const btn = document.getElementById('register-btn');
+    btn.disabled = true;
     try {
-      await window.firebaseService.signUp(email, password, firstName, lastName);
+      await window.firebaseService.signUp(email, password, firstName, lastName, regAvatarId);
       authOverlay.classList.add('hidden');
     } catch (err) {
       errorEl.textContent = authErrorMsg(err);
     } finally {
-      document.getElementById('register-btn').disabled = false;
+      btn.disabled = false;
+    }
+  });
+
+  document.getElementById('google-btn').addEventListener('click', async () => {
+    const btn = document.getElementById('google-btn');
+    btn.disabled = true;
+    try {
+      await window.firebaseService.signInWithGoogle();
+      authOverlay.classList.add('hidden');
+    } catch (err) {
+      if (err.code !== 'auth/popup-closed-by-user' && err.code !== 'auth/cancelled-popup-request') {
+        console.error('Google sign-in error:', err);
+      }
+    } finally {
+      btn.disabled = false;
     }
   });
 
   window.onFirebaseAuthChanged = user => {
     const display = document.getElementById('user-display');
     if (user) {
-      const name = user.displayName || user.email.split('@')[0];
+      const name = user.displayName || user.email?.split('@')[0] || 'Joueur';
       display.textContent = name;
-      document.getElementById('dropdown-name').textContent = user.email;
+      document.getElementById('dropdown-name').textContent = user.email || '';
       authBtn.classList.add('logged-in');
-      window.firebaseService.getUserSkin().then(skinId => {
-        const themeName = SKIN_NAMES[skinId];
+      window.firebaseService.getUserProfile().then(profile => {
+        if (!profile) return;
+        const themeName = SKIN_NAMES[profile.skin_id];
         if (themeName) applyTheme(themeName);
+        if (profile.avatar_id) {
+          profileAvatarId = profile.avatar_id;
+          showUserAvatar(profile.avatar_id);
+        } else if (user.photoURL) {
+          const avatarImg = document.getElementById('auth-avatar');
+          const authIcon  = document.getElementById('auth-icon');
+          avatarImg.src = user.photoURL;
+          avatarImg.classList.remove('hidden');
+          authIcon.classList.add('hidden');
+        }
       }).catch(() => {});
     } else {
       display.textContent = 'Me connecter';
       authBtn.classList.remove('logged-in');
       userDropdown.classList.add('hidden');
+      showUserAvatar(null);
     }
   };
 
@@ -1255,6 +1365,29 @@ function updateCounter() {
   const el = document.getElementById('country-counter');
   el.textContent = `${correctCount} / ${gamePoolSize}`;
   el.classList.remove('hidden');
+}
+
+function avatarPath(id) {
+  return `assets/avatars/avatar${String(id).padStart(2, '0')}.png`;
+}
+
+function buildAvatarGrid(container, selectedId, onSelect) {
+  container.innerHTML = '';
+  for (let i = 1; i <= 24; i++) {
+    const div = document.createElement('div');
+    div.className = 'avatar-option' + (i === selectedId ? ' selected' : '');
+    div.dataset.avatarId = i;
+    const img = document.createElement('img');
+    img.src = avatarPath(i);
+    img.alt = `Avatar ${i}`;
+    div.appendChild(img);
+    div.addEventListener('click', () => {
+      container.querySelectorAll('.avatar-option').forEach(el => el.classList.remove('selected'));
+      div.classList.add('selected');
+      onSelect(i);
+    });
+    container.appendChild(div);
+  }
 }
 
 function authErrorMsg(err) {

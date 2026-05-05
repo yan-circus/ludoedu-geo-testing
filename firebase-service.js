@@ -35,7 +35,7 @@ auth.onAuthStateChanged(user => {
 window.firebaseService = {
   getUser: () => _currentUser,
 
-  signUp: async (email, password, firstName, lastName) => {
+  signUp: async (email, password, firstName, lastName, avatarId = 1) => {
     const cred = await auth.createUserWithEmailAndPassword(email, password);
     await cred.user.updateProfile({ displayName: firstName });
     await db.collection('users').doc(cred.user.uid).set({
@@ -46,14 +46,37 @@ window.firebaseService = {
       role_id:    'player',
       color:      0,
       skin_id:    1,
+      avatar_id:  avatarId,
       date:       new Date().toISOString(),
-      avatar:     '',
     });
     return cred.user;
   },
 
-  signIn:  (email, password) => auth.signInWithEmailAndPassword(email, password),
-  signOut: ()               => auth.signOut(),
+  signIn:        (email, password) => auth.signInWithEmailAndPassword(email, password),
+  signOut:       ()               => auth.signOut(),
+  resetPassword: (email)          => auth.sendPasswordResetEmail(email),
+
+  signInWithGoogle: async () => {
+    const provider = new firebase.auth.GoogleAuthProvider();
+    const cred = await auth.signInWithPopup(provider);
+    const userRef = db.collection('users').doc(cred.user.uid);
+    const existing = await userRef.get();
+    if (!existing.exists) {
+      const nameParts = (cred.user.displayName || '').split(' ');
+      await userRef.set({
+        uuid:       cred.user.uid,
+        first_name: nameParts[0] || '',
+        last_name:  nameParts.slice(1).join(' ') || '',
+        mail:       cred.user.email || '',
+        role_id:    'player',
+        color:      0,
+        skin_id:    1,
+        date:       new Date().toISOString(),
+        avatar:     cred.user.photoURL || '',
+      });
+    }
+    return cred.user;
+  },
 
   seedDatabase: async () => {
     const existing = await db.collection('games').doc('1').get();
@@ -189,6 +212,12 @@ window.firebaseService = {
     return snap.docs.map(d => d.data());
   },
 
+  getUserProfile: async () => {
+    if (!_currentUser) return null;
+    const doc = await db.collection('users').doc(_currentUser.uid).get();
+    return doc.exists ? doc.data() : null;
+  },
+
   getUserSkin: async () => {
     if (!_currentUser) return null;
     const doc = await db.collection('users').doc(_currentUser.uid).get();
@@ -198,6 +227,11 @@ window.firebaseService = {
   updateUserSkin: (skinId) => {
     if (!_currentUser) return Promise.resolve();
     return db.collection('users').doc(_currentUser.uid).update({ skin_id: skinId });
+  },
+
+  updateUserAvatar: (avatarId) => {
+    if (!_currentUser) return Promise.resolve();
+    return db.collection('users').doc(_currentUser.uid).update({ avatar_id: avatarId });
   },
 
   getLevelLeaderboard: async (levelId) => {

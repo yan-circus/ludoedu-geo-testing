@@ -505,7 +505,17 @@ body[data-timer="off"]     #timer-gauge  { display: none; }
   transition: color 0.15s;
 }
 #auth-btn:hover { color: var(--text); }
-#auth-btn.logged-in { color: var(--correct); }
+#auth-btn.logged-in { color: var(--text); }
+
+#auth-icon.hidden { display: none; }
+
+.user-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+.user-avatar.hidden { display: none; }
 
 #user-display {
   font-size: 0.68rem;
@@ -721,6 +731,8 @@ body[data-timer="off"]     #timer-gauge  { display: none; }
   border-radius: 12px;
   padding: 20px 24px 24px;
   width: min(380px, 92vw);
+  max-height: 92vh;
+  overflow-y: auto;
   display: flex;
   flex-direction: column;
   gap: 14px;
@@ -793,6 +805,48 @@ body[data-timer="off"]     #timer-gauge  { display: none; }
   border-color: var(--selected-fill);
 }
 
+.avatar-label {
+  font-size: 0.8rem;
+  color: var(--text-dim);
+  margin: 0;
+}
+
+.avatar-picker {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 6px;
+}
+
+.avatar-option {
+  border-radius: 50%;
+  cursor: pointer;
+  border: 2px solid transparent;
+  overflow: hidden;
+  transition: border-color 0.15s, transform 0.1s;
+  aspect-ratio: 1;
+}
+.avatar-option img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+.avatar-option:hover    { border-color: var(--text-dim); transform: scale(1.08); }
+.avatar-option.selected { border-color: var(--hover-fill); }
+
+.auth-forgot {
+  background: none;
+  border: none;
+  color: var(--text-dim);
+  font-size: 0.78rem;
+  cursor: pointer;
+  text-align: right;
+  padding: 0;
+  text-decoration: underline;
+  align-self: flex-end;
+}
+.auth-forgot:hover { color: var(--text); }
+
 .auth-submit {
   padding: 9px;
   border-radius: var(--radius-btn);
@@ -831,6 +885,24 @@ body[data-timer="off"]     #timer-gauge  { display: none; }
 .auth-separator::before { left: 0; }
 .auth-separator::after  { right: 0; }
 
+.auth-google {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 9px;
+  border-radius: var(--radius-btn);
+  border: 1px solid #ccc;
+  background: #fff;
+  color: #333;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.auth-google:hover    { background: #f0f0f0; }
+.auth-google:disabled { opacity: 0.5; cursor: default; }
+
 .auth-anon {
   padding: 7px;
   border-radius: var(--radius-btn);
@@ -842,6 +914,81 @@ body[data-timer="off"]     #timer-gauge  { display: none; }
   transition: background 0.15s, color 0.15s;
 }
 .auth-anon:hover { background: var(--accent); color: var(--text); }
+
+/* ══════════════════════════════════════════════════════════
+   PROFILE MODAL
+   ══════════════════════════════════════════════════════════ */
+
+#profile-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 200;
+}
+#profile-overlay.hidden { display: none; }
+
+#profile-panel {
+  background: var(--surface);
+  border: 1px solid var(--accent);
+  border-radius: 12px;
+  padding: 20px 24px 24px;
+  width: min(380px, 92vw);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+#profile-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+#profile-header h2 {
+  font-size: 1.1rem;
+  color: var(--hover-fill);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-family: var(--h1-font);
+}
+#profile-close {
+  background: transparent;
+  border: none;
+  color: var(--text-dim);
+  font-size: 1.1rem;
+  cursor: pointer;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+#profile-close:hover { color: var(--text); background: var(--accent); }
+
+#profile-avatar-picker {
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+}
+
+#profile-panel section h3 {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--text-dim);
+  margin: 0 0 10px;
+}
+
+#user-dropdown #profile-btn {
+  width: 100%;
+  padding: 6px 8px;
+  border: none;
+  background: transparent;
+  color: var(--text-dim);
+  font-size: 0.85rem;
+  cursor: pointer;
+  text-align: left;
+  border-radius: 4px;
+}
+#user-dropdown #profile-btn:hover { background: var(--accent); color: var(--text); }
 
 /* ══════════════════════════════════════════════════════════
    SETTINGS MODAL
