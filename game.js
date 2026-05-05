@@ -1,6 +1,6 @@
 // ─── Version ─────────────────────────────────────────────────────────────────
 
-const APP_VERSION = { hash: '9f4e814', date: '2026-05-05', time: '15:32', msg: 'Connexion Firebase : auth utilisateurs + sauvegarde des scores' };
+const APP_VERSION = { hash: '6e803f7', date: '2026-05-05', time: '15:45', msg: 'Seed Firestore : games, game_types, level_families, levels' };
 
 // ─── Constants ───────────────────────────────────────────────────────────────
 
