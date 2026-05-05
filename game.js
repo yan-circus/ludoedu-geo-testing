@@ -1,6 +1,6 @@
 // ─── Version ─────────────────────────────────────────────────────────────────
 
-const APP_VERSION = { hash: '472298e', date: '2026-05-05', time: '20:56', msg: 'Apprentissage : recentrage carte + compteur pays + améliorations UX' };
+const APP_VERSION = { hash: '4959028', date: '2026-05-05', time: '22:20', msg: 'Auth : avatars joueur + connexion Google + réinitialisation mot de passe' };
 
 // ─── Constants ───────────────────────────────────────────────────────────────
 
