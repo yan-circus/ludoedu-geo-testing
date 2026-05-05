@@ -170,6 +170,8 @@ let lives         = 0;
 let currentCountry = null;
 let queue         = [];
 let activePaths   = new Set();
+let gameStartTime = null;
+let gamePoolSize  = 0;
 
 // Learning state
 let selectedId    = null;
@@ -316,6 +318,84 @@ async function init() {
   document.addEventListener('fullscreenchange', () => {
     document.body.classList.toggle('is-fullscreen', !!document.fullscreenElement);
   });
+
+  // Auth modal
+  const authOverlay = document.getElementById('auth-overlay');
+  const authBtn     = document.getElementById('auth-btn');
+
+  authBtn.addEventListener('click', () => {
+    if (window.firebaseService?.getUser()) {
+      window.firebaseService.signOut().catch(console.error);
+    } else {
+      authOverlay.classList.remove('hidden');
+    }
+  });
+
+  document.getElementById('auth-close').addEventListener('click', () =>
+    authOverlay.classList.add('hidden')
+  );
+  authOverlay.addEventListener('click', e => {
+    if (e.target === authOverlay) authOverlay.classList.add('hidden');
+  });
+  document.getElementById('play-anon').addEventListener('click', () =>
+    authOverlay.classList.add('hidden')
+  );
+
+  document.querySelectorAll('.auth-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      document.querySelectorAll('.auth-tab').forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      document.getElementById('auth-login').classList.toggle('hidden',    tab.dataset.tab !== 'login');
+      document.getElementById('auth-register').classList.toggle('hidden', tab.dataset.tab !== 'register');
+    });
+  });
+
+  document.getElementById('login-btn').addEventListener('click', async () => {
+    const email    = document.getElementById('login-email').value.trim();
+    const password = document.getElementById('login-password').value;
+    const errorEl  = document.getElementById('login-error');
+    errorEl.textContent = '';
+    document.getElementById('login-btn').disabled = true;
+    try {
+      await window.firebaseService.signIn(email, password);
+      authOverlay.classList.add('hidden');
+    } catch (err) {
+      errorEl.textContent = authErrorMsg(err);
+    } finally {
+      document.getElementById('login-btn').disabled = false;
+    }
+  });
+
+  document.getElementById('register-btn').addEventListener('click', async () => {
+    const firstName = document.getElementById('reg-firstname').value.trim();
+    const lastName  = document.getElementById('reg-lastname').value.trim();
+    const email     = document.getElementById('reg-email').value.trim();
+    const password  = document.getElementById('reg-password').value;
+    const errorEl   = document.getElementById('register-error');
+    errorEl.textContent = '';
+    document.getElementById('register-btn').disabled = true;
+    try {
+      await window.firebaseService.signUp(email, password, firstName, lastName);
+      authOverlay.classList.add('hidden');
+    } catch (err) {
+      errorEl.textContent = authErrorMsg(err);
+    } finally {
+      document.getElementById('register-btn').disabled = false;
+    }
+  });
+
+  window.onFirebaseAuthChanged = user => {
+    const display = document.getElementById('user-display');
+    if (user) {
+      display.textContent = user.displayName || user.email.split('@')[0];
+      authBtn.textContent = 'Déconnexion';
+      authBtn.classList.add('logged-in');
+    } else {
+      display.textContent = '';
+      authBtn.textContent = 'Connexion';
+      authBtn.classList.remove('logged-in');
+    }
+  };
 
   // Service worker (PWA)
   if ('serviceWorker' in navigator) {
@@ -615,6 +695,8 @@ function startGame() {
   hideAllCircles();
 
   const pool = getCountriesForLevel();
+  gameStartTime = Date.now();
+  gamePoolSize  = pool.length;
   queue = shuffle([...pool]);
   activePaths = new Set(pool.map(c => c.id));
 
@@ -681,6 +763,9 @@ function handleGameClick(clickedId) {
 }
 
 function endGame(won) {
+  const timeMs = gameStartTime ? Date.now() - gameStartTime : 0;
+  gameStartTime = null;
+
   resetTimerGauge();
   document.body.classList.remove('game-running');
   gameState = 'idle';
@@ -691,6 +776,10 @@ function endGame(won) {
   clearAllHighlights();
   applyLevelInactive();
   startBtn.textContent = 'Démarrer';
+
+  window.firebaseService?.saveGame({
+    levelKey: level, timerEnabled, score, timeMs, won, poolSize: gamePoolSize,
+  }).catch(console.error);
 }
 
 function resetGameIdle() {
@@ -948,6 +1037,18 @@ function formatPop(n) {
 function formatSup(n) {
   if (n >= 1_000_000) return (n / 1_000_000).toFixed(1).replace('.', ',') + ' M km²';
   return n.toLocaleString('fr-FR') + ' km²';
+}
+
+function authErrorMsg(err) {
+  switch (err.code) {
+    case 'auth/email-already-in-use': return 'Cet email est déjà utilisé.';
+    case 'auth/invalid-email':        return 'Email invalide.';
+    case 'auth/weak-password':        return 'Mot de passe trop court (min. 6 caractères).';
+    case 'auth/user-not-found':
+    case 'auth/wrong-password':
+    case 'auth/invalid-credential':   return 'Email ou mot de passe incorrect.';
+    default:                          return err.message;
+  }
 }
 
 function shuffle(arr) {

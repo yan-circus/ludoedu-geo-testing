@@ -1,8 +1,9 @@
-const CACHE = 'cliconmap-v1';
+const CACHE = 'cliconmap-v2';
 const ASSETS = [
   '.',
   'index.html',
   'game.js',
+  'firebase-service.js',
   'style.css',
   'world.svg',
   'countries.json',
