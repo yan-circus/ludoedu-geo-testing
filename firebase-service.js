@@ -55,6 +55,82 @@ window.firebaseService = {
   signIn:  (email, password) => auth.signInWithEmailAndPassword(email, password),
   signOut: ()               => auth.signOut(),
 
+  seedDatabase: async () => {
+    const existing = await db.collection('games').doc('1').get();
+    if (existing.exists) {
+      console.log('Seed ignoré — données déjà présentes.');
+      return;
+    }
+
+    const FAMILY_UUID = 'a1b2c3d4-0001-4000-8000-cliconmap0001';
+    const now = new Date().toISOString();
+    const batch = db.batch();
+
+    // games
+    batch.set(db.collection('games').doc('1'), {
+      id:          1,
+      name:        'Clic on Map',
+      description: 'Jeu de géographie — trouvez les pays sur la carte du monde',
+      version:     '1.0',
+    });
+
+    // game_types
+    batch.set(db.collection('game_types').doc('1'), {
+      id: 1, game_id: 1,
+      name:  'Classique',
+      notes: 'Avec chrono — répondez vite pour plus de points',
+    });
+    batch.set(db.collection('game_types').doc('2'), {
+      id: 2, game_id: 1,
+      name:  'Sans chrono',
+      notes: 'Prenez votre temps, aucune pénalité de temps',
+    });
+
+    // level_families
+    batch.set(db.collection('level_families').doc('1'), {
+      id:      1,
+      uuid:    FAMILY_UUID,
+      game_id: 1,
+      name:    'Carte du monde',
+      notes:   'Planisphère SVG — tous les pays reconnus',
+      date:    now,
+      author:  'system',
+    });
+
+    // levels  (name = valeur du select dans le jeu)
+    const LEVELS = [
+      { id: 1, name: 'monde',    title: 'Monde entier',     notes: 'Tous les pays du monde' },
+      { id: 2, name: 'Europe',   title: 'Europe',           notes: 'Pays du continent européen' },
+      { id: 3, name: 'UE',       title: 'Union Européenne', notes: 'Les 27 membres de l\'UE' },
+      { id: 4, name: 'Afrique',  title: 'Afrique',          notes: 'Pays du continent africain' },
+      { id: 5, name: 'Asie',     title: 'Asie',             notes: 'Pays du continent asiatique' },
+      { id: 6, name: 'Amérique', title: 'Amérique',         notes: 'Amérique du Nord et du Sud' },
+      { id: 7, name: 'Océanie',  title: 'Océanie',          notes: 'Pays d\'Océanie' },
+    ];
+
+    LEVELS.forEach(lvl => {
+      batch.set(db.collection('levels').doc(String(lvl.id)), {
+        id:          lvl.id,
+        uuid:        `b100000${lvl.id}-0001-4000-8000-cliconmap0001`,
+        game_id:     1,
+        family_id:   1,
+        family_uuid: FAMILY_UUID,
+        name:        lvl.name,
+        title:       lvl.title,
+        thumb:       '',
+        author:      'system',
+        nb_stars:    3,
+        items:       [],
+        is_lockable: false,
+        date:        now,
+        notes:       lvl.notes,
+      });
+    });
+
+    await batch.commit();
+    console.log('Seed OK — games, game_types, level_families, levels créés dans Firestore.');
+  },
+
   saveGame: async ({ levelKey, timerEnabled, score, timeMs, won, poolSize }) => {
     if (!_currentUser) return;
     const levelId    = LEVEL_IDS[levelKey] ?? 1;
