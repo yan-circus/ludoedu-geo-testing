@@ -1,6 +1,6 @@
 // ─── Version ─────────────────────────────────────────────────────────────────
 
-const APP_VERSION = { hash: '8ed8bb9', date: '2026-05-05', time: '16:06', msg: 'UI auth : icône utilisateur + dropdown déconnexion' };
+const APP_VERSION = { hash: '8bbf0ae', date: '2026-05-05', time: '16:21', msg: 'Modal scores : mes scores + classement global par niveau' };
 
 // ─── Constants ───────────────────────────────────────────────────────────────
 
