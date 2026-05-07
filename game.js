@@ -1,6 +1,6 @@
 // ─── Version ─────────────────────────────────────────────────────────────────
 
-const APP_VERSION = { hash: '4959028', date: '2026-05-05', time: '22:20', msg: 'Auth : avatars joueur + connexion Google + réinitialisation mot de passe' };
+const APP_VERSION = { hash: '2fe88af', date: '2026-05-07', time: '06:57', msg: 'Thème trésor : image de fond SVG + fond noir' };
 
 // ─── Constants ───────────────────────────────────────────────────────────────
 
