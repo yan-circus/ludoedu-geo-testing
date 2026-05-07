@@ -107,7 +107,7 @@ const THEMES = {
   },
   tresor: {
     '--bg':           '#1e1006', '--surface':      '#2e1a08', '--accent':       '#7a4a15',
-    '--text':         '#f0ddb0', '--text-dim':     '#d4b880', '--ocean':        '#3a5c3a',
+    '--text':         '#f0ddb0', '--text-dim':     '#d4b880', '--ocean':        '#000000',
     '--country-fill': '#c8a060', '--hover-fill':   '#e8b030', '--correct':      '#5a9040',
     '--wrong':        '#b03020', '--selected-fill':'#d4801a', '--radius-btn':   '6px',
     '--h1-font':      "Georgia, 'Times New Roman', serif",
@@ -157,6 +157,8 @@ function applyTheme(name) {
     c.classList.toggle('active', c.dataset.theme === name)
   );
   applyMulticolorPaths(name === 'multi');
+  const bgLayer = mapContainer.querySelector('#layer3');
+  if (bgLayer) bgLayer.style.display = name === 'tresor' ? 'inline' : 'none';
 }
 
 // ─── State ───────────────────────────────────────────────────────────────────
@@ -229,6 +231,16 @@ async function init() {
   countryById = Object.fromEntries(countries.map(c => [c.id, c]));
 
   mapContainer.innerHTML = svgText;
+
+  fetch('assets/cartes/world_background/fond_carte_tresor.jpg', { method: 'HEAD' })
+    .then(r => {
+      const el = document.getElementById('dev-bg-img');
+      if (el) el.textContent = r.ok ? `✅ ${r.status}` : `❌ ${r.status}`;
+    })
+    .catch(() => {
+      const el = document.getElementById('dev-bg-img');
+      if (el) el.textContent = '❌ fetch error';
+    });
 
   const counterEl = document.createElement('div');
   counterEl.id = 'country-counter';
